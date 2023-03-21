@@ -1,0 +1,124 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+}
+android {
+    compileSdkVersion compile_sdk_version
+    buildToolsVersion build_tools_version
+
+    defaultConfig {
+        minSdkVersion min_sdk_version
+        targetSdkVersion target_sdk_version
+        versionCode version_code
+        versionName version_name
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+
+    kotlinOptions {
+        jvmTarget = java_version
+    }
+
+    compileOptions {
+        sourceCompatibility java_version
+        targetCompatibility java_version
+    }
+}
+
+dependencies {
+    // 屏幕适配
+    api project(path: ':autosize')
+    // 网络请求
+    api project(path: ':network')
+
+    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    api "androidx.core:core-ktx:$core_ktx_version"
+    api "androidx.appcompat:appcompat:$appcompat_version"
+    api "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
+    api "androidx.cardview:cardview:$cardview_version"
+    api "androidx.fragment:fragment-ktx:$fragment_version"
+    api "androidx.viewpager2:viewpager2:$viewpager2_version"
+    api "com.google.android.material:material:$material_version"
+    api "androidx.startup:startup-runtime:$startup_version"
+    api "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    api "androidx.navigation:navigation-ui-ktx:$navigation_version"
+    //流式布局
+    api "com.google.android:flexbox:$flexbox_version"
+
+    //Compose相关
+    api "androidx.compose.ui:ui:$compose_version"
+    api "androidx.compose.material:material:$compose_version"
+    api "androidx.compose.ui:ui-tooling-preview:$compose_version"
+    //提供observeAsState等方法
+    api "androidx.compose.runtime:runtime-livedata:$compose_version"
+//    api "androidx.activity:activity-compose:$activity_compose_version"
+//    api "androidx.navigation:navigation-compose:navigation_compose_version"
+
+    // 协程基础库
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+
+    //lifecycle
+    api "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    api "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+    // viewModel
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    // liveData
+    api "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+
+    // 日志打印
+    api "com.jakewharton.timber:timber:$timber_version"
+
+    // MMKV，替代SP
+    api "com.tencent:mmkv-static:${mmkv_version}"
+    //状态栏
+    api "com.gyf.immersionbar:immersionbar:${immersionbar_version}"
+    api "com.gyf.immersionbar:immersionbar-ktx:${immersionbar_version}"
+
+    //刷新头
+    api "com.scwang.smart:refresh-layout-kernel:${smart_refresh_layout_version}"
+    api "com.scwang.smart:refresh-header-classics:${smart_refresh_layout_version}"
+    //谷歌刷新头
+    api "com.scwang.smart:refresh-header-material:${smart_refresh_layout_version}"
+
+    //UnPeekLiveData
+    api "com.kunminx.archi:unpeek-livedata:${unpeek_livedata_version}"
+
+    //通过标签直接生成shape
+    api "com.github.JavaNoober.BackgroundLibrary:library:${background_library_version}"
+
+    //Toast
+    api "com.github.getActivity:ToastUtils:$toast_version"
+
+    //glide
+    api "com.github.bumptech.glide:glide:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
+
+    //AnyLayer弹窗
+    api "com.github.goweii:AnyLayer:$anylayer_version"
+
+    //时间选择器 https://github.com/loperSeven/DateTimePicker
+    api "com.github.loperSeven:DateTimePicker:$date_time_picker_version"
+
+    //选择相片/拍照 https://github.com/LuckSiege/PictureSelector/blob/master/README_CN.md
+    api "io.github.lucksiege:pictureselector:$pictureselector_version"
+
+    //基于viewpager2的banner.. https://github.com/zhpanvip/BannerViewPager/wiki/06.%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B
+    api "com.github.zhpanvip:bannerviewpager:${banner_version}"
+
+    //工具包 https://github.com/Blankj/AndroidUtilCode/blob/master/lib/utilcode/README-CN.md
+    api "com.blankj:utilcodex:$utilcode_version"
+
+    //圆形ImageView
+    api "de.hdodenhof:circleimageview:$circle_imageview_version"
+
+    //加载json动画
+    api "com.airbnb.android:lottie:$lottie_version"
+
+    //防止CoordinatorLayout与RecyclerView或Viewpager联动使用时快速上下滑动抖动
+    api "com.github.yuruiyin:AppbarLayoutBehavior:v1.0.4"
+}

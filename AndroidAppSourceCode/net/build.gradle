@@ -1,0 +1,40 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+}
+android {
+    compileSdkVersion compile_sdk_version
+    buildToolsVersion build_tools_version
+
+    defaultConfig {
+        minSdkVersion min_sdk_version
+        targetSdkVersion target_sdk_version
+        versionCode version_code
+        versionName version_name
+    }
+    compileOptions {
+        sourceCompatibility java_version
+        targetCompatibility java_version
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "androidx.core:core-ktx:$core_ktx_version"
+    //retrofit
+    api "com.squareup.retrofit2:retrofit:$retrofit_version"
+    api "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    //rxHttp
+    api "com.ljx.rxhttp:rxhttp:$rxhttp_version"
+    api "com.squareup.okhttp3:okhttp:$okhttp_version"
+    kapt "com.ljx.rxhttp:rxhttp-compiler:$rxhttp_version"
+    //管理协程生命周期，页面销毁，自动关闭协程
+    api "com.ljx.rxlife:rxlife-coroutine:$rxlife_coroutine_version"
+    // 日志打印
+    implementation "com.jakewharton.timber:timber:$timber_version"
+}

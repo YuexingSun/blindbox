@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.zhixing.zxhy.view_model.BlindBoxViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ConstraintLayoutA"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.amap.api.maps.TextureMapView
+            android:id="@+id/MapViewA"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/BarrageRecyc"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_marginTop="66dp"
+            android:translationZ="11dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/BarrageRecycB"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_marginTop="15dp"
+            android:translationZ="11dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/BarrageRecyc" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/Hint"
+            android:layout_width="137dp"
+            android:layout_height="49dp"
+            android:layout_marginBottom="155dp"
+            android:background="@color/transparent"
+            android:translationZ="11dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:shapeAppearance="@style/roundedCornerImageStyle26" />
+
+        <com.noober.background.view.BLConstraintLayout
+            android:id="@+id/ConNoStore"
+            android:layout_width="278dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="132dp"
+            android:translationZ="12dp"
+            android:visibility="gone"
+            app:bl_corners_radius="32dp"
+            app:bl_solid_color="@color/c_800"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ImageViewA"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                android:layout_marginStart="24dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_box_face"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:text="所在范围没有适合的店铺"
+                android:textColor="@color/c_F"
+                android:textSize="@dimen/sp_18"
+                app:layout_constraintBottom_toBottomOf="@+id/ImageViewA"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ImageViewA" />
+
+        </com.noober.background.view.BLConstraintLayout>
+
+        <com.noober.background.view.BLConstraintLayout
+            android:id="@+id/ConSence"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginBottom="107dp"
+            android:elevation="8dp"
+            app:bl_corners_radius="24dp"
+            app:bl_solid_color="@color/c_80F"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Scene"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_box_scene" />
+
+        </com.noober.background.view.BLConstraintLayout>
+
+        <com.noober.background.view.BLConstraintLayout
+            android:id="@+id/ConDistance"
+            android:layout_width="48dp"
+            android:layout_height="96dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="107dp"
+            android:elevation="8dp"
+            app:bl_corners_radius="24dp"
+            app:bl_solid_color="@color/c_80F"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Subtract"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:onClick="@{()->vm.subtractDistance()}"
+                android:scaleType="fitXY"
+                android:src="@{vm.distance == 500 ? @drawable/ic_box_unsubtract: @drawable/ic_box_subtract}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Add"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:onClick="@{()->vm.addDistance()}"
+                android:scaleType="fitXY"
+                android:src="@{vm.distance == 10000 ? @drawable/ic_box_unadd: @drawable/ic_box_add}"
+                app:layout_constraintBottom_toTopOf="@+id/Subtract"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <!--加减中间的分割线-->
+            <View
+                android:id="@+id/FenGeA"
+                android:layout_width="12dp"
+                android:layout_height="1dp"
+                android:background="@color/c_E"
+                app:layout_constraintBottom_toBottomOf="@+id/Subtract"
+                app:layout_constraintEnd_toEndOf="@+id/Subtract"
+                app:layout_constraintStart_toStartOf="@+id/Subtract"
+                app:layout_constraintTop_toTopOf="@+id/Add" />
+
+        </com.noober.background.view.BLConstraintLayout>
+
+        <include
+            android:id="@+id/JourneyDialog"
+            layout="@layout/dialog_journey"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/Element"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="Hint, ConSence, ConDistance, BarrageRecyc, BarrageRecycB" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

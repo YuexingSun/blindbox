@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="type"
+            type="Integer" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="data"
+            type="com.zhixing.zxhy.InformationData" />
+
+        <import type="com.zhixing.zxhy.util.databinding.Common" />
+
+    </data>
+
+    <!--这里动态设置背景颜色，如果是词条的话就设置成透明色-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CardA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="2dp"
+        app:cardCornerRadius="8dp">
+
+        <com.noober.background.view.BLConstraintLayout
+            android:id="@+id/ArticleConst"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{type == 1 ? View.VISIBLE: View.GONE}"
+            app:bl_corners_radius="8dp"
+            app:bl_solid_color="@color/c_F">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/GuideA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/GuideB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+            <com.zhixing.zxhy.widget.imageListShowView.ImageListShowView
+                android:id="@+id/ImageShowA"
+                android:layout_width="match_parent"
+                android:layout_height="263dp"
+                app:imgShow_background="@color/transparent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.noober.background.view.BLView
+                android:id="@+id/RoundView"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="251dp"
+                app:bl_corners_radius="50dp"
+                app:bl_solid_color="@color/c_F"
+                app:layout_constraintStart_toStartOf="@id/GuideA"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/HeadImg"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="@+id/RoundView"
+                app:layout_constraintEnd_toEndOf="@+id/RoundView"
+                app:layout_constraintStart_toStartOf="@+id/RoundView"
+                app:layout_constraintTop_toTopOf="@+id/RoundView"
+                app:shapeAppearance="@style/roundedCornerImageStyle50" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/NickName"
+                style="@style/text_3_14"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="4dp"
+                android:text="@{data.nickname}"
+                android:textColor="@color/c_CC3"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/RoundView"
+                app:layout_constraintStart_toEndOf="@+id/RoundView" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/Title"
+                style="@style/text_0_18"
+                android:layout_width="0dp"
+                android:layout_marginTop="12dp"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:maxLines="2"
+                android:text="@{data.title}"
+                android:textColor="@color/c_3"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/GuideB"
+                app:layout_constraintStart_toStartOf="@id/GuideA"
+                app:layout_constraintTop_toBottomOf="@+id/RoundView" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/Time"
+                style="@style/text_3_14"
+                android:layout_marginTop="8dp"
+                android:text="@{Common.dateTransition(data.sendtime)}"
+                android:textColor="@color/c_CC9"
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintStart_toStartOf="@+id/GuideA"
+                app:layout_constraintTop_toBottomOf="@+id/Title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/Content"
+                style="@style/text_0_16"
+                android:layout_width="0dp"
+                android:layout_marginTop="12dp"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:lineSpacingExtra="1dp"
+                android:maxLines="6"
+                android:textColor="@color/c_3"
+                app:layout_constraintEnd_toEndOf="@id/GuideB"
+                app:layout_constraintStart_toStartOf="@id/GuideA"
+                app:layout_constraintTop_toBottomOf="@+id/Time" />
+
+            <com.noober.background.view.BLTextView
+                android:id="@+id/Like"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                app:bl_selected_drawable="@mipmap/ic_home_like"
+                app:bl_unSelected_drawable="@mipmap/ic_home_unlike"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/GuideA"
+                app:layout_constraintTop_toBottomOf="@+id/Content" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/LikeNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:textColor="@color/c_9"
+                android:textSize="@dimen/sp_14"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/Like"
+                app:layout_constraintStart_toEndOf="@+id/Like"
+                app:layout_constraintTop_toTopOf="@+id/Like" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/Comment"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginStart="12dp"
+                android:drawableStart="@mipmap/ic_home_comment"
+                android:drawablePadding="8dp"
+                android:gravity="center"
+                android:textColor="@color/c_9"
+                android:text="@{Common.intDispose(data.commentnumber)}"
+                android:textSize="@dimen/sp_14"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/LikeNumber"
+                app:layout_constraintTop_toTopOf="@+id/Like" />
+
+        </com.noober.background.view.BLConstraintLayout>
+
+        <com.noober.background.view.BLConstraintLayout
+            android:id="@+id/EntryConst"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{type == 2 ? View.VISIBLE: View.GONE}"
+            app:bl_corners_radius="8dp"
+            app:bl_solid_color="@color/transparent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/GuideC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/GuideD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/BgImg"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="24dp"
+                android:alpha="0.15"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearance="@style/roundedCornerImageStyle16" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/Banner"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:scaleType="fitXY"
+                app:layout_constraintStart_toStartOf="@id/GuideC"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearance="@style/roundedCornerImageStyle16" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/EntryTitle"
+                style="@style/text_3_14"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:text="@{data.title}"
+                android:textSize="@dimen/sp_24"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/Banner"
+                app:layout_constraintTop_toTopOf="@+id/BgImg" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/SubTitle"
+                style="@style/text_8C0_14"
+                android:layout_marginTop="1dp"
+                android:text="@{data.subtitle}"
+                android:textColor="@color/c_F86E97"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/EntryTitle"
+                app:layout_constraintTop_toBottomOf="@+id/EntryTitle" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/EntryContent"
+                style="@style/text_0_16"
+                android:layout_width="0dp"
+                android:layout_marginTop="16dp"
+                android:gravity="start"
+                android:textColor="@color/c_3"
+                app:layout_constraintEnd_toEndOf="@id/GuideD"
+                app:layout_constraintStart_toStartOf="@+id/GuideC"
+                app:layout_constraintTop_toBottomOf="@+id/Banner" />
+
+            <com.noober.background.view.BLConstraintLayout
+                android:id="@+id/GoBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                app:bl_corners_radius="18dp"
+                app:bl_solid_color="@color/c_F86E97"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/GuideD"
+                app:layout_constraintTop_toBottomOf="@+id/EntryContent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/GoImg"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="12dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/ic_home_gobtn"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/GoText"
+                    style="@style/text_0_14"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@{data.btntxt}"
+                    android:textColor="@color/c_F"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/GoImg"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </com.noober.background.view.BLConstraintLayout>
+
+        </com.noober.background.view.BLConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

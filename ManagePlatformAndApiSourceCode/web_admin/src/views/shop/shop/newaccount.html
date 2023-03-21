@@ -1,0 +1,79 @@
+
+<div class="layui-form" lay-filter="ayuiadmin-form-socialform" style="padding: 20px 30px 0 0;">
+
+      <script type="text/html" template lay-done="layui.data.done(d);">
+        <input type="hidden" name="id" id="id" value="{{ d.params.id || '' }}" >
+      </script>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label"><font color='red'>*</font>登录手机号</label>
+      <div class="layui-input-block">
+        <script type="text/html" template>
+          <input type="text" name="mob" value="{{ d.params.mob || '' }}" lay-verify="required" autocomplete="off" class="layui-input" placeholder='登录手机号'>
+        </script>
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">登录密码</label>
+      <div class="layui-input-block">
+        <script type="text/html" template>
+          <input type="text" name="pwd" autocomplete="off" class="layui-input" placeholder='密码不变请留空'>
+        </script>
+      </div>
+    </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label"></label>
+    <div class="layui-input-block">
+      <input type="submit" lay-submit lay-filter="LAY-user-back-submit" class="layui-btn" id="LAY-user-back-submit">
+    </div>
+  </div>
+</div>
+
+<script>
+layui.data.done = function (d) {
+
+  layui.use(['admin', 'form','table','xmSelect','upload','laydate','citypicker'], function(){
+    var $ = layui.$
+    ,admin = layui.admin
+    ,table = layui.table
+    ,xmSelect = layui.xmSelect
+    ,upload = layui.upload
+    ,laydate = layui.laydate 
+    ,cityPicker = layui.citypicker
+    ,form = layui.form;
+
+
+    
+    form.render();
+
+
+    //监听提交
+    form.on('submit(LAY-user-back-submit)', function(data){
+        let postData = data.field;
+        postData.did = d.params.did;
+
+        let methstr = "POST";
+        if (postData.id)
+        {
+          methstr = "PUT";
+        }
+        admin.req({
+          url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.ShopAccount   
+          ,type: methstr
+          ,data: postData
+          ,done: function(res){
+            layer.msg(res.errormsg, {icon: 1});
+            table.reload('LAY-tag-tag-list-table'); //重载表格
+            layer.close(d.params.layerindex); //再执行关闭 
+          }
+        });
+
+    });
+
+
+
+  });
+}
+</script>

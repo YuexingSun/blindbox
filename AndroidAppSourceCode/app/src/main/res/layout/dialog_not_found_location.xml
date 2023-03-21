@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.noober.background.view.BLConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="55dp"
+    app:bl_corners_topLeftRadius="16dp"
+    app:bl_corners_topRightRadius="16dp"
+    app:bl_solid_color="@color/c_F">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/GuideA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="32dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/GuideB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="32dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/Title"
+        style="@style/text_0_16"
+        android:layout_marginTop="24dp"
+        android:text="找不到目的地？"
+        android:textColor="@color/c_3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/Close"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="14dp"
+        android:padding="6dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_help_close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/TextA"
+        style="@style/text_3_14"
+        android:layout_marginTop="24dp"
+        android:text="电话联系店家"
+        android:textColor="@color/c_9"
+        app:layout_constraintStart_toStartOf="@+id/GuideA"
+        app:layout_constraintTop_toBottomOf="@+id/Title" />
+
+    <View
+        android:id="@+id/FenGeA"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/c_EF"
+        app:layout_constraintEnd_toEndOf="@id/GuideB"
+        app:layout_constraintStart_toStartOf="@id/GuideA"
+        app:layout_constraintTop_toBottomOf="@id/TextA" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/PhoneImgB"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="14dp"
+        android:background="@mipmap/ic_phone"
+        app:layout_constraintStart_toStartOf="@+id/GuideA"
+        app:layout_constraintTop_toBottomOf="@+id/FenGeA" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/PhoneB"
+        style="@style/text_0_16"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="12dp"
+        android:gravity="center_vertical"
+        android:text="18601234567"
+        android:textColor="@color/c_3"
+        app:layout_constraintBottom_toTopOf="@+id/FenGeB"
+        app:layout_constraintEnd_toStartOf="@+id/GuideB"
+        app:layout_constraintStart_toEndOf="@+id/PhoneImgB"
+        app:layout_constraintTop_toBottomOf="@+id/FenGeA" />
+
+    <View
+        android:id="@+id/FenGeB"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="14dp"
+        android:background="@color/c_EF"
+        app:layout_constraintEnd_toEndOf="@id/GuideB"
+        app:layout_constraintStart_toStartOf="@+id/PhoneB"
+        app:layout_constraintTop_toBottomOf="@+id/PhoneImgB" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/PhoneImgC"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="14dp"
+        android:background="@mipmap/ic_phone"
+        app:layout_constraintStart_toStartOf="@+id/GuideA"
+        app:layout_constraintTop_toBottomOf="@+id/FenGeB" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/PhoneC"
+        style="@style/text_0_16"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="12dp"
+        android:gravity="center_vertical"
+        android:text="18601234567"
+        android:textColor="@color/c_3"
+        app:layout_constraintBottom_toTopOf="@+id/FenGeC"
+        app:layout_constraintEnd_toStartOf="@+id/GuideB"
+        app:layout_constraintStart_toEndOf="@+id/PhoneImgC"
+        app:layout_constraintTop_toBottomOf="@+id/FenGeB" />
+
+    <View
+        android:id="@+id/FenGeC"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="14dp"
+        android:background="@color/c_EF"
+        app:layout_constraintEnd_toEndOf="@id/GuideB"
+        app:layout_constraintStart_toStartOf="@+id/PhoneC"
+        app:layout_constraintTop_toBottomOf="@+id/PhoneImgC" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/TextB"
+        style="@style/text_3_14"
+        android:layout_marginTop="32dp"
+        android:text="使用第三方导航"
+        android:textColor="@color/c_9"
+        app:layout_constraintStart_toStartOf="@+id/GuideA"
+        app:layout_constraintTop_toBottomOf="@+id/FenGeC" />
+
+    <View
+        android:id="@+id/FenGeD"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/c_EF"
+        app:layout_constraintEnd_toEndOf="@id/GuideB"
+        app:layout_constraintStart_toStartOf="@id/GuideA"
+        app:layout_constraintTop_toBottomOf="@+id/TextB" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/Geode"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="17dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_geode"
+        app:layout_constraintStart_toStartOf="@+id/GuideA"
+        app:layout_constraintTop_toBottomOf="@+id/FenGeD" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/GeodeStr"
+        style="@style/text_9_12"
+        android:layout_marginTop="8dp"
+        android:text="高德地图"
+        android:textColor="@color/c_6"
+        app:layout_constraintEnd_toEndOf="@+id/Geode"
+        app:layout_constraintStart_toStartOf="@+id/Geode"
+        app:layout_constraintTop_toBottomOf="@+id/Geode" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/BaiDu"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="18dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_baidu"
+        app:layout_constraintStart_toEndOf="@+id/Geode"
+        app:layout_constraintTop_toTopOf="@+id/Geode" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/BaiDuStr"
+        style="@style/text_9_12"
+        android:layout_marginTop="8dp"
+        android:text="百度地图"
+        android:textColor="@color/c_6"
+        app:layout_constraintEnd_toEndOf="@+id/BaiDu"
+        app:layout_constraintStart_toStartOf="@+id/BaiDu"
+        app:layout_constraintTop_toBottomOf="@+id/BaiDu" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/PhoneGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="TextA, FenGeA, PhoneImgB, PhoneB, FenGeB, PhoneImgC, PhoneC, FenGeC" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/PhoneGroupOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="PhoneImgC, PhoneC, FenGeC" />
+
+</com.noober.background.view.BLConstraintLayout>

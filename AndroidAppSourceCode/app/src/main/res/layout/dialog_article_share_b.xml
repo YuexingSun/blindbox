@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.noober.background.view.BLConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="241dp"
+    app:bl_corners_topLeftRadius="14dp"
+    app:bl_corners_topRightRadius="14dp"
+    app:bl_solid_color="@color/c_F">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/TextA"
+        style="@style/text_9_16"
+        android:layout_marginTop="10dp"
+        android:text="分享这篇文章"
+        android:textColor="@color/c_3"
+        android:textSize="@dimen/sp_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/WeiXin"
+        android:layout_width="62dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:drawableTop="@mipmap/ic_share_weixin"
+        android:drawablePadding="4dp"
+        android:gravity="center"
+        android:text="微信"
+        android:textColor="@color/c_3"
+        android:textSize="@dimen/sp_14"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/Friend"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextA" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/Friend"
+        android:layout_width="62dp"
+        android:layout_height="wrap_content"
+        android:drawableTop="@mipmap/ic_share_friend"
+        android:drawablePadding="4dp"
+        android:gravity="center"
+        android:text="朋友圈"
+        android:textColor="@color/c_3"
+        android:textSize="@dimen/sp_14"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/Link"
+        app:layout_constraintStart_toEndOf="@+id/WeiXin"
+        app:layout_constraintTop_toTopOf="@+id/WeiXin" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/Link"
+        android:layout_width="62dp"
+        android:layout_height="wrap_content"
+        android:drawableTop="@mipmap/ic_share_link"
+        android:drawablePadding="4dp"
+        android:gravity="center"
+        android:text="复制链接"
+        android:textColor="@color/c_3"
+        android:textSize="@dimen/sp_14"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/Report"
+        app:layout_constraintStart_toEndOf="@+id/Friend"
+        app:layout_constraintTop_toTopOf="@+id/WeiXin" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/Report"
+        android:layout_width="62dp"
+        android:layout_height="wrap_content"
+        android:drawableTop="@mipmap/ic_share_report"
+        android:drawablePadding="4dp"
+        android:gravity="center"
+        android:text="举报"
+        android:textColor="@color/c_3"
+        android:textSize="@dimen/sp_14"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/Link"
+        app:layout_constraintTop_toTopOf="@+id/WeiXin" />
+
+    <View
+        android:id="@+id/FenGeA"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/c_E"
+        app:layout_constraintEnd_toEndOf="@id/GuideB"
+        app:layout_constraintStart_toStartOf="@id/GuideA"
+        app:layout_constraintTop_toBottomOf="@+id/WeiXin" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/Close"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:paddingBottom="16dp"
+        android:text="取消"
+        android:textColor="@color/c_6"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/FenGeA" />
+
+</com.noober.background.view.BLConstraintLayout>

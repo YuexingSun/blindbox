@@ -1,0 +1,15 @@
+{
+    "id": "f-progress",
+    "name": "进度条-渐变颜色",
+    "version": "0.0.1",
+    "description": "静态进度条-渐变颜色",
+    "keywords": [
+        "uni-app",
+        "vue"
+    ],
+    "dependencies": {
+        "lottie-miniapp": "^1.9.1",
+        "moment": "^2.29.1",
+        "vue-lottie": "^0.2.1"
+    }
+}

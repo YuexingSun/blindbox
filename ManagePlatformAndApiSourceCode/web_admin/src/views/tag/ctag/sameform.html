@@ -1,0 +1,182 @@
+
+<div class="layui-form" lay-filter="ayuiadmin-form-socialform" style="padding: 20px;">
+
+  <script type="text/html" template lay-done="layui.data.done(d);">
+    <input type="hidden" name="id" id="id" value="{{ d.params.id || '' }}" >
+  </script>
+
+    <div class="layui-card" style="margin-bottom:0px;">
+      <div class="layui-card-body" style="padding: 15px;">
+        <div class="layui-form-item">
+          <label class="layui-form-label">C端标签</label>
+          <div class="layui-input-block">
+            <script type="text/html" template>
+              <label class="layui-form-label" style="text-align: left;">{{ d.params.name || '' }}</label>
+            </script>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="layui-card" style="margin-bottom:0px;">
+      <div class="layui-card-body">
+
+        <table id="form-create" class="layui-table">
+          <thead>
+            <tr>
+              <th style="width: 100px;">相似值</th>
+              <th>B端标签</th>
+              <th style="width: 50px;"><button type="button" class="layui-btn layui-btn-sm addselect">增加</button></th>
+            </tr>
+          </thead>
+          <tbody id="tablecontent">
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="layui-form-item" style="text-align: center;bottom: 10px;left: 0px;right: 0px;">
+      <script type="text/html" template>
+        <input type="submit" lay-submit lay-filter="LAY-user-back-submit" value="确定" class="layui-btn">
+        <a class="layui-btn layui-btn-primary" onclick="layer.close({{d.params.layerindex}})">取消</a>
+      </script>
+    </div>
+
+</div>
+
+<script>
+layui.data.done = function (d) {
+
+  layui.use(['admin', 'form','table','xmSelect','upload','laydate','transfer'], function(){
+    var $ = layui.$
+    ,admin = layui.admin
+    ,table = layui.table
+    ,xmSelect = layui.xmSelect
+    ,upload = layui.upload
+    ,laydate = layui.laydate 
+    ,transfer = layui.transfer
+    ,form = layui.form;
+
+
+  var nowindex = 1;
+  var proplist = [];
+
+  function createTables(p1,p2){
+    var s = "";
+    if (p1) s = p1;
+    var element = $([
+      '<tr>',
+        '<td><input type="number" name="valueInput_'+nowindex+'" lay-verify="required" class="layui-input" value="'+s+'" min="-100" max="100" style="display:inline-block;width:85%;">%</td>',
+        '<td class="proptd"></td>',
+        '<td class="handler">',
+          '<button type="button" class="layui-btn layui-btn-danger layui-btn-sm del">删除</button>',
+        '</td>',
+      '</tr>',
+    ].join(''))
+    
+    var proptd = element.find('.proptd')[0];
+    var propSelect = xmSelect.render({
+      el: proptd,
+      name: "propSelect_"+nowindex,
+      layVerify: 'required',
+      prop: {
+        value: 'id',
+      },
+      toolbar: {
+          show: true,
+      },
+      filterable: true,
+      autoRow: true,
+      data: function(){
+        return proplist;
+      }
+    })
+    if (p2) propSelect.setValue(p2);
+
+    element.find('.del').on('click', function(){
+      $(this).parents('tr').remove();
+    })
+    
+    nowindex++;
+    
+    $('#form-create tbody').append(element)    
+  }
+
+  $('.addselect').on('click', function(){
+    createTables();
+  });
+
+    var olddata = [];
+    var detaldata = [];
+    for(var i=0;i<d.params.samelist.length;i++)
+    {
+      var index = olddata.indexOf(d.params.samelist[i].samenum);
+      if (index == -1)
+      {
+        olddata.push(d.params.samelist[i].samenum);
+
+        detaldata[olddata.length-1] = [];
+        detaldata[olddata.length-1].push(d.params.samelist[i]);
+      }
+      else
+      {
+        detaldata[index].push(d.params.samelist[i]);
+      }
+    }
+
+
+    admin.req({
+      url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.getDictList   
+      ,type:"POST"
+      ,data: {type:"typechildtag"}
+      //,data: {type:"taglist"}
+      ,done: function(res){
+        if (res.errorcode === 0)
+        {
+          proplist = res.data;
+
+          for(var i=0;i<olddata.length;i++)
+          {
+            var p1 = olddata[i];
+            var p2 = [];
+            for(var j=0;j<detaldata[i].length;j++)
+            {
+              p2.push(detaldata[i][j].btagid);
+            }
+            createTables(p1,p2);
+          }
+          form.render();
+        }
+      }
+    });
+
+    form.render();
+
+
+    //监听提交
+    form.on('submit(LAY-user-back-submit)', function(data){
+      
+      let postData = data.field;
+      postData.nowindex = nowindex;
+      console.log(postData);
+
+      admin.req({
+        url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.TagSameTagClient   
+        ,type:"post"
+        ,data: postData
+        ,done: function(res){
+          layer.msg(res.errormsg, {icon: 1});
+          table.reload('LAY-tag-tag-list-table'); //重载表格
+          layer.close(d.params.layerindex); //再执行关闭 
+        }
+      });
+
+    });
+
+
+  });
+}
+</script>

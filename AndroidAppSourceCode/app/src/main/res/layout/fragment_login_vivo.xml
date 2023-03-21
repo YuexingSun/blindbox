@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ConstraintLayoutA"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/bg_login_main">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/AppIcon"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:layout_marginTop="142dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_login_app"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/AppName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="知行盒一"
+            android:textColor="@color/c_FF7C80"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/AppIcon" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/LoadingPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            android:layout_marginTop="65dp"
+            android:src="@drawable/ic_loading"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/AppName" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/LoginSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="65dp"
+            android:text="请选择登录方式"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/LoadingPhone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/AppName" />
+
+        <com.noober.background.view.BLButton
+            android:id="@+id/LocalPhone"
+            style="@style/big_text_button_red_white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="29dp"
+            android:layout_marginEnd="32dp"
+            android:text="本机号码一键登录"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/LoadingPhone" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/OtherPhoneBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_login_main_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/LocalPhone" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/OtherPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="其他手机号码登录"
+            android:textColor="@color/c_FF599F"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintBottom_toBottomOf="@+id/OtherPhoneBackground"
+            app:layout_constraintEnd_toEndOf="@+id/OtherPhoneBackground"
+            app:layout_constraintStart_toStartOf="@+id/OtherPhoneBackground"
+            app:layout_constraintTop_toTopOf="@+id/OtherPhoneBackground" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/AgreementText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="29dp"
+            android:layout_marginEnd="43dp"
+            android:gravity="center"
+            android:textColor="@color/c_BF442C60"
+            android:textSize="@dimen/sp_14"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/OtherPhone" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/AgConst"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/OtherPhoneBackground">
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/AgCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/AgreementCheckBox"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/AgText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:textColor="@color/c_BF442C60"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/AgCheck"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

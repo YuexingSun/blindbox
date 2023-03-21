@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/c_F">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/UGCLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/c_EF"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/AppBarA"
+                android:layout_width="match_parent"
+                android:layout_height="96dp">
+
+                <!--
+                scroll：想要触发滑动事件，必须要加上这个属性，不加最后会停在顶端
+                exitUntilCollapsed：表示滑动到最后折叠在顶端
+                enterAlways: 表示向上滑动消失，向下滑动可见
+                -->
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/ToolbarLayoutA"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_scrollFlags="scroll|enterAlways">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/ConstraintLayoutA"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/GuideA"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_begin="16dp" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/GuideB"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_end="16dp" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/ConstTop"
+                            android:layout_width="match_parent"
+                            android:layout_height="96dp"
+                            android:background="@color/transparent"
+                            android:translationZ="12dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/c_F" />
+
+                            <com.noober.background.view.BLConstraintLayout
+                                android:id="@+id/SearchConst"
+                                android:layout_width="0dp"
+                                android:layout_height="32dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="50dp"
+                                android:layout_marginEnd="16dp"
+                                android:transitionName="search_const"
+                                app:bl_corners_radius="16dp"
+                                app:bl_solid_color="@color/c_EF"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:id="@+id/SearchImg"
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:scaleType="fitCenter"
+                                    android:src="@mipmap/ic_search"
+                                    android:transitionName="search_img"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toStartOf="@id/SearchText"
+                                    app:layout_constraintHorizontal_chainStyle="packed"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/SearchText"
+                                    style="@style/text_0_14"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="3dp"
+                                    android:text="搜索文章"
+                                    android:textColor="@color/c_9"
+                                    android:textStyle="bold"
+                                    android:transitionName="search_text"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toEndOf="@id/SearchImg"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                            </com.noober.background.view.BLConstraintLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <com.scwang.smart.refresh.layout.SmartRefreshLayout
+                android:id="@+id/SmartRefreshLayoutA"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srlEnableLoadMore="false">
+
+                <com.scwang.smart.refresh.header.MaterialHeader
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/RecycA"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/FenGeA" />
+
+            </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="80dp"
+                android:layout_height="100dp"
+                android:layout_marginBottom="100dp"
+                app:layout_anchor="@id/SmartRefreshLayoutA"
+                app:layout_anchorGravity="end|bottom">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/SendArticle"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="@color/c_F"
+                    android:elevation="12dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/ic_write"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearance="@style/roundedCornerImageStyle50" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <ProgressBar
+            android:id="@+id/TitleBarProgress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:progressDrawable="@drawable/bg_progress_gradient"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <org.flower.l.library.view.webview.BrowserView
+            android:id="@+id/WebViewA"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TitleBarProgress" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

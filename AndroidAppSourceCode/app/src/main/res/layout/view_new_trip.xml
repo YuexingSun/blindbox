@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <com.noober.background.view.BLConstraintLayout
+        android:id="@+id/TripConstraintA"
+        android:layout_width="match_parent"
+        android:layout_height="513dp"
+        app:bl_corners_topLeftRadius="16dp"
+        app:bl_corners_topRightRadius="16dp"
+        app:bl_solid_color="@color/c_F">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/TitleA"
+            style="@style/text_3_20"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            app:bl_corners_topLeftRadius="16dp"
+            app:bl_corners_topRightRadius="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/TripRecyclerViewA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/TitleA" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/TitleB"
+            style="@style/text_3_20"
+            android:layout_marginTop="37dp"
+            android:gravity="center"
+            app:bl_corners_topLeftRadius="16dp"
+            app:bl_corners_topRightRadius="16dp"
+            app:layout_constraintStart_toStartOf="@+id/TitleA"
+            app:layout_constraintTop_toBottomOf="@+id/TripRecyclerViewA" />
+
+        <com.noober.background.view.BLConstraintLayout
+            android:id="@+id/ConstraintLayoutB"
+            android:layout_width="160dp"
+            android:layout_height="38dp"
+            android:layout_marginEnd="24dp"
+            android:elevation="4dp"
+            app:bl_corners_radius="40dp"
+            app:bl_solid_color="@color/c_F4"
+            app:layout_constraintBottom_toBottomOf="@+id/TitleB"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/TitleB">
+
+            <com.noober.background.view.BLTextView
+                android:id="@+id/Me"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:elevation="0dp"
+                android:enabled="true"
+                android:gravity="center"
+                android:textSize="@dimen/sp_16"
+                app:bl_corners_radius="40dp"
+                app:bl_enabled_solid_color="@color/c_F4"
+                app:bl_enabled_textColor="@color/c_AC"
+                app:bl_unEnabled_solid_color="@color/c_FF5280"
+                app:bl_unEnabled_textColor="@color/c_F"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/Friend"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.noober.background.view.BLTextView
+                android:id="@+id/Friend"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:elevation="0dp"
+                android:enabled="true"
+                android:gravity="center"
+                android:textSize="@dimen/sp_16"
+                app:bl_corners_radius="40dp"
+                app:bl_enabled_solid_color="@color/c_F4"
+                app:bl_enabled_textColor="@color/c_AC"
+                app:bl_unEnabled_solid_color="@color/c_FF5280"
+                app:bl_unEnabled_textColor="@color/c_F"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/Me"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </com.noober.background.view.BLConstraintLayout>
+
+        <com.zhpan.bannerview.BannerViewPager
+            android:id="@+id/BannerVp"
+            android:layout_width="match_parent"
+            android:layout_height="122dp"
+            android:layout_marginTop="33dp"
+            app:bvp_indicator_visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TitleB" />
+
+        <com.zhpan.indicator.IndicatorView
+            android:id="@+id/IndVA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/BannerVp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/BannerVp" />
+
+        <com.zhpan.bannerview.BannerViewPager
+            android:id="@+id/BannerVpB"
+            android:layout_width="match_parent"
+            android:layout_height="122dp"
+            android:layout_marginTop="33dp"
+            app:bvp_indicator_visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TitleB" />
+
+        <com.zhpan.indicator.IndicatorView
+            android:id="@+id/IndVAB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/BannerVpB"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/BannerVpB" />
+
+        <com.noober.background.view.BLButton
+            android:id="@+id/Cancel"
+            style="@style/big_text_button_gray_black"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="197dp"
+            android:layout_marginEnd="7dp"
+            android:text="取消"
+            android:textColor="@color/c_9"
+            app:layout_constraintEnd_toStartOf="@id/Confirm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TitleB" />
+
+        <com.noober.background.view.BLButton
+            android:id="@+id/Confirm"
+            style="@style/big_text_button_red_white"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginEnd="32dp"
+            android:text="确定"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/Cancel"
+            app:layout_constraintTop_toTopOf="@+id/Cancel" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/BannerA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="BannerVp, IndVA" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/BannerB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="BannerVpB, IndVAB" />
+
+    </com.noober.background.view.BLConstraintLayout>
+</layout>

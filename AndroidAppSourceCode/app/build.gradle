@@ -1,0 +1,160 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "kotlin-kapt"
+    // Parcelable 实现生成器
+    id "kotlin-parcelize"
+    id "androidx.navigation.safeargs.kotlin"
+}
+
+android {
+    compileSdkVersion compile_sdk_version
+    buildToolsVersion build_tools_version
+
+    defaultConfig {
+        applicationId application_id
+        minSdkVersion min_sdk_version
+        targetSdkVersion target_sdk_version
+        versionCode version_code
+        versionName version_name
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        //只打包中文资源与英文资源
+        resConfigs "zh-rCN", "en-rUS"
+
+        ndk {
+            //设置支持的SO库架构，主流，追求性能，但部分老旧机型不能适配
+            abiFilters "arm64-v8a"
+//            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+        }
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: "com.zhixing.zxhy",
+                //Portal上注册的包名对应的 appKey
+                JPUSH_APPKEY : "d097636bbf8984ef25c0dfda",
+                //暂时填写默认值即可.
+                JPUSH_CHANNEL: "developer-default",
+                //高德地图的key
+                GAO_DE_KEY   : "ece2c346c3f9fff5c3a6a19ed34cfe45"
+        ]
+
+        // 支持多dex
+        multiDexEnabled true
+    }
+
+    // 开启DataBinding
+    buildFeatures {
+        dataBinding true
+        compose = true
+    }
+
+    signingConfigs {
+        release {
+            keyAlias 'zxhy'
+            keyPassword 'android'
+            storeFile file('../zxhy.jks')
+            storePassword 'android'
+        }
+
+        debug {
+            keyAlias 'zxhy'
+            keyPassword 'android'
+            storeFile file('../zxhy.jks')
+            storePassword 'android'
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            zipAlignEnabled false
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            //开启混淆
+            minifyEnabled false
+            //去除无用资源
+            shrinkResources false
+            zipAlignEnabled false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion compose_version
+        kotlinCompilerVersion kotlin_version
+    }
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "${applicationId}_${getBuildDate()}_${variant.versionName}.apk"
+        }
+    }
+    compileOptions {
+        sourceCompatibility java_version
+        targetCompatibility java_version
+    }
+    kotlinOptions {
+        jvmTarget = java_version
+        useIR = true
+        //NetRspKtx 使用了实验特性
+        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
+    }
+    lintOptions {
+        disable 'InvalidPackage'
+        disable "ResourceType"
+        abortOnError false
+    }
+    packagingOptions {
+        pickFirst 'lib/*/libc++_shared.so' // 多个aar存在此so，需要选择第一个
+    }
+//    sourceSets {
+//        main{
+//            jniLibs.srcDirs = ['libs']
+//        }
+//    }
+}
+
+/**
+ * 获取编译日期
+ */
+static String getBuildDate() {
+    Date date = new Date()
+    String dateStr = date.format("yyyy-MM-dd")
+    return dateStr
+}
+
+dependencies {
+    api project(path: ':common')
+    implementation project(path: ':l-library')
+    // 内存泄露检测
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
+
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$junit_ext_version"
+//    androidTestImplementation "androidx.test.espresso:$espresso_version"
+
+    //Compose相关
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+
+    //极光
+    implementation "cn.jiguang.sdk:jverification:2.7.6"
+    implementation "cn.jiguang.sdk:jcore:3.1.0"
+
+    //高德
+    implementation(name: 'AMap3DMap_8.1.0_AMapNavi_8.1.0_AMapSearch_8.1.0_AMapLocation_5.6.0_20211101', ext: "aar")
+
+    //腾讯云验证码
+    implementation(name: 'captchasdk-release-1.0.2', ext: "aar")
+
+    //微信开发工具包 微信分享、登录、收藏、支付等功能需要的库以及文件
+    implementation "com.tencent.mm.opensdk:wechat-sdk-android:6.8.0"
+
+    //Bugly异常上报
+    implementation "com.tencent.bugly:crashreport:3.4.4"
+    implementation "com.tencent.bugly:nativecrashreport:3.9.2"
+}

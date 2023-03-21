@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ConstA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/HeadImg"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="12dp"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/roundedCornerImageStyle50" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/NickName"
+            style="@style/text_0_14"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/c_9"
+            app:layout_constraintStart_toEndOf="@+id/HeadImg"
+            app:layout_constraintTop_toTopOf="@+id/HeadImg" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/Content"
+            style="@style/text_0_14"
+            android:layout_width="0dp"
+            android:gravity="start"
+            android:paddingEnd="10dp"
+            android:textColor="@color/c_3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/NickName"
+            app:layout_constraintTop_toBottomOf="@+id/NickName" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/Time"
+            style="@style/text_0_14"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/c_9"
+            android:textSize="@dimen/sp_10"
+            app:layout_constraintStart_toStartOf="@+id/Content"
+            app:layout_constraintTop_toBottomOf="@+id/Content" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

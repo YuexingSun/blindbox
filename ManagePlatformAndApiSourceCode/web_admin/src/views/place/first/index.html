@@ -1,0 +1,261 @@
+
+
+<title>分类管理</title>
+  
+<div class="layui-card layadmin-header">
+  <div class="layui-breadcrumb" lay-filter="breadcrumb">
+    <a lay-href="">主页</a>
+    <a><cite>目的地管理</cite></a>
+    <a><cite>分类管理</cite></a>
+  </div>
+</div>
+
+<div class="layui-fluid">   
+  <div class="layui-card">
+
+    <div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="LAY-tag-tag-list-search-form" method='post'>
+      <div class="layui-form-item">
+        <div class="layui-inline">
+          <label class="layui-form-label">分类名称</label>
+          <div class="layui-input-inline">
+            <input type="text" name="tagname" placeholder="请输入" autocomplete="off" class="layui-input searchinput">
+          </div>
+        </div>
+        <div class="layui-inline">
+          <label class="layui-form-label">主类别</label>
+          <div class="layui-input-inline">
+            <div id="searchmaintype"></div>
+          </div>
+        </div>
+        <div class="layui-inline">
+          <button class="layui-btn" lay-submit lay-filter="LAY-tag-tag-list-search-form-submit" id="queryCondBtn">
+            <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="layui-card-body">
+
+      <div style="padding-bottom: 10px;text-align:right;">
+        <button class="layui-btn layuiadmin-btn-admin" data-type="add">增加分类</button>
+      </div>
+      
+      <table id="LAY-tag-tag-list-table" lay-filter="LAY-tag-tag-list-table"></table>  
+      <script type="text/html" id="LAY-tag-tag-list-table-opt">
+        <a class="layui-btn layui-btn layui-btn-xs" lay-event="bind"><i class="layui-icon layui-icon-edit"></i>合并到...</a>
+        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
+      </script>
+    </div>
+  </div>
+</div>
+
+<script type="text/html" id="TagDimenTmplate">
+  {{#  for(var i=0;i<d.taglist.length;i++){ }}
+    <span class="layui-badge layui-bg-cyan" style="height: 100%;">{{d.taglist[i].name}}</span>
+  {{#  } }}
+</script>
+
+<script>
+layui.use('useradmin', layui.factory('useradmin')).use(['admin', 'useradmin', 'table','laydate','xmSelect','element'], function(){
+  var $ = layui.$
+  ,admin = layui.admin
+  ,setter = layui.setter
+  ,view = layui.view
+  ,laydate = layui.laydate
+  ,table = layui.table
+  ,xmSelect = layui.xmSelect
+  ,element = layui.element
+  ,form = layui.form;
+
+  var searchmaintype = xmSelect.render({
+    el: '#searchmaintype', 
+    name: "searchmaintype",
+    prop: {
+      value: 'id',
+    },
+    radio: true,
+    clickClose: true,
+    data: []
+  })
+  admin.req({
+    url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.getDictList   
+    ,type:"POST"
+    ,data:{"type":"maintype"}
+    ,done: function(res){
+      if (res.errorcode === 0)
+      {
+        searchmaintype.update({
+          data: res.data,
+        })
+      }
+    }
+  }); 
+
+
+  table.render({
+    elem: '#LAY-tag-tag-list-table'
+    ,url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.DestinationFirst 
+    ,method : 'GET'
+    ,cols: [[
+      {field: 'name', title: '分类名称',sort:true}
+      ,{field: 'mainname', title: '所属主类别',sort:true}
+      ,{field: 'pic', title: '图标',templet:function(d){return (d.pic!="")?"<img src='"+d.pic+"' width='100px;'>":"";}}
+      ,{field: 'num', title: '目的地数量',sort:true}
+      ,{field: 'taglist', title: '标签',templet:'#TagDimenTmplate'}
+      ,{title: '操作', width: "25%", align: 'center', toolbar: '#LAY-tag-tag-list-table-opt'}
+    ]]
+    ,autoSort: false
+    ,page: true
+    ,toolbar: true
+    ,defaultToolbar: [
+      'filter', /*'print', 'exports'*/
+      {
+        title: '下载' //标题
+        ,layEvent: 'LAYTABLE_TIPS' //事件名，用于 toolbar 事件中使用
+        ,icon: 'layui-icon-export' //图标类名
+      } 
+    ]
+    ,text: {none:'暂无数据'}
+    ,done: function(res, curr, count){
+      if (res.errorcode != 0)
+      {
+        layer.msg(res.errormsg, {icon: 5});
+      }
+    }
+  });
+  //监听排序事件 
+  table.on('sort(LAY-tag-tag-list-table)', function(obj){
+    table.reload('LAY-tag-tag-list-table', {
+      initSort: obj
+      ,where: {
+        field: obj.field
+        ,order: obj.type
+      }
+    });
+  });  
+
+  //监听工具条
+  table.on('tool(LAY-tag-tag-list-table)', function(obj){
+    var data = obj.data;
+    if(obj.event === 'edit'){
+      layer.open({
+        type: 1
+        ,title: '修改分类'
+        ,area: ['500px', '500px']
+        ,maxmin: true
+        ,id: 'LAY-popup-useradmin2-add'
+        ,success: function(layero, index){
+          data.layerindex = index;          
+          view(this.id).render('place/first/form',data).done(function(){
+            form.render(null, 'layuiadmin-form-admin2');
+          });
+        }
+      });
+    }else if(obj.event === 'del'){
+      layer.confirm('确定要删除该分类吗？', function(index){
+        admin.req({
+          url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.DestinationFirst   
+          ,type:"DELETE"
+          ,data: {id:data.id}
+          ,done: function(res){
+            layer.msg(res.errormsg, {icon: 1});
+            table.reload('LAY-tag-tag-list-table'); //重载表格
+            layer.close(index);
+          }
+        });
+      });
+    }else if(obj.event === 'bind'){
+      layer.open({
+        type: 1
+        ,title: '合并分类到'
+        ,area: ['500px', '300px']
+        ,maxmin: true
+        ,id: 'LAY-popup-useradmin2-add'
+        ,success: function(layero, index){
+          data.layerindex = index;          
+          view(this.id).render('place/first/bindform',data).done(function(){
+            form.render(null, 'layuiadmin-form-admin2');
+          });
+        }
+      });
+    }
+
+  });
+
+  table.on('toolbar(LAY-tag-tag-list-table)', function(obj){
+    if (obj.event == "LAYTABLE_TIPS")
+    {
+        //layui.table.exportFile(ins1.config.id,exportdata,'xls');
+        var loadindex = layer.load(2);
+        var dataexport = form.val("LAY-tag-tag-list-search-form");
+        dataexport.export = 1;
+
+        admin.req({
+          url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.DestinationFirst   
+          ,type:"GET"
+          ,data: dataexport
+          ,done: function(res){
+            layer.closeAll('loading');
+            const iframe = document.createElement("iframe");
+            iframe.style.display = "none"; // 防止影响页面
+            iframe.style.height = 0; // 防止影响页面
+            iframe.src = res.data.url; 
+            document.body.appendChild(iframe); // 这一行必须，iframe挂在到dom树上才会发请求
+            
+            layer.msg(res.errormsg, {icon: 1});
+            layer.close(loadindex);
+
+          }
+        });
+
+
+    }
+  });
+
+
+  //事件
+  var active = {
+    add: function(){
+      layer.open({
+        type: 1
+        ,title: '新建分类'
+        ,area: ['500px', '500px']
+        ,maxmin: true
+        ,id: 'LAY-popup-useradmin2-add'
+        ,success: function(layero, index){
+          var data = new Object();
+          data.layerindex = index;          
+          view(this.id).render('place/first/form',data).done(function(){
+            form.render(null, 'layuiadmin-form-admin2');
+          });
+        }
+      });
+    }
+  }  
+
+  $('.layui-btn.layuiadmin-btn-admin').on('click', function(){
+    var type = $(this).data('type');
+    active[type] ? active[type].call(this) : '';
+  });
+
+  $(".searchinput").keydown(function (e) {
+    if (e.keyCode === 13) {
+      $("#queryCondBtn").trigger("click");
+    }
+  });
+
+  //监听搜索
+  form.on('submit(LAY-tag-tag-list-search-form-submit)', function(data){
+    var field = data.field;    
+    //执行重载
+    table.reload('LAY-tag-tag-list-table', {
+      where: field
+    });
+  });
+
+
+});
+</script>

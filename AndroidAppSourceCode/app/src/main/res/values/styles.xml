@@ -1,0 +1,334 @@
+<resources>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+        <item name="colorPrimary">@color/c_F</item>
+        <item name="colorPrimarySurface">@color/c_F</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" >
+        <item name="colorPrimary">@color/c_F</item>
+        <item name="colorPrimarySurface">@color/c_F</item>
+    </style>
+
+    <style name="Widget.Theme.ZhiXingBase.ButtonBar.Fullscreen" parent="">
+        <item name="android:background">@color/black_overlay</item>
+        <item name="android:buttonBarStyle">?attr/borderlessButtonStyle</item>
+        <!--去掉Button阴影-->
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <!--未选中的样式，可以设置选择的字体颜色，这里只是为了改变选择时的字体大小-->
+    <style name="bottom_tab_title_inactive">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <!--红色背景白色文字的大Button样式-->
+    <style name="big_text_button_red_white">
+        <item name="bl_corners_radius">30dp</item>
+        <item name="bl_gradient_angle">0</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="bl_gradient_endColor">@color/c_FF4545</item>
+        <item name="bl_gradient_startColor">@color/c_FF599E</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!--灰色背景黑色文字的大Button样式-->
+    <style name="big_text_button_gray_black">
+        <item name="bl_corners_radius">30dp</item>
+        <item name="bl_gradient_angle">0</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="bl_gradient_endColor">@color/c_E1</item>
+        <item name="bl_gradient_startColor">@color/c_E1</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/c_BF000000</item>
+    </style>
+
+    <!--红色背景白色文字的大Button样式-->
+    <style name="big_text_button_style">
+        <item name="bl_corners_radius">20dp</item>
+        <item name="bl_gradient_angle">0</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!--text样式 FFFFFF 20sp-->
+    <style name="text_F_20">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">@color/c_F</item>
+        <item name="android:textSize">@dimen/sp_20</item>
+    </style>
+
+    <!--text样式 333333 20sp-->
+    <style name="text_3_20">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">@color/c_3</item>
+        <item name="android:textSize">@dimen/sp_20</item>
+    </style>
+
+    <!--text样式 333333 14sp-->
+    <style name="text_3_14">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">@color/c_3</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
+    <!--text样式 8C000000 16sp-->
+    <style name="text_8C0_16">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">@color/c_8C000000</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+
+    <!--text样式 8C000000 14sp-->
+    <style name="text_8C0_14">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">@color/c_8C000000</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
+    <!--text样式 8C000000 16sp-->
+    <style name="text_BF0_16">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">@color/c_BF000000</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+
+    <!--text样式 000000 18sp-->
+    <style name="text_0_18">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">@color/c_0</item>
+        <item name="android:textSize">@dimen/sp_18</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!--text样式 000000 16sp-->
+    <style name="text_0_16">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">@color/c_0</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!--text样式 999999 16sp-->
+    <style name="text_9_16">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">@color/c_9</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!--text样式 000000 14sp-->
+    <style name="text_0_14">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">@color/c_0</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!--text样式 4D4D4D 14sp-->
+    <style name="text_4D_14">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">@color/c_4D</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!--text样式 442C60 14sp-->
+    <style name="text_442C60_14">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">@color/c_442C60</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!--text样式 999999 12sp-->
+    <style name="text_9_12">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">@color/c_9</item>
+        <item name="android:textSize">@dimen/sp_12</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!--edittext样式 333333 16sp-->
+    <style name="edit_3_16">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="textSize">@dimen/sp_16</item>
+        <item name="android:textColor">@color/c_3</item>
+    </style>
+
+    <style name="ed_down_line_color" parent="Theme.AppCompat.Light">
+        <!--控件默认颜色-->
+        <item name="colorControlNormal">@color/c_CD</item>
+        <!--被激活时的颜色-->
+        <item name="colorControlActivated">@color/c_CD</item>
+    </style>
+
+    <!--滑动器的style-->
+    <style name="MaterialSnackbarTheme" parent="@style/Widget.MaterialComponents.Snackbar">
+        <item name="backgroundTint">@color/c_F86D97</item>
+        <item name="android:background">@drawable/ic_login_app</item>
+        <item name="colorPrimary">@color/c_442C60</item>
+    </style>
+
+    <!-- 圆角图片50 -->
+    <style name="roundedCornerImageStyle50">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <!-- 圆角图片32 -->
+    <style name="roundedCornerImageStyle32">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">32dp</item>
+    </style>
+
+    <!-- 圆角图片26 -->
+    <style name="roundedCornerImageStyle26">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">26dp</item>
+    </style>
+
+    <!-- 圆角图片24 -->
+    <style name="roundedCornerImageStyle24">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">24dp</item>
+    </style>
+
+    <!-- 圆角图片18 -->
+    <style name="roundedCornerImageStyle18">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">18dp</item>
+    </style>
+
+    <!-- 圆角图片16 -->
+    <style name="roundedCornerImageStyle16">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <!-- 圆角图片11dp -->
+    <style name="roundedCornerImageStyle11">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">11dp</item>
+    </style>
+
+    <!-- 圆角图片8 -->
+    <style name="roundedCornerImageStyle8">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <!-- 圆角图片4 -->
+    <style name="roundedCornerImageStyle4">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">4%</item>
+    </style>
+
+    <!-- 圆角图片4dp -->
+    <style name="roundedCornerImageStyle4dp">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">4dp</item>
+    </style>
+
+    <!--tabs的文字style-->
+    <style name="TextAppearance.Tabs.text" parent="">
+        <item name="android:textSize">@dimen/sp_16</item>
+    </style>
+
+    <!--不满意选择框的按钮样式-->
+    <style name="NoManYi.Selected" parent="">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:gravity">center</item>
+        <item name="bl_corners_radius">40dp</item>
+        <item name="bl_stroke_width">1dp</item>
+        <item name="bl_selected_solid_color">@color/c_FFECF8</item>
+        <item name="bl_selected_stroke_color">@color/c_FF5280</item>
+        <item name="bl_selected_textColor">@color/c_FF5280</item>
+        <item name="bl_unSelected_solid_color">@color/c_F</item>
+        <item name="bl_unSelected_stroke_color">@color/c_c</item>
+        <item name="bl_unSelected_textColor">@color/c_9</item>
+    </style>
+
+    <!--出行页面的btn样式-->
+    <style name="Trip_Btn" parent="">
+        <item name="android:layout_width">104dp</item>
+        <item name="android:layout_height">44dp</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:background">@null</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textColor">@color/c_A1</item>
+        <item name="android:gravity">center</item>
+        <item name="bl_corners_radius">32dp</item>
+        <item name="bl_unSelected_drawable">@color/c_F0</item>
+        <item name="bl_selected_drawable">@mipmap/ic_btn_backg</item>
+        <item name="bl_selected_textColor">@color/c_F</item>
+        <item name="bl_unSelected_textColor">@color/c_A1</item>
+    </style>
+
+    <!--出行页面 步行/交通工具 的button样式-->
+    <style name="Trip_Btn_One" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="strokeColor">@color/trip_one_btn_selected</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/trip_one_btn_textcolor_selected</item>
+        <item name="android:backgroundTint">@color/trip_one_btn_selected</item>
+    </style>
+
+    <!--checkBox选中时的颜色-->
+    <style name="MyCheckBox" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/c_1890FF</item>
+    </style>
+
+    <!--checkBox选中时的颜色-->
+    <style name="AgreementCheckBox" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/c_FF4545</item>
+    </style>
+
+    <!--开关框的style-->
+    <style name="MySwitchMaterial" parent="Theme.AppCompat.Light">
+        <!--开启时的颜色-->
+        <item name="colorControlActivated">@color/c_F86E97</item>
+        <!--关闭时的颜色-->
+        <item name="colorSwitchThumbNormal">@color/c_F299F2</item>
+        <!--关闭时轨迹的颜色-->
+        <!--        <item name="android:colorForeground">@color/c_c</item>-->
+    </style>
+
+    <!--emoji的背景-->
+    <style name="EmojiClickBackG" >
+        <item name="bl_unPressed_solid_color">@color/c_F8</item>
+        <item name="bl_pressed_solid_color">@color/c_E4</item>
+        <item name="bl_corners_radius">5dp</item>
+    </style>
+
+    <!--评分控件自定义的style-->
+    <style name="RatingBar_CustomColor" parent="Widget.AppCompat.RatingBar.Indicator">
+        <!--背景色-->
+        <item name="colorControlNormal">@color/c_F</item>
+        <!--星星颜色-->
+        <item name="colorControlActivated">@color/c_FFC700</item>
+    </style>
+
+</resources>

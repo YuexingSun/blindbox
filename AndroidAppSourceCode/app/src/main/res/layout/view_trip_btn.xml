@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <com.noober.background.view.BLButton
+        android:id="@+id/BtnA"
+        android:layout_width="104dp"
+        android:layout_height="44dp"
+        android:background="@null"
+        android:gravity="center"
+        android:stateListAnimator="@null"
+        android:textSize="@dimen/sp_16"
+        android:textStyle="bold"
+        app:bl_corners_radius="32dp"
+        app:bl_enabled_solid_color="@color/c_F4"
+        app:bl_enabled_stroke_color="@color/transparent"
+        app:bl_enabled_textColor="@color/c_AC"
+        app:bl_stroke_width="1dp"
+        app:bl_unEnabled_solid_color="@color/c_FEF5F9"
+        app:bl_unEnabled_stroke_color="@color/c_F49AC0"
+        app:bl_unEnabled_textColor="@color/c_FF5280" />
+
+</layout>

@@ -1,0 +1,104 @@
+
+
+  <style>
+        html,body,#container{
+            height:100%;
+            width:100%;
+        }
+        .btn{
+            width:10rem;
+            margin-left:6.8rem;   
+        }
+      .amap-marker:first-child .amap-icon img {
+          width: 25px;
+          height: 34px;
+      }
+  </style>
+<div class="layui-form" lay-filter="ayuiadmin-form-socialform" style="height: 100%;">
+
+      <script type="text/html" template lay-done="layui.data.done(d);">
+        <input type="hidden" name="id" id="id" value="{{ d.params.id || '' }}" >
+      </script>
+
+      <div id="container"></div>
+
+</div>
+
+<script>
+layui.data.done = function (d) {
+
+  layui.use(['admin', 'form','table','xmSelect','upload','laydate'], function(){
+    var $ = layui.$
+    ,admin = layui.admin
+    ,table = layui.table
+    ,xmSelect = layui.xmSelect
+    ,upload = layui.upload
+    ,laydate = layui.laydate 
+    ,form = layui.form;
+
+    admin.req({
+      url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.TradingCircle   
+      ,type:"GET"
+      ,data:{"id":"AllForMap"}
+      ,done: function(res){
+        if (res.errorcode === 0)
+        {
+          for(var i=0;i<res.data.length;i++)
+          {
+            if (res.data[i].maintypeid == 1)
+            {
+              var iconurl = "./src/style/res/local"+res.data[i].maintypeid+".png";
+            }
+            else
+            {
+              iconurl = "";
+            }
+            var marker = new AMap.Marker({
+              position : [res.data[i].lng,res.data[i].lat],
+              icon : iconurl,
+              title : res.data[i].name
+            });
+            // marker.setLabel({
+            //     offset: new AMap.Pixel(0, 20),  //设置文本标注偏移量
+            //     content: "<div class='info'>"+res.data[i].name+"</div>", //设置文本标注内容
+            //     direction: 'right' //设置文本标注方位
+            // });
+            map.add(marker);
+
+            var circle = new AMap.Circle({
+                center: new AMap.LngLat(res.data[i].lng,res.data[i].lat),  // 圆心位置
+                radius: 500, // 圆半径
+                fillColor: '#a3e1f8',   // 圆形填充颜色
+                strokeColor: '#fff', // 描边颜色
+            });
+
+            map.add(circle);
+
+
+            //map.setFitView(marker);
+          }
+          map.setFitView();
+        }
+      }
+    }); 
+
+
+    var map = new AMap.Map("container", {
+        resizeEnable: true,
+        zoom :13,
+    });
+    AMap.plugin([
+        'AMap.ToolBar',
+    ], function(){
+        // 在图面添加工具条控件，工具条控件集成了缩放、平移、定位等功能按钮在内的组合控件
+        map.addControl(new AMap.ToolBar());
+    });
+    map.setFeatures(['bg','road','point','building']);
+    
+    var geocoder = new AMap.Geocoder({
+        city: "020", //城市设为北京，默认：“全国”
+    });
+    
+  });
+}
+</script>

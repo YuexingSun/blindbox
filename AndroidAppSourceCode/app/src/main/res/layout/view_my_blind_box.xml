@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.zhixing.zxhy.view_model.MyBlindBoxListData" />
+
+        <import type="com.zhixing.zxhy.util.databinding.MyBlindBox" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/CardViewA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="@color/c_F"
+        app:cardCornerRadius="10dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="start"
+                android:maxLines="2"
+                android:text="@{data.title}"
+                android:textColor="@color/c_0"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/Status"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/Status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:text="进行中"
+                android:textColor="@color/c_82B3FD"
+                android:textSize="@dimen/sp_12"
+                android:visibility="@{data.status == 0 || data.status == 1 ? View.VISIBLE: View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@+id/Title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/Title" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/TimeImage"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginTop="7dp"
+                android:scaleType="fitXY"
+                app:layout_constraintStart_toStartOf="@id/Title"
+                app:layout_constraintTop_toBottomOf="@id/Title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/Time"
+                style="@style/text_8C0_16"
+                android:layout_marginStart="4dp"
+                android:text="@{data.time}"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintBottom_toBottomOf="@id/TimeImage"
+                app:layout_constraintStart_toEndOf="@id/TimeImage"
+                app:layout_constraintTop_toTopOf="@id/TimeImage" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/LocationImage"
+                android:layout_width="10dp"
+                android:layout_height="14dp"
+                android:layout_marginTop="7dp"
+                android:paddingTop="4dp"
+                android:scaleType="fitXY"
+                app:layout_constraintStart_toStartOf="@id/Title"
+                app:layout_constraintTop_toBottomOf="@id/TimeImage" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/Location"
+                style="@style/text_8C0_16"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="20dp"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:maxLines="1"
+                android:text="@{data.subtitle}"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/StatusImg"
+                app:layout_constraintStart_toEndOf="@id/LocationImage"
+                app:layout_constraintTop_toTopOf="@id/LocationImage" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/StatusImg"
+                android:layout_width="94dp"
+                android:layout_height="94dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="9dp"
+                android:layout_marginBottom="3dp"
+                android:scaleType="fitXY"
+                android:visibility="@{data.status == 0 || data.status == 1 ? View.GONE: View.VISIBLE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

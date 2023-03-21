@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.zhixing.zxhy.view_model.PerfectDataOneViewModel" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ConstraintLayoutA"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/TextViewA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="112dp"
+            android:text="填个用户名吧"
+            android:textColor="@color/c_8F"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ConstraintLayoutB"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/TextViewA">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ImageViewA"
+                android:layout_width="24dp"
+                android:layout_height="26dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_prefect_one_a"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/UserName"
+                android:layout_width="0dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="17dp"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:maxLength="20"
+                android:maxLines="1"
+                android:text="@{vm.userName}"
+                android:textColor="@{vm.userName.length() > 16 ? @color/c_FF0000:@color/c_FF599F}"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="@+id/ImageViewA"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ImageViewA"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/FenGeA"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="11dp"
+                android:background="@color/c_FF4A80"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/Notice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="用户名不得超过16个字"
+            android:textColor="@color/c_FF0000"
+            android:textSize="@dimen/sp_14"
+            android:visibility="@{vm.userName.length() > 16 ? View.VISIBLE: View.GONE}"
+            app:layout_constraintStart_toStartOf="@+id/ConstraintLayoutB"
+            app:layout_constraintTop_toBottomOf="@+id/ConstraintLayoutB" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/TextViewB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="54dp"
+            android:text="再填个出生年月吧"
+            android:textColor="@color/c_8F"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintStart_toStartOf="@id/ConstraintLayoutB"
+            app:layout_constraintTop_toBottomOf="@id/ConstraintLayoutB" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ConstraintLayoutC"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/TextViewB">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ImageViewB"
+                android:layout_width="24dp"
+                android:layout_height="26dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_prefect_one_b"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/UserDate"
+                android:layout_width="0dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="17dp"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:text="@{vm.userDate}"
+                android:textColor="@color/c_FF599F"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="@+id/ImageViewB"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ImageViewB"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/FenGeB"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="11dp"
+                android:background="@color/c_FF4A80"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/Man"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_marginTop="40dp"
+            android:onClick="@{()->vm.genderClick(1)}"
+            android:scaleType="fitXY"
+            android:src="@{vm.gender == 1 ? @drawable/ic_man_check: @drawable/ic_man_uncheck}"
+            app:layout_constraintEnd_toStartOf="@id/WoMan"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ConstraintLayoutC" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/WoMan"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:onClick="@{()->vm.genderClick(0)}"
+            android:scaleType="fitXY"
+            android:src="@{vm.gender == 0 ? @drawable/ic_woman_check: @drawable/ic_woman_uncheck}"
+            app:layout_constraintBottom_toBottomOf="@id/Man"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/Man"
+            app:layout_constraintTop_toTopOf="@id/Man" />
+
+        <com.noober.background.view.BLButton
+            android:id="@+id/Next"
+            style="@style/big_text_button_style"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginEnd="60dp"
+            android:enabled="false"
+            android:text="下一步"
+            android:onClick="@{()->vm.submitBaseDataOneData()}"
+            android:textColor="@color/c_B"
+            app:bl_solid_color="@color/c_F3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/Man" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

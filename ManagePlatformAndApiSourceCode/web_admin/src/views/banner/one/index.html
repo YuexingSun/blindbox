@@ -1,0 +1,279 @@
+
+
+<title>霸屏广告管理</title>
+  
+<div class="layui-card layadmin-header">
+  <div class="layui-breadcrumb" lay-filter="breadcrumb">
+    <a lay-href="">主页</a>
+    <a><cite>广告管理</cite></a>
+    <a><cite>霸屏广告管理</cite></a>
+  </div>
+</div>
+
+<div class="layui-fluid">   
+  <div class="layui-card">
+
+    <div class="layui-card-body">
+
+      <div class="layui-form" lay-filter="ayuiadmin-form-socialform" style="padding: 20px 30px 0 0;">
+
+        <div class="layui-form-item">
+          <div class="layui-inline">
+            <label class="layui-form-label"><font color='red'>*</font>是否显示霸屏广告</label>
+            <div class="layui-input-inline">
+              <div id="bannertype"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="banner1" style="display: none;">
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">显示日期</label>
+            <div class="layui-input-block">
+                <input type="text" name="startdate" id="startdate" class="layui-input">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">显示时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="starttime" id="starttime" class="layui-input">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">广告图片</label>
+            <div class="layui-input-block">
+              <button type="button" class="layui-btn" id="uploadfilebtn1">
+                <i class="layui-icon">&#xe67c;</i><span>上传图片</span>
+              </button>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <img src="" id="bannerpic1" width="150px;">
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <div class="layui-inline">
+              <label class="layui-form-label"><font color='red'>*</font>点击跳转目标</label>
+              <div class="layui-input-inline">
+                <div id="targettype1"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="layui-form-item banner1url banner1none">
+            <label class="layui-form-label">外部链接地址</label>
+            <div class="layui-input-block">
+                <input type="text" name="banner1url" id="banner1url" value="" autocomplete="off" class="layui-input" placeholder='外部链接地址'>
+            </div>
+          </div>
+
+          <div class="layui-form-item banner1atc banner1none">
+            <label class="layui-form-label">选择要跳转的文章</label>
+            <div class="layui-input-block">
+                <div id="banner1atc"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+          <label class="layui-form-label"></label>
+          <div class="layui-input-block">
+            <input type="submit" lay-submit lay-filter="LAY-user-back-submit" class="layui-btn" id="LAY-user-back-submit">
+          </div>
+        </div>
+
+
+    </div>
+  </div>
+</div>
+
+<script>
+layui.use('useradmin', layui.factory('useradmin')).use(['admin', 'useradmin', 'table','laydate','xmSelect','element','upload'], function(){
+  var $ = layui.$
+  ,admin = layui.admin
+  ,setter = layui.setter
+  ,view = layui.view
+  ,laydate = layui.laydate
+  ,table = layui.table
+  ,xmSelect = layui.xmSelect
+  ,upload = layui.upload
+  ,element = layui.element
+  ,form = layui.form;
+
+    laydate.render({ 
+      elem: '#startdate'
+      ,range: true //或 range: '~' 来自定义分割字符
+    });
+    laydate.render({ 
+      elem: '#starttime'
+      ,type: 'time'
+      ,range: true //或 range: '~' 来自定义分割字符
+    });
+
+    var bannertype = xmSelect.render({
+      el: '#bannertype', 
+      layVerify: 'required',
+      name: "bannertype",
+      radio: true,
+      clickClose: true,
+      data: [{value:0,name:"不显示"},{value:1,name:"显示广告图"}],
+      on: function(data){
+        var arr = data.arr;
+        if (arr.length > 0)
+        {
+          $(".banner1").hide();
+          if (arr[0].value == 1)
+          {
+            $(".banner1").show();
+          }
+        }
+      }
+    })
+
+    var targettype1 = xmSelect.render({
+      el: '#targettype1', 
+      name: "targettype1",
+      radio: true,
+      clickClose: true,
+      data: [{value:"none",name:"不可点击"},{value:"box",name:"跳转到开盒页"},{value:"h5",name:"跳转到外部链接"},{value:"detail",name:"跳转到文章详情页"}],
+      on: function(data){
+        var arr = data.arr;
+        if (arr.length > 0)
+        {
+          $(".banner1none").hide();
+          if (arr[0].value == "h5")
+          {
+            $(".banner1url").show();
+          }
+          else if (arr[0].value == "detail")
+          {
+            $(".banner1atc").show();
+          }
+        }
+      }
+    })
+
+    var banner1atc = xmSelect.render({
+      el: '#banner1atc', 
+      name: "banner1atc",
+      prop: {
+        value: 'id',
+        name : 'title'
+      },
+      radio: true,
+      clickClose: true,
+      filterable: true,
+      filterMethod: function(val, item, index, prop){
+        if(item.title.toLowerCase().indexOf(val.toLowerCase()) !=-1){
+          return true;
+        }
+        return false;
+      },
+      paging: true,
+      data: [],
+    })
+    
+    admin.req({
+      url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.getDictList   
+      ,type:"POST"
+      ,data:{"type":"articlelist"}
+      ,done: function(res){
+        if (res.errorcode === 0)
+        {
+          banner1atc.update({
+            data: res.data,
+          })
+        }
+
+        admin.req({
+          url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.Banner   
+          ,type:"GET"
+          ,data:{"type":"2"}
+          ,done: function(res){
+            if (res.errorcode === 0)
+            {
+              bannertype.setValue([res.data.length],false,true);
+              if (res.data.length > 0)
+              {
+                $("#startdate").val(res.data[0].startdate + " - " + res.data[0].enddate);
+                $("#starttime").val(res.data[0].starttime + " - " + res.data[0].endtime);
+              }
+              for(var i=0;i<res.data.length;i++)
+              {
+                
+                  targettype1.setValue([res.data[i].targettype],false,true);
+                  if (res.data[i].pic)
+                  {
+                    $("#bannerpic1").attr("src",res.data[i].pic);
+                  }
+                  if (res.data[i].param)
+                  {
+                    if (res.data[i].targettype == "h5")
+                    {
+                      $("#banner1url").val(res.data[i].param);
+                    }
+                    else if (res.data[i].targettype == "detail")
+                    {
+                      banner1atc.setValue([res.data[i].param]);
+                    }
+                  }
+                
+                
+              }
+              form.render();
+            }
+          }
+        }); 
+
+      }
+    }); 
+
+
+    //上传
+    var loadindex = null;
+    
+    upload.render({
+      elem: '#uploadfilebtn1'
+      ,url: layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.uploadFile
+      ,before: function(obj){
+        loadindex = layer.load(2);
+      }
+      ,done: function(res){
+        layer.close(loadindex);
+        if (res.location)
+        {
+          $("#bannerpic1").attr("src",res.location);
+          layer.msg('上传成功', {icon: 1});
+        }
+        else
+        { 
+          layer.msg(res.errormsg, {icon: 5});
+        }
+      }
+    });
+
+    //监听提交
+    form.on('submit(LAY-user-back-submit)', function(data){
+        let postData = data.field;
+        postData.type = 2;
+        postData.pic1 = $("#bannerpic1").attr("src");
+
+        let methstr = "POST";
+
+        admin.req({
+          url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.Banner   
+          ,type: methstr
+          ,data: postData
+          ,done: function(res){
+            layer.msg(res.errormsg, {icon: 1});
+          }
+        });
+
+    });
+
+
+
+});
+</script>

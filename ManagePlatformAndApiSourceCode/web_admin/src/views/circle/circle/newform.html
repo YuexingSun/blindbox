@@ -1,0 +1,216 @@
+
+  <script src="./src/controller/lib/city-picker.data.js"></script>
+  <link href="./src/style/city-picker.css" rel="stylesheet" />
+
+
+  <style>
+        html,body,#container{
+            height:100%;
+            width:100%;
+        }
+        .btn{
+            width:10rem;
+            margin-left:6.8rem;   
+        }
+      .amap-marker:first-child .amap-icon img {
+          width: 25px;
+          height: 34px;
+      }
+  </style>
+<div class="layui-form" lay-filter="ayuiadmin-form-socialform" style="padding: 20px 30px 0 0;">
+
+      <script type="text/html" template lay-done="layui.data.done(d);">
+        <input type="hidden" name="id" id="id" value="{{ d.params.id || '' }}" >
+      </script>
+
+
+    <div class="layui-form-item">
+      <label class="layui-form-label"><font color='red'>*</font>所在省市</label>
+      <div class="layui-input-block">
+          <input type="text" autocomplete="on" class="layui-input" id="city-picker" name="city-picker" readonly="readonly" data-toggle="city-picker" placeholder="请选择" lay-verify="required">
+      </div>
+    </div> 
+
+    <div class="layui-form-item">
+      <label class="layui-form-label"><font color='red'>*</font>所属位置</label>
+      <div class="layui-input-block">
+          <div id="maintypeid"></div>
+      </div>
+    </div> 
+
+    <div class="layui-form-item">
+      <label class="layui-form-label"><font color='red'>*</font>商圈名称</label>
+      <div class="layui-input-block" style="width: 70%;display: inline-block;margin-left: 0px;">
+        <script type="text/html" template>
+          <input type="text" name="name" value="{{ d.params.name || '' }}" lay-verify="required" autocomplete="off" class="layui-input" placeholder='商圈名称'  id="address">
+        </script>
+      </div><button type="button" class="layui-btn layui-btn-normal layui-btn-sm" id="locationit">定位</button>
+
+    </div>
+
+    <div class="layui-form-item">
+      <div class="layui-inline">
+        <label class="layui-form-label"><font color='red'>*</font>坐标经度</label>
+        <div class="layui-input-inline">
+          <script type="text/html" template>
+            <input type="text" name="lng" id="lng" value="{{ d.params.lng || '' }}" autocomplete="off" class="layui-input" placeholder='坐标经度' readonly lay-verify="required">
+          </script>
+        </div>
+      </div>
+      <div class="layui-inline">
+        <label class="layui-form-label"><font color='red'>*</font>坐标纬度</label>
+        <div class="layui-input-inline">
+          <script type="text/html" template>
+            <input type="number" name="lat" id="lat" value="{{ d.params.lat || '' }}" autocomplete="off" class="layui-input" placeholder='坐标纬度' readonly lay-verify="required">
+          </script>
+        </div>
+      </div>
+    </div>
+
+    <div class="layui-form-item" style="height: 300px;">
+      <label class="layui-form-label">准确位置</label>
+      <div class="layui-input-block" style="height: 100%;">
+        <div id="container"></div>
+      </div>
+    </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label"></label>
+    <div class="layui-input-block">
+      <input type="submit" lay-submit lay-filter="LAY-user-back-submit" class="layui-btn" id="LAY-user-back-submit">
+    </div>
+  </div>
+</div>
+
+<script>
+layui.data.done = function (d) {
+
+  layui.use(['admin', 'form','table','xmSelect','upload','laydate','citypicker'], function(){
+    var $ = layui.$
+    ,admin = layui.admin
+    ,table = layui.table
+    ,xmSelect = layui.xmSelect
+    ,upload = layui.upload
+    ,laydate = layui.laydate 
+    ,cityPicker = layui.citypicker
+    ,form = layui.form;
+
+    var currentPicker = new cityPicker("#city-picker", {
+                provincename:"provinceId",
+                cityname:"cityId",
+                districtname: "districtId",
+                level: 'districtId',// 级别
+            });
+    if (d.params.province)
+    {
+      currentPicker.setValue(d.params.province+"/"+d.params.city+"/"+d.params.district);
+    }
+
+    var maintypeid = xmSelect.render({
+      el: '#maintypeid', 
+      layVerify: 'required',
+      name: "maintypeid",
+      prop: {
+        value: 'id',
+      },
+      data: [],
+    })
+    admin.req({
+      url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.getDictList   
+      ,type:"POST"
+      ,data:{"type":"circletype"}
+      ,done: function(res){
+        if (res.errorcode === 0)
+        {
+          maintypeid.update({
+            data: res.data,
+          })
+        }
+        if (d.params.taglist)
+        {
+          maintypeid.setValue(d.params.taglist);
+        }
+      }
+    }); 
+
+
+
+    var map = new AMap.Map("container", {
+        resizeEnable: true
+    });
+    
+    var geocoder = new AMap.Geocoder({
+        city: "广州", //城市设为北京，默认：“全国”
+    });
+    
+    var marker = new AMap.Marker({
+        // 设置是否可以拖拽
+        draggable: true,
+        cursor: 'move',
+        // 设置拖拽效果
+        raiseOnDrag: true
+
+    });
+
+    function putFlaginMap(address){
+      geocoder.getLocation(address, function(status, result) {
+        console.log(result);
+          if (status === 'complete'&&result.geocodes.length) {
+              console.log(result);
+              var lnglat = result.geocodes[0].location
+              marker.setPosition(lnglat);
+              map.add(marker);
+              map.setFitView(marker);
+              marker.on('dragging', showInfoM);
+              showInfoM();
+          }else{
+              layer.msg("根据地址查询位置失败", {icon: 5});
+          }
+        });
+    }
+    function showInfoM(){
+      var tmp = marker.getPosition();
+      $("#lng").val(tmp.lng);
+      $("#lat").val(tmp.lat);
+    }
+
+    $("#locationit").on("click",function(){
+      putFlaginMap($("#address").val());
+    });
+    if (d.params.lng)
+    {
+      marker.setPosition([d.params.lng,d.params.lat]);
+      map.add(marker);
+      map.setFitView(marker);
+      marker.on('dragging', showInfoM);
+    }
+
+
+    //监听提交
+    form.on('submit(LAY-user-back-submit)', function(data){
+        let postData = data.field;
+        let methstr = "POST";
+        if (postData.id)
+        {
+          methstr = "PUT";
+          postData.type = "edit";
+        }
+
+        admin.req({
+          url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.TradingCircle   
+          ,type: methstr
+          ,data: postData
+          ,done: function(res){
+            layer.msg(res.errormsg, {icon: 1});
+            table.reload('LAY-tag-tag-list-table'); //重载表格
+            layer.close(d.params.layerindex); //再执行关闭 
+          }
+        });
+
+    });
+
+
+
+  });
+}
+</script>

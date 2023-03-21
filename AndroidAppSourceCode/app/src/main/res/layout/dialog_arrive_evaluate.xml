@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.noober.background.view.BLConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:bl_corners_topLeftRadius="8dp"
+    app:bl_corners_topRightRadius="8dp"
+    app:bl_solid_color="@color/c_F">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/ETextA"
+        style="@style/text_0_16"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="您对此次盲盒的内容满意吗？"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ConstraintLayoutA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ETextA">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/NoManYi"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="24dp"
+            android:background="@mipmap/ic_box_nomanyi_unselected"
+            app:layout_constraintEnd_toStartOf="@id/ManYi"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/ManYi"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="24dp"
+            android:background="@mipmap/ic_box_manyi_unselected"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/NoManYi"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/ETextB"
+            style="@style/text_0_18"
+            android:layout_marginTop="16dp"
+            android:text="不满意"
+            app:layout_constraintEnd_toEndOf="@+id/NoManYi"
+            app:layout_constraintStart_toStartOf="@+id/NoManYi"
+            app:layout_constraintTop_toBottomOf="@+id/NoManYi" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/ETextC"
+            style="@style/text_0_18"
+            android:layout_marginTop="16dp"
+            android:text="满意"
+            app:layout_constraintEnd_toEndOf="@+id/ManYi"
+            app:layout_constraintStart_toStartOf="@+id/ManYi"
+            app:layout_constraintTop_toBottomOf="@+id/ManYi" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ConstraintLayoutB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ConstraintLayoutA">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/ETextD"
+            style="@style/text_0_16"
+            android:layout_marginTop="38dp"
+            android:text="“感谢支持，我们会继续努力”"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/ETextE"
+            style="@style/text_0_16"
+            android:layout_marginTop="38dp"
+            android:text="“体验不好，以下哪方面使您不满意”"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ConstraintLayoutC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="43dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="43dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ETextE">
+
+            <com.noober.background.view.BLTextView
+                android:id="@+id/TextOne"
+                style="@style/NoManYi.Selected"
+                android:layout_marginEnd="14dp"
+                android:text="以前来过"
+                app:layout_constraintEnd_toStartOf="@id/TextTwo"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.noober.background.view.BLTextView
+                android:id="@+id/TextTwo"
+                style="@style/NoManYi.Selected"
+                android:text="不喜欢这个地方"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/TextOne"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.noober.background.view.BLTextView
+                android:id="@+id/TextThree"
+                style="@style/NoManYi.Selected"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="14dp"
+                android:text="导航不清晰"
+                app:layout_constraintEnd_toStartOf="@id/TextTwo"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/TextOne" />
+
+            <com.noober.background.view.BLTextView
+                android:id="@+id/TextFour"
+                style="@style/NoManYi.Selected"
+                android:text="太好猜"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/TextTwo"
+                app:layout_constraintTop_toTopOf="@id/TextThree" />
+
+            <com.noober.background.view.BLTextView
+                android:id="@+id/TextFive"
+                style="@style/NoManYi.Selected"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="14dp"
+                android:text="时间不准确"
+                app:layout_constraintEnd_toStartOf="@id/TextTwo"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/TextThree" />
+
+            <com.noober.background.view.BLTextView
+                android:id="@+id/TextSix"
+                style="@style/NoManYi.Selected"
+                android:text="找不到店"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/TextFour"
+                app:layout_constraintTop_toTopOf="@id/TextFive" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.noober.background.view.BLButton
+        android:id="@+id/EBtnA"
+        style="@style/big_text_button_red_white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="34dp"
+        android:text="提交评价"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ConstraintLayoutB" />
+
+</com.noober.background.view.BLConstraintLayout>

@@ -1,0 +1,97 @@
+
+<div class="layui-form" lay-filter="ayuiadmin-form-socialform" style="padding: 20px;">
+
+  <script type="text/html" template lay-done="layui.data.done(d);">
+    <input type="hidden" name="id" id="id" value="{{ d.params.id || '' }}" >
+  </script>
+
+  <div class="layui-form-item">
+    <div id="transferdiv"></div>
+  </div>
+
+  <div class="layui-form-item" style="text-align: center;bottom: 10px;left: 0px;right: 0px;">
+    <script type="text/html" template>
+      <input type="submit" lay-submit lay-filter="LAY-user-back-submit" value="确定" class="layui-btn">
+      <a class="layui-btn layui-btn-primary" onclick="layer.close({{d.params.layerindex}})">取消</a>
+    </script>
+  </div>
+
+</div>
+
+<script>
+layui.data.done = function (d) {
+
+  layui.use(['admin', 'form','table','xmSelect','upload','laydate','transfer'], function(){
+    var $ = layui.$
+    ,admin = layui.admin
+    ,table = layui.table
+    ,xmSelect = layui.xmSelect
+    ,upload = layui.upload
+    ,laydate = layui.laydate 
+    ,transfer = layui.transfer
+    ,form = layui.form;
+
+    transfer.render({
+      elem: '#transferdiv'
+      ,data: []
+      ,id: 'transid'
+      ,width: 250
+      ,showSearch : true
+      ,title : ['全部维度',d.params.name]
+      ,parseData: function(res){
+        return {
+          "value": res.id 
+          ,"title": res.name
+        }
+      }
+    });
+
+    var sel = [];
+    $.each(d.params.taglist, function (index, itemobj) {
+      sel.push(itemobj.id);
+    });
+
+    admin.req({
+      url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.getDictList   
+      ,type:"post"
+      ,data:{"type":"typelist"}
+      ,done: function(res){
+        if (res.errorcode === 0)
+        {
+          transfer.reload('transid', {
+            data: res.data
+            ,value: sel
+          });
+        }
+      }
+    });
+
+
+    form.render();
+
+
+    //监听提交
+    form.on('submit(LAY-user-back-submit)', function(data){
+      
+      let postData = data.field;
+      postData.type = "tag";//以维度为基准
+      let getData = transfer.getData('transid'); 
+      postData.list = JSON.stringify(getData); 
+
+      admin.req({
+        url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.RelationTagType   
+        ,type:"post"
+        ,data: postData
+        ,done: function(res){
+          layer.msg(res.errormsg, {icon: 1});
+          table.reload('LAY-tag-tag-list-table'); //重载表格
+          layer.close(d.params.layerindex); //再执行关闭 
+        }
+      });
+
+    });
+
+
+  });
+}
+</script>

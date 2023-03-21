@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <com.noober.background.view.BLConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:bl_corners_topLeftRadius="16dp"
+        app:bl_corners_topRightRadius="16dp"
+        app:bl_solid_color="@color/c_F">
+
+        <com.noober.background.view.BLConstraintLayout
+            android:id="@+id/TripConstraintA"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:visibility="gone"
+            app:bl_corners_topLeftRadius="16dp"
+            app:bl_corners_topRightRadius="16dp"
+            app:bl_solid_color="@color/c_F">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/Title"
+                style="@style/text_3_20"
+                android:layout_marginTop="37dp"
+                android:gravity="center"
+                android:text="出行人数"
+                app:bl_corners_topLeftRadius="16dp"
+                app:bl_corners_topRightRadius="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/TripRecyclerViewA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/Title" />
+
+            <com.zhixing.zxhy.util.recyclerView.ViewPager2Container
+                android:id="@+id/VpContainer"
+                android:layout_width="match_parent"
+                android:layout_height="390dp"
+                android:layout_marginTop="48dp"
+                android:clipChildren="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/TripRecyclerViewA">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/TripViewPagerA"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="73dp"
+                    android:layout_marginEnd="73dp"
+                    android:clipChildren="false" />
+
+            </com.zhixing.zxhy.util.recyclerView.ViewPager2Container>
+
+            <com.noober.background.view.BLButton
+                android:id="@+id/NextBtn"
+                style="@style/big_text_button_red_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="60dp"
+                android:text="下一步"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/VpContainer" />
+
+        </com.noober.background.view.BLConstraintLayout>
+
+        <com.noober.background.view.BLConstraintLayout
+            android:id="@+id/TripConstraintB"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:visibility="gone"
+            app:bl_corners_topLeftRadius="16dp"
+            app:bl_corners_topRightRadius="16dp"
+            app:bl_solid_color="@color/c_F">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/TitleB"
+                style="@style/text_3_20"
+                android:layout_marginTop="37dp"
+                android:gravity="center"
+                android:text="人均预算"
+                app:bl_corners_topLeftRadius="16dp"
+                app:bl_corners_topRightRadius="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/Back"
+                android:layout_width="29dp"
+                android:layout_height="37dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_back"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/TripRecyclerViewB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/TitleB" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/TitleC"
+                style="@style/text_3_20"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                android:text="距离时长"
+                app:bl_corners_topLeftRadius="16dp"
+                app:bl_corners_topRightRadius="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/TripRecyclerViewB" />
+
+            <com.amap.api.maps.MapView
+                android:id="@+id/MapViewA"
+                android:layout_width="match_parent"
+                android:layout_height="210dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/TitleC" />
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/BtnGroupA"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                app:checkedButton="@id/TripBtnA"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/MapViewA"
+                app:selectionRequired="true"
+                app:singleSelection="true">
+
+                <Button
+                    android:id="@+id/TripBtnA"
+                    style="@style/Trip_Btn_One"
+                    android:text="步行可达"
+                    app:cornerRadius="20dp" />
+
+                <Button
+                    android:id="@+id/TripBtnB"
+                    style="@style/Trip_Btn_One"
+                    android:text="使用交通工具" />
+
+                <Button
+                    android:id="@+id/TripBtnC"
+                    style="@style/Trip_Btn_One"
+                    android:text="比较远也行"
+                    app:cornerRadius="20dp" />
+
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+            <com.noober.background.view.BLButton
+                android:id="@+id/SubmitBtn"
+                style="@style/big_text_button_red_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="60dp"
+                android:text="下一步"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/BtnGroupA" />
+
+        </com.noober.background.view.BLConstraintLayout>
+
+    </com.noober.background.view.BLConstraintLayout>
+</layout>

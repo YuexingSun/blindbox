@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_app"
+    app:startDestination="@id/startFragment">
+
+    <!--启动页-->
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.zhixing.zxhy.ui.fragment.StartFragment"
+        android:label="StartFragment">
+        <action
+            android:id="@+id/action_startFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/startFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_startFragment_to_loginMainFragment"
+            app:destination="@id/loginMainFragment"
+            app:popUpTo="@id/startFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_startFragment_to_otherPhoneLoginFragment"
+            app:destination="@id/otherPhoneLoginFragment"
+            app:popUpTo="@id/startFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_startFragment_to_agreementFragment"
+            app:destination="@id/agreementFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_loginVivoFragment"
+            app:destination="@id/loginVivoFragment" />
+    </fragment>
+
+    <!--配合vivo审核要求的登录页面-->
+    <fragment
+        android:id="@+id/loginVivoFragment"
+        android:name="com.zhixing.zxhy.ui.fragment.LoginVivoFragment"
+        android:label="LoginVivoFragment" >
+        <action
+            android:id="@+id/action_loginVivoFragment_to_loginMainFragment"
+            app:destination="@id/loginMainFragment" />
+        <action
+            android:id="@+id/action_loginVivoFragment_to_otherPhoneLoginFragment"
+            app:destination="@id/otherPhoneLoginFragment" />
+        <action
+            android:id="@+id/action_loginVivoFragment_to_agreementFragment"
+            app:destination="@id/agreementFragment" />
+    </fragment>
+
+    <!--登录首页-->
+    <fragment
+        android:id="@+id/loginMainFragment"
+        android:name="com.zhixing.zxhy.ui.fragment.LoginMainFragment"
+        android:label="LoginMainFragment">
+        <action
+            android:id="@+id/action_loginMainFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/loginMainFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginMainFragment_to_agreementFragment"
+            app:destination="@id/agreementFragment" />
+        <action
+            android:id="@+id/action_loginMainFragment_to_otherPhoneLoginFragment"
+            app:destination="@id/otherPhoneLoginFragment" />
+        <!--栈顶的 其他手机号码登录页面-->
+        <action
+            android:id="@+id/action_loginMainFragment_to_otherPhoneLoginFragmentOne"
+            app:destination="@id/otherPhoneLoginFragment"
+            app:popUpTo="@id/loginMainFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginMainFragment_to_perfectDataOneFragment"
+            app:destination="@id/perfectDataOneFragment"
+            app:popUpTo="@id/loginMainFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!--主页-->
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.zhixing.zxhy.ui.fragment.MainFragment"
+        android:label="MainFragment">
+        <action
+            android:id="@+id/action_mainFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_myCollectFragment"
+            app:destination="@id/myCollectFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_myBlindBoxFragment"
+            app:destination="@id/myBlindBoxFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_setOutFragment"
+            app:destination="@id/setOutFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_articleDetailsFragment"
+            app:destination="@id/articleDetailsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_sendArticleFragment"
+            app:destination="@id/sendArticleFragment" />
+    </fragment>
+
+    <!--隐私协议/服务协议页面-->
+    <fragment
+        android:id="@+id/agreementFragment"
+        android:name="com.zhixing.zxhy.ui.fragment.AgreementFragment"
+        android:label="AgreementFragment" />
+
+    <!--其他手机号码登录-->
+    <fragment
+        android:id="@+id/otherPhoneLoginFragment"
+        android:name="com.zhixing.zxhy.ui.fragment.OtherPhoneLoginFragment"
+        android:label="OtherPhoneLoginFragment">
+        <action
+            android:id="@+id/action_otherPhoneLoginFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/otherPhoneLoginFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_otherPhoneLoginFragment_to_perfectDataOneFragment"
+            app:destination="@id/perfectDataOneFragment"
+            app:popUpTo="@id/otherPhoneLoginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!--完善资料第一个页面-->
+    <fragment
+        android:id="@+id/perfectDataOneFragment"
+        android:name="com.zhixing.zxhy.ui.fragment.PerfectDataOneFragment"
+        android:label="PerfectDataOneFragment">
+        <action
+            android:id="@+id/action_perfectDataOneFragment_to_perfectDataTwoFragment"
+            app:destination="@id/perfectDataTwoFragment"
+            app:popUpTo="@id/perfectDataOneFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!--资料完善的第二个页面-->
+    <fragment
+        android:id="@+id/perfectDataTwoFragment"
+        android:name="com.zhixing.zxhy.ui.fragment.PerfectDataTwoFragment"
+        android:label="PerfectDataTwoFragment">
+        <action
+            android:id="@+id/action_perfectDataTwoFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/perfectDataTwoFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!--设置页面-->
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.zhixing.zxhy.ui.fragment.SettingFragment"
+        android:label="SettingFragment">
+        <action
+            android:id="@+id/action_settingFragment_to_setPhoneFragment"
+            app:destination="@id/setPhoneFragment" />
+        <action
+            android:id="@+id/action_settingFragment_to_aboutMeFragment"
+            app:destination="@id/aboutMeFragment" />
+        <action
+            android:id="@+id/action_settingFragment_to_hobbyFragment"
+            app:destination="@id/hobbyFragment" />
+        <action
+            android:id="@+id/action_settingFragment_to_myInformationFragment"
+            app:destination="@id/myInformationFragment" />
+        <action
+            android:id="@+id/action_settingFragment_to_changePerfectDataFragment"
+            app:destination="@id/changePerfectDataFragment" />
+    </fragment>
+
+    <!--修改手机号-->
+    <fragment
+        android:id="@+id/setPhoneFragment"
+        android:name="com.zhixing.zxhy.ui.fragment.SetPhoneFragment"
+        android:label="SetPhoneFragment" />
+
+    <!--关于我们-->
+    <fragment
+        android:id="@+id/aboutMeFragment"
+        android:name="com.zhixing.zxhy.ui.fragment.AboutMeFragment"
+        android:label="AboutMeFragment">
+        <action
+            android:id="@+id/action_aboutMeFragment_to_agreementFragment"
+            app:destination="@id/agreementFragment" />
+    </fragment>
+
+    <!--兴趣爱好页面-->
+    <fragment
+        android:id="@+id/hobbyFragment"
+        android:name="com.zhixing.zxhy.ui.fragment.HobbyFragment"
+        android:label="LabelFragment" />
+
+    <!--我的收藏页面-->
+    <fragment
+        android:id="@+id/myCollectFragment"
+        android:name="com.zhixing.zxhy.ui.fragment.MyCollectFragment"
+        android:label="MyCollectFragment" >
+        <action
+            android:id="@+id/action_myCollectFragment_to_articleDetailsFragment"
+            app:destination="@id/articleDetailsFragment" />
+    </fragment>
+
+    <!--我的盲盒页面-->
+    <fragment
+        android:id="@+id/myBlindBoxFragment"
+        android:name="com.zhixing.zxhy.ui.fragment.MyBlindBoxFragment"
+        android:label="MyBlindBoxFragment">
+        <action
+            android:id="@+id/action_myBlindBoxFragment_to_boxDetailFragment"
+            app:destination="@id/boxDetailFragment" />
+    </fragment>
+
+    <!--盲盒详情页面-->
+    <fragment
+        android:id="@+id/boxDetailFragment"
+        android:name="com.zhixing.zxhy.ui.fragment.BoxDetailFragment"
+        android:label="BoxDetailFragment" />
+
+    <!--启程页面-->
+    <fragment
+        android:id="@+id/setOutFragment"
+        android:name="com.zhixing.zxhy.ui.fragment.SetOutFragment"
+        android:label="SetOutFragment" />
+
+    <!--编辑个人资料-->
+    <fragment
+        android:id="@+id/myInformationFragment"
+        android:name="com.zhixing.zxhy.ui.fragment.MyInformationFragment"
+        android:label="MyInformationFragment" />
+
+    <!--搜索-->
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.zhixing.zxhy.ui.fragment.SearchFragment"
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_articleDetailsFragment"
+            app:destination="@id/articleDetailsFragment" />
+    </fragment>
+
+    <!--文章详情-->
+    <fragment
+        android:id="@+id/articleDetailsFragment"
+        android:name="com.zhixing.zxhy.ui.fragment.ArticleDetailsFragment"
+        android:label="ArticleDetailsFragment" >
+        <action
+            android:id="@+id/action_articleDetailsFragment_to_sendArticleFragment"
+            app:destination="@id/sendArticleFragment" />
+        <action
+            android:id="@+id/action_articleDetailsFragment_to_checkSiteFragment"
+            app:destination="@id/checkSiteFragment" />
+    </fragment>
+
+    <!--写文章页面-->
+    <fragment
+        android:id="@+id/sendArticleFragment"
+        android:name="com.zhixing.zxhy.ui.fragment.SendArticleFragment"
+        android:label="SendArticleFragment" >
+        <action
+            android:id="@+id/action_sendArticleFragment_to_seekLocationFragment"
+            app:destination="@id/seekLocationFragment" />
+    </fragment>
+
+    <!--搜索地址页面-->
+    <fragment
+        android:id="@+id/seekLocationFragment"
+        android:name="com.zhixing.zxhy.ui.fragment.SeekLocationFragment"
+        android:label="SeekLocationFragment" />
+
+    <!--查看地址页面-->
+    <fragment
+        android:id="@+id/checkSiteFragment"
+        android:name="com.zhixing.zxhy.ui.fragment.CheckSiteFragment"
+        android:label="CheckSiteFragment" />
+
+    <!--修改兴趣偏好页面-->
+    <fragment
+        android:id="@+id/changePerfectDataFragment"
+        android:name="com.zhixing.zxhy.ui.fragment.ChangePerfectDataFragment"
+        android:label="ChangePerfectDataFragment" />
+
+</navigation>

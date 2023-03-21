@@ -1,0 +1,381 @@
+
+<!--   <script src="./src/controller/lib/city-picker.data.js"></script>
+  <link href="./src/style/city-picker.css" rel="stylesheet" />
+ -->
+
+  <style>
+        html,body,#container{
+            height:100%;
+            width:100%;
+        }
+        .btn{
+            width:10rem;
+            margin-left:6.8rem;   
+        }
+      .amap-marker:first-child .amap-icon img {
+          width: 25px;
+          height: 34px;
+      }
+  </style>
+  <style>
+    .amap-sug-result { z-index: 2001; }
+  </style>
+
+<div class="layui-form" lay-filter="ayuiadmin-form-socialform" style="padding: 20px 30px 0 0;">
+
+      <script type="text/html" template lay-done="layui.data.done(d);">
+        <input type="hidden" name="id" id="id" value="{{ d.params.id || '' }}" >
+      </script>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label"><font color='red'>*</font>标题</label>
+      <div class="layui-input-block">
+        <script type="text/html" template>
+          <input type="text" name="title" value="{{ d.params.title || '' }}" lay-verify="required" autocomplete="off" class="layui-input" placeholder='标题'>
+        </script>
+      </div>
+    </div>
+
+
+    <div class="layui-form-item">
+      <label class="layui-form-label"><font color='red'>*</font>作者</label>
+      <div class="layui-input-block">
+        <div id="authorid"></div>
+      </div>
+    </div>
+
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">标签</label>
+      <div class="layui-input-block">
+        <div id="taglist"></div>
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label"><font color='red'>*</font>所在省市</label>
+      <div class="layui-input-block">
+          <input type="text" autocomplete="on" class="layui-input" id="city-picker" name="city-picker" readonly="readonly" data-toggle="city-picker" placeholder="请选择" lay-verify="required">
+      </div>
+    </div> 
+
+    <div class="layui-form-item">
+      <label class="layui-form-label"><font color='red'>*</font>地理位置</label>
+      <div class="layui-input-block" style="width: 70%;display: inline-block;margin-left: 0px;">
+        <script type="text/html" template>
+          <input type="text" name="address" value="{{ d.params.address || '' }}" lay-verify="required" autocomplete="off" class="layui-input" placeholder='地理位置'  id="address">
+          <input type="hidden" name="lng" value="{{ d.params.lng || '' }}" id="lng">
+          <input type="hidden" name="lat" value="{{ d.params.lat || '' }}" id="lat">
+          <input type="text" name="detailaddress" value="{{ d.params.detailaddress || '' }}" id="detailaddress" readonly="" width="100%">
+        </script>
+      </div>
+
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">正文</label>
+      <div class="layui-input-block">
+        <script type="text/html" template>
+          <textarea name="content" id="content"></textarea>
+        </script>
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label"><font color='red'>*</font>发布时间</label>
+      <div class="layui-input-block">
+        <script type="text/html" template>
+          <input type="text" name="sendtime" value="{{ d.params.sendtime || '' }}" lay-verify="required" autocomplete="off" class="layui-input" placeholder='发布时间' id="sendtime">
+        </script>
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label"><font color='red'>*</font>封面图片</label>
+      <div class="layui-input-block">
+        <button type="button" class="layui-btn" id="uploadcoverbtn">
+          <i class="layui-icon">&#xe67c;</i><span>上传图片</span>
+        </button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <script type="text/html" template>
+          <img src="{{ d.params.coverpic || '' }}" id="coverpic">
+        </script>
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">其它配图</label>
+      <div class="layui-input-block">
+        <button type="button" class="layui-btn" id="uploadpicsbtn">
+          <i class="layui-icon">&#xe67c;</i><span>上传图片</span>
+        </button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <script type="text/html" template>
+          <div class="layui-upload-list" id="single-upload-more-list"></div>
+        </script>
+      </div>
+    </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label"></label>
+    <div class="layui-input-block">
+      <input type="submit" lay-submit lay-filter="LAY-user-back-submit" class="layui-btn" id="LAY-user-back-submit">
+    </div>
+  </div>
+</div>
+
+<script>
+layui.data.done = function (d) {
+
+  layui.use(['admin', 'form','table','xmSelect','upload','laydate','citypicker'], function(){
+    var $ = layui.$
+    ,admin = layui.admin
+    ,table = layui.table
+    ,xmSelect = layui.xmSelect
+    ,upload = layui.upload
+    ,laydate = layui.laydate 
+    ,cityPicker = layui.citypicker
+    ,form = layui.form;
+
+    laydate.render({ 
+      elem: '#sendtime'
+      ,type: 'datetime'
+    });
+
+    var currentPicker = new cityPicker("#city-picker", {
+                provincename:"provinceId",
+                cityname:"cityId",
+                districtname: "districtId",
+                level: 'districtId',// 级别
+                //callback : callbackfun,
+            });
+    if (d.params.province)
+    {
+      currentPicker.setValue(d.params.province+"/"+d.params.city+"/"+d.params.district);
+    }
+
+    var authorid = xmSelect.render({
+      el: '#authorid', 
+      layVerify: 'required',
+      name: "authorid",
+      prop: {
+        value: 'id',
+      },
+      radio: true,
+      clickClose: true,
+      paging: true,
+      template({ item, sels, name, value }){
+        return item.name  + '<span style="position: absolute; right: 10px; color: #8799a3">'+item.mob+'<img width="30px" src="'+item.avatar+'"></span>' 
+      },
+      filterable: true,
+      filterMethod: function(val, item, index, prop){
+        if((item.mob.toLowerCase().indexOf(val.toLowerCase()) !=-1)||(item.name.toLowerCase().indexOf(val.toLowerCase()) !=-1)){
+          return true;
+        }
+        return false;
+      },
+      data: [],      
+    })
+    admin.req({
+      url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.getDictList   
+      ,type:"POST"
+      ,data:{"type":"userlist"}
+      ,done: function(res){
+        if (res.errorcode === 0)
+        {
+          authorid.update({
+            data: res.data,
+          })
+        }
+        if (d.params.authorid)
+        {
+          authorid.setValue([d.params.authorid],false,true);
+        }
+      }
+    }); 
+    
+
+    var taglist = xmSelect.render({
+      el: '#taglist', 
+      name: "taglist",
+      prop: {
+        value: 'id',
+      },
+      filterable: true,
+      filterMethod: function(val, item, index, prop){
+        if(item.name.toLowerCase().indexOf(val.toLowerCase()) !=-1){
+          return true;
+        }
+        return false;
+      },
+      paging: true,
+      data: []
+    })
+    admin.req({
+      url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.getDictList   
+      ,type:"POST"
+      ,data:{"type":"ctaglist"}
+      ,done: function(res){
+        if (res.errorcode === 0)
+        {
+          taglist.update({
+            data: res.data,
+          })
+          if (d.params.taglist)
+          {
+            var tmp = [];
+            for(var i=0;i<d.params.taglist.length;i++)
+            {
+              tmp.push(d.params.taglist[i].tagid);
+            }
+            taglist.setValue(tmp);
+          }
+        }
+      }
+    }); 
+    
+    CKEDITOR.replace( 'content',{ height: '250px', width: '100%' , allowedContent: true});
+    if (d.params.content)
+    {
+      CKEDITOR.instances.content.setData(d.params.content);
+    }
+
+
+
+    AMap.plugin('AMap.Autocomplete', function(){
+      // 实例化Autocomplete
+      var autoOptions = {
+        // input 为绑定输入提示功能的input的DOM ID
+        input: 'address'
+      }
+      var autoComplete= new AMap.Autocomplete(autoOptions);
+      // 无需再手动执行search方法，autoComplete会根据传入input对应的DOM动态触发search
+      autoComplete.on("select", select);
+    })
+
+    function select(e) {
+      console.log(e.poi)
+      $("#lng").val(e.poi.location.lng);
+      $("#lat").val(e.poi.location.lat);
+      $("#detailaddress").val(e.poi.address);
+    }
+
+    function picover(url){
+
+      var html = '<span><img src="'+ url +'" class="layui-upload-img-single" width="200px">&nbsp;';
+      html += '<button type="button" class="layui-btn-danger layui-btn layui-btn-xs delimgsig" >删除</button></span>';
+      $('#single-upload-more-list').append(html)
+      $(".delimgsig").unbind("click");
+      $(".delimgsig").on('click',function(){
+        $(this).parent().remove();
+      });
+
+    }
+
+    if (d.params.pics)
+    {
+      var pics = JSON.parse(d.params.pics);
+      for(var i=0;i<pics.length;i++)
+      {
+        picover(pics[i]);
+      }
+    }
+
+    //上传
+    var loadindex = null;
+    upload.render({
+      elem: '#uploadpicsbtn'
+      ,url: layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.uploadFile
+      ,multiple:true
+      ,before: function(obj){
+        loadindex = layer.load(2);
+      }
+      ,done: function(res){
+        layer.close(loadindex);
+        if (res.location)
+        {
+          picover(res.location);
+          layer.msg('上传成功', {icon: 1});
+        }
+        else
+        { 
+          layer.msg(res.errormsg, {icon: 5});
+        }
+      }
+    });
+
+    upload.render({
+      elem: '#uploadcoverbtn'
+      ,url: layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.uploadFile
+      ,before: function(obj){
+        loadindex = layer.load(2);
+      }
+      ,done: function(res){
+        layer.close(loadindex);
+        if (res.location)
+        {
+          $("#coverpic").attr("src",res.location);
+          layer.msg('上传成功', {icon: 1});
+        }
+        else
+        { 
+          layer.msg(res.errormsg, {icon: 5});
+        }
+      }
+    });
+
+    form.render();
+
+
+    //监听提交
+    form.on('submit(LAY-user-back-submit)', function(data){
+        let postData = data.field;
+
+        console.log(postData);
+        var imgs = Array();
+        $(".layui-upload-img-single").each(function(){
+          imgs.push($(this).attr("src"));
+        })
+        postData.imgs = JSON.stringify(imgs);
+        postData.coverpic = $("#coverpic").attr("src");
+        if (!postData.coverpic)
+        {
+          layer.msg("请上传封面图", {icon: 5});
+          return false;
+        }
+        if (!postData.lng)
+        {
+          postData.lng = 0;
+        }
+        if (!postData.lat)
+        {
+          postData.lat = 0;
+        }
+
+        postData.content = CKEDITOR.instances.content.getData();
+
+        let methstr = "POST";
+        if (postData.id)
+        {
+          methstr = "PUT";
+          postData.type = "edit";
+        }
+
+        admin.req({
+          url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.Article   
+          ,type: methstr
+          ,data: postData
+          ,done: function(res){
+            layer.msg(res.errormsg, {icon: 1});
+            table.reload('LAY-tag-tag-list-table'); //重载表格
+            layer.close(d.params.layerindex); //再执行关闭 
+          }
+        });
+
+    });
+
+
+
+  });
+}
+</script>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.zhixing.zxhy.InforMyFavData" />
+
+    </data>
+
+    <com.zhixing.zxhy.widget.LeftDeleteView
+        android:id="@+id/DeleteView"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:orientation="horizontal"
+        app:deleteBtnWidth="59">
+
+        <com.noober.background.view.BLConstraintLayout
+            android:id="@+id/ConstA"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/FenGeA"
+                android:layout_width="16dp"
+                android:layout_height="match_parent"
+                android:background="@color/transparent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.noober.background.view.BLConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:bl_corners_radius="8dp"
+                app:bl_solid_color="@color/c_F"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/FenGeB"
+                app:layout_constraintStart_toEndOf="@id/FenGeA"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ShowImg"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_marginStart="12dp"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/bg_history"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearance="@style/roundedCornerImageStyle4dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/Title"
+                    style="@style/text_3_14"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@{data.title}"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ShowImg"
+                    app:layout_constraintTop_toTopOf="@+id/ShowImg" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/HeadImg"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintBottom_toBottomOf="@+id/ShowImg"
+                    app:layout_constraintStart_toStartOf="@+id/Title"
+                    app:shapeAppearance="@style/roundedCornerImageStyle50" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/NickName"
+                    style="@style/text_3_14"
+                    android:layout_marginStart="4dp"
+                    android:text="@{data.nickname}"
+                    app:layout_constraintBottom_toBottomOf="@+id/HeadImg"
+                    app:layout_constraintStart_toEndOf="@+id/HeadImg"
+                    app:layout_constraintTop_toTopOf="@+id/HeadImg" />
+            </com.noober.background.view.BLConstraintLayout>
+
+            <View
+                android:id="@+id/FenGeB"
+                android:layout_width="16dp"
+                android:layout_height="match_parent"
+                android:background="@color/transparent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </com.noober.background.view.BLConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/Delete"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="32dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_end_clear" />
+
+    </com.zhixing.zxhy.widget.LeftDeleteView>
+
+</layout>

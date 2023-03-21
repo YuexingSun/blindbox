@@ -1,0 +1,625 @@
+
+<!--   <script src="./src/controller/lib/city-picker.data.js"></script>
+  <link href="./src/style/city-picker.css" rel="stylesheet" />
+ -->
+
+  <style>
+        html,body,#container{
+            height:100%;
+            width:100%;
+        }
+        .btn{
+            width:10rem;
+            margin-left:6.8rem;   
+        }
+      .amap-marker:first-child .amap-icon img {
+          width: 25px;
+          height: 34px;
+      }
+  </style>
+<div class="layui-form" lay-filter="ayuiadmin-form-socialform" style="padding: 20px 30px 0 0;">
+
+      <script type="text/html" template lay-done="layui.data.done(d);">
+        <input type="hidden" name="id" id="id" value="{{ d.params.id || '' }}" >
+      </script>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label"><font color='red'>*</font>目的地名称</label>
+      <div class="layui-input-block">
+        <script type="text/html" template>
+          <input type="text" name="name" value="{{ d.params.name || '' }}" lay-verify="required" autocomplete="off" class="layui-input" placeholder='目的地名称'>
+        </script>
+      </div>
+    </div>
+
+
+    <div class="layui-form-item">
+      <div class="layui-inline">
+        <label class="layui-form-label"><font color='red'>*</font>主类别</label>
+        <div class="layui-input-inline">
+          <div id="maintypeid"></div>
+        </div>
+      </div>
+      <div class="layui-inline">
+        <label class="layui-form-label"><font color='red'>*</font>所属分类</label>
+        <div class="layui-input-inline">
+          <div id="firstcateid"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">简要描述</label>
+      <div class="layui-input-block">
+        <script type="text/html" template>
+          <textarea name="subname" placeholder="简要描述" class="layui-textarea">{{ d.params.subname || '' }}</textarea>
+        </script>
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">标签</label>
+      <div class="layui-input-block">
+        <div id="taglist"></div>
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">不适合</label>
+      <div class="layui-input-block">
+        <div id="notforlist"></div>
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label"><font color='red'>*</font>所在省市</label>
+      <div class="layui-input-block">
+          <input type="text" autocomplete="on" class="layui-input" id="city-picker" name="city-picker" readonly="readonly" data-toggle="city-picker" placeholder="请选择" lay-verify="required">
+      </div>
+    </div> 
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">所属商圈</label>
+      <div class="layui-input-block">
+        <div id="circlelist"></div>
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label"><font color='red'>*</font>地址</label>
+      <div class="layui-input-block" style="width: 70%;display: inline-block;margin-left: 0px;">
+        <script type="text/html" template>
+          <input type="text" name="address" value="{{ d.params.address || '' }}" lay-verify="required" autocomplete="off" class="layui-input" placeholder='地址'  id="address">
+        </script>
+      </div><button type="button" class="layui-btn layui-btn-normal layui-btn-sm" id="locationit">定位</button>
+
+    </div>
+
+    <div class="layui-form-item">
+      <div class="layui-inline">
+        <label class="layui-form-label"><font color='red'>*</font>坐标经度</label>
+        <div class="layui-input-inline">
+          <script type="text/html" template>
+            <input type="text" name="lng" id="lng" value="{{ d.params.lng || '' }}" autocomplete="off" class="layui-input" placeholder='坐标经度' readonly lay-verify="required">
+          </script>
+        </div>
+      </div>
+      <div class="layui-inline">
+        <label class="layui-form-label"><font color='red'>*</font>坐标纬度</label>
+        <div class="layui-input-inline">
+          <script type="text/html" template>
+            <input type="number" name="lat" id="lat" value="{{ d.params.lat || '' }}" autocomplete="off" class="layui-input" placeholder='坐标纬度' readonly lay-verify="required">
+          </script>
+        </div>
+      </div>
+    </div>
+
+    <div class="layui-form-item" style="height: 300px;">
+      <label class="layui-form-label">准确位置</label>
+      <div class="layui-input-block" style="height: 100%;">
+        <div id="container"></div>
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <div class="layui-inline">
+        <label class="layui-form-label">联系电话</label>
+        <div class="layui-input-inline">
+          <script type="text/html" template>
+            <input type="text" name="mob" value="{{ d.params.mob || '' }}" autocomplete="off" class="layui-input" placeholder='联系电话'>
+          </script>
+        </div>
+      </div>
+      <div class="layui-inline">
+        <label class="layui-form-label">评分</label>
+        <div class="layui-input-inline">
+          <script type="text/html" template>
+            <input type="number" name="point" value="{{ d.params.point || '' }}" autocomplete="off" class="layui-input" placeholder='评分'>
+          </script>
+        </div>
+      </div>
+      <div class="layui-inline">
+        <label class="layui-form-label">人均消费</label>
+        <div class="layui-input-inline">
+          <script type="text/html" template>
+            <input type="number" name="consume" value="{{ d.params.consume || '' }}" autocomplete="off" class="layui-input" placeholder='人均消费'>
+          </script>
+        </div>
+      </div>
+    </div>
+
+    <div class="layui-card" style="margin-bottom:0px;margin-left: 100px">
+      <div class="layui-card-head">营业时间</div>
+      <div class="layui-card-body">
+
+        <table id="form-create" class="layui-table">
+          <thead>
+            <tr>
+              <th style="width:50%;">时间</th>
+              <th>星期</th>
+              <th style="width: 50px;"><button type="button" class="layui-btn layui-btn-sm addselect">增加</button></th>
+            </tr>
+          </thead>
+          <tbody id="tablecontent">
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">图片</label>
+      <div class="layui-input-block">
+        <button type="button" class="layui-btn" id="uploadfilebtn">
+          <i class="layui-icon">&#xe67c;</i><span>上传图片</span>
+        </button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <script type="text/html" template>
+          <div class="layui-upload-list" id="single-upload-more-list"></div>
+        </script>
+      </div>
+    </div>
+
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">目的地详情</label>
+      <div class="layui-input-block">
+        <textarea name="content" id="content"></textarea>
+      </div>
+    </div> 
+
+  <div class="layui-form-item">
+    <label class="layui-form-label"></label>
+    <div class="layui-input-block">
+      <input type="submit" lay-submit lay-filter="LAY-user-back-submit" class="layui-btn" id="LAY-user-back-submit">
+    </div>
+  </div>
+</div>
+
+<script>
+layui.data.done = function (d) {
+
+  layui.use(['admin', 'form','table','xmSelect','upload','laydate','citypicker'], function(){
+    var $ = layui.$
+    ,admin = layui.admin
+    ,table = layui.table
+    ,xmSelect = layui.xmSelect
+    ,upload = layui.upload
+    ,laydate = layui.laydate 
+    ,cityPicker = layui.citypicker
+    ,form = layui.form;
+
+    var maintypeid = xmSelect.render({
+      el: '#maintypeid', 
+      layVerify: 'required',
+      name: "maintypeid",
+      prop: {
+        value: 'id',
+      },
+      radio: true,
+      clickClose: true,
+      data: [],
+      on: function(data){
+        var arr = data.arr;
+        firstcateid.update({
+          data: [],
+        })        
+        if (arr.length > 0)
+        {
+          admin.req({
+            url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.getDictList   
+            ,type:"POST"
+            ,data:{"type":"firstcate",id:arr[0].id}
+            ,done: function(res){
+              if (res.errorcode === 0)
+              {
+                firstcateid.update({
+                  data: res.data,
+                })
+                if (d.params.firstcateid)
+                {
+                  firstcateid.setValue([d.params.firstcateid]);
+                }
+              }
+            }
+          }); 
+        }
+      }
+    })
+    admin.req({
+      url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.getDictList   
+      ,type:"POST"
+      ,data:{"type":"maintype"}
+      ,done: function(res){
+        if (res.errorcode === 0)
+        {
+          maintypeid.update({
+            data: res.data,
+          })
+        }
+        if (d.params.maintypeid)
+        {
+          maintypeid.setValue([d.params.maintypeid],false,true);
+        }
+      }
+    }); 
+    var firstcateid = xmSelect.render({
+      el: '#firstcateid', 
+      layVerify: 'required',
+      name: "firstcateid",
+      prop: {
+        value: 'id',
+      },
+      filterable: true,
+      filterMethod: function(val, item, index, prop){
+        if(item.name.toLowerCase().indexOf(val.toLowerCase()) !=-1){
+          return true;
+        }
+        return false;
+      },
+      radio: true,
+      clickClose: true,
+      data: [],
+    })
+
+
+
+    var taglist = xmSelect.render({
+      el: '#taglist', 
+      name: "taglist",
+      prop: {
+        value: 'id',
+      },
+      filterable: true,
+      filterMethod: function(val, item, index, prop){
+        if(item.name.toLowerCase().indexOf(val.toLowerCase()) !=-1){
+          return true;
+        }
+        return false;
+      },
+      paging: true,
+      data: []
+    })
+    admin.req({
+      url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.getDictList   
+      ,type:"POST"
+      ,data:{"type":"typechildtag"}
+      ,done: function(res){
+        if (res.errorcode === 0)
+        {
+          taglist.update({
+            data: res.data,
+          })
+          if (d.params.taglist)
+          {
+            var tmp = [];
+            for(var i=0;i<d.params.taglist.length;i++)
+            {
+              tmp.push(d.params.taglist[i].tagid);
+            }
+            taglist.setValue(tmp);
+          }
+        }
+      }
+    }); 
+    var notforlist = xmSelect.render({
+      el: '#notforlist', 
+      name: "notforlist",
+      prop: {
+        value: 'id',
+      },
+      filterable: true,
+      filterMethod: function(val, item, index, prop){
+        if(item.name.toLowerCase().indexOf(val.toLowerCase()) !=-1){
+          return true;
+        }
+        return false;
+      },
+      paging: true,
+      data: []
+    })
+    admin.req({
+      url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.getDictList   
+      ,type:"POST"
+      ,data:{"type":"typechildctag"}
+      ,done: function(res){
+        if (res.errorcode === 0)
+        {
+          notforlist.update({
+            data: res.data,
+          })
+          if (d.params.untaglist)
+          {
+            var tmp = [];
+            for(var i=0;i<d.params.untaglist.length;i++)
+            {
+              tmp.push(d.params.untaglist[i].tagid);
+            }
+            notforlist.setValue(tmp);
+          }
+        }
+      }
+    }); 
+    var circlelist = xmSelect.render({
+      el: '#circlelist', 
+      name: "circlelist",
+      prop: {
+        value: 'id',
+      },
+      filterable: true,
+      filterMethod: function(val, item, index, prop){
+        if(item.name.toLowerCase().indexOf(val.toLowerCase()) !=-1){
+          return true;
+        }
+        return false;
+      },
+      data: []
+    })
+
+    function callbackfun(s){
+      circlelist.update({
+              data: [],
+            })
+      admin.req({
+        url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.getDictList   
+        ,type:"POST"
+        ,data:{"type":"circlelist","id":s}
+        ,done: function(res){
+          if (res.errorcode === 0)
+          {
+            circlelist.update({
+              data: res.data,
+            })
+          }
+          if (d.params.circlelist)
+          {
+            circlelist.setValue(d.params.circlelist);
+          }
+        }
+      }); 
+
+      console.log(s)
+    }
+
+    var currentPicker = new cityPicker("#city-picker", {
+                provincename:"provinceId",
+                cityname:"cityId",
+                districtname: "districtId",
+                level: 'districtId',// 级别
+                callback : callbackfun,
+            });
+    if (d.params.province)
+    {
+      currentPicker.setValue(d.params.province+"/"+d.params.city+"/"+d.params.district);
+    }
+
+
+
+    var nowindex = 1;
+    var proplist = [{value:1,name:"周一"},{value:2,name:"周二"},{value:3,name:"周三"},{value:4,name:"周四"},{value:5,name:"周五"},{value:6,name:"周六"},{value:7,name:"周日"}];
+    function createTables(p1,p2){
+      var s = "";
+      if (p1) s = p1;
+      var element = $([
+        '<tr>',
+          '<td ><input type="text" id="date_'+nowindex+'" name="valueInput_'+nowindex+'" lay-verify="required" class="layui-input" ></td>',
+          '<td class="proptd"></td>',
+          '<td class="handler">',
+            '<button type="button" class="layui-btn layui-btn-danger layui-btn-sm del">删除</button>',
+          '</td>',
+        '</tr>',
+      ].join(''))
+      
+      var datetd = element.find('#date_'+nowindex)[0];
+
+      laydate.render({ 
+        elem: datetd
+        ,range: true
+        ,type: 'time'
+        ,value: s //必须遵循format参数设定的格式
+      });
+
+      var proptd = element.find('.proptd')[0];
+      var propSelect = xmSelect.render({
+        el: proptd,
+        name: "propSelect_"+nowindex,
+        layVerify: 'required',
+        // prop: {
+        //   value: 'id',
+        // },
+        toolbar: {
+            show: true,
+        },
+        filterable: true,
+        autoRow: true,
+        data: function(){
+          return proplist;
+        }
+      })
+      if (p2) propSelect.setValue(p2);
+
+      element.find('.del').on('click', function(){
+        $(this).parents('tr').remove();
+      })
+      
+      nowindex++;
+      
+      $('#form-create tbody').append(element)    
+    }
+    $('.addselect').on('click', function(){
+      createTables();
+    });
+    if (d.params.opentime)
+    {
+      for(var i=0;i<d.params.opentime.length;i++)
+      {
+        var tmp = [];
+        for(var j=0;j<d.params.opentime[i].weeklist.length;j++)
+        {
+          tmp.push(d.params.opentime[i].weeklist[j].weekid);
+        }
+        createTables(d.params.opentime[i].time,tmp);
+      }
+    }
+
+
+    var map = new AMap.Map("container", {
+        resizeEnable: true
+    });
+    
+    var geocoder = new AMap.Geocoder({
+        city: "020", //城市设为北京，默认：“全国”
+    });
+    
+    var marker = new AMap.Marker({
+        // 设置是否可以拖拽
+        draggable: true,
+        cursor: 'move',
+        // 设置拖拽效果
+        raiseOnDrag: true
+
+    });
+
+    function putFlaginMap(address){
+      geocoder.getLocation(address, function(status, result) {
+          if (status === 'complete'&&result.geocodes.length) {
+              console.log(result);
+              var lnglat = result.geocodes[0].location
+              marker.setPosition(lnglat);
+              map.add(marker);
+              map.setFitView(marker);
+              marker.on('dragging', showInfoM);
+              showInfoM();
+          }else{
+              layer.msg("根据地址查询位置失败", {icon: 5});
+          }
+        });
+    }
+    function showInfoM(){
+      var tmp = marker.getPosition();
+      $("#lng").val(tmp.lng);
+      $("#lat").val(tmp.lat);
+    }
+
+    $("#locationit").on("click",function(){
+      putFlaginMap($("#address").val());
+    });
+    if (d.params.lng)
+    {
+      marker.setPosition([d.params.lng,d.params.lat]);
+      map.add(marker);
+      map.setFitView(marker);
+      marker.on('dragging', showInfoM);
+    }
+
+    CKEDITOR.replace( 'content',{ height: '250px', width: '100%' , allowedContent: true});
+    if (d.params.detail)
+    {
+      CKEDITOR.instances.content.setData(d.params.detail);
+    }
+
+    function picover(url){
+
+      var html = '<span><img src="'+ url +'" class="layui-upload-img-single" width="200px">&nbsp;';
+      html += '<button type="button" class="layui-btn-danger layui-btn layui-btn-xs delimgsig" >删除</button></span>';
+      $('#single-upload-more-list').append(html)
+      $(".delimgsig").unbind("click");
+      $(".delimgsig").on('click',function(){
+        $(this).parent().remove();
+      });
+
+    }
+
+    if (d.params.pics)
+    {
+      var pics = JSON.parse(d.params.pics);
+      for(var i=0;i<pics.length;i++)
+      {
+        picover(pics[i]);
+      }
+    }
+
+    //上传
+    var loadindex = null;
+    upload.render({
+      elem: '#uploadfilebtn'
+      ,url: layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.uploadFile
+      ,multiple:true
+      ,before: function(obj){
+        loadindex = layer.load(2);
+      }
+      ,done: function(res){
+        layer.close(loadindex);
+        if (res.location)
+        {
+          picover(res.location);
+          layer.msg('上传成功', {icon: 1});
+        }
+        else
+        { 
+          layer.msg(res.errormsg, {icon: 5});
+        }
+      }
+    });
+
+    form.render();
+
+
+    //监听提交
+    form.on('submit(LAY-user-back-submit)', function(data){
+        let postData = data.field;
+        postData.nowindex = nowindex;
+
+        var imgs = Array();
+        $(".layui-upload-img-single").each(function(){
+          imgs.push($(this).attr("src"));
+        })
+        postData.imgs = JSON.stringify(imgs);
+        postData.detail = CKEDITOR.instances.content.getData();
+
+        let methstr = "POST";
+        if (postData.id)
+        {
+          methstr = "PUT";
+          postData.type = "edit";
+        }
+
+        admin.req({
+          url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.Destination   
+          ,type: methstr
+          ,data: postData
+          ,done: function(res){
+            layer.msg(res.errormsg, {icon: 1});
+            table.reload('LAY-tag-tag-list-table'); //重载表格
+            layer.close(d.params.layerindex); //再执行关闭 
+          }
+        });
+
+    });
+
+
+
+  });
+}
+</script>

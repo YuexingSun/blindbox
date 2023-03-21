@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_viewName">知行盒一</string>
+    <string name="temperature">%1$s%2$s</string>
+
+    <string-array name="cat_chip_group_text_array">
+        <item>New York</item>
+        <item>Los Angeles</item>
+        <item>Chicago</item>
+        <item>Houston</item>
+        <item>Philadelphia</item>
+        <item>Phoenix</item>
+        <item>San Antonio</item>
+        <item>San Diego</item>
+        <item>Dallas</item>
+        <item>San Jose</item>
+        <item>Austin</item>
+        <item>Jacksonville</item>
+        <item>San Francisco</item>
+    </string-array>
+    <string name="main_blinxbox">获取盲盒</string>
+    <string name="main_blinxbox_message">跳转到获取盲盒页面</string>
+</resources>

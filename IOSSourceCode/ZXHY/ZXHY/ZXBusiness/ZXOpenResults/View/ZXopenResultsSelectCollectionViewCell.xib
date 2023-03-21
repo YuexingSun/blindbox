@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ZXopenResultsSelectCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="189" height="238"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="189" height="238"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BoxEat" translatesAutoresizingMaskIntoConstraints="NO" id="LrB-ZF-yO6">
+                        <rect key="frame" x="16" y="5" width="173" height="228"/>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BoxNotSelect" translatesAutoresizingMaskIntoConstraints="NO" id="5oU-jZ-Iko">
+                        <rect key="frame" x="157" y="201" width="24" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="24" id="ZKu-AT-p36"/>
+                            <constraint firstAttribute="height" constant="24" id="bPN-Ka-EC4"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <constraints>
+                <constraint firstItem="LrB-ZF-yO6" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="FUs-A1-E6w"/>
+                <constraint firstItem="5oU-jZ-Iko" firstAttribute="bottom" secondItem="LrB-ZF-yO6" secondAttribute="bottom" constant="-8" id="OTT-wi-ij6"/>
+                <constraint firstItem="LrB-ZF-yO6" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="Ukz-3I-Z5T"/>
+                <constraint firstAttribute="bottom" secondItem="LrB-ZF-yO6" secondAttribute="bottom" constant="5" id="gez-z9-PKw"/>
+                <constraint firstItem="5oU-jZ-Iko" firstAttribute="trailing" secondItem="LrB-ZF-yO6" secondAttribute="trailing" constant="-8" id="pP4-iw-2o4"/>
+                <constraint firstAttribute="trailing" secondItem="LrB-ZF-yO6" secondAttribute="trailing" id="vjo-Px-SPA"/>
+            </constraints>
+            <size key="customSize" width="189" height="238"/>
+            <connections>
+                <outlet property="boxImageView" destination="LrB-ZF-yO6" id="TNf-Ph-a1b"/>
+                <outlet property="selectImageView" destination="5oU-jZ-Iko" id="VWj-hd-Vlr"/>
+            </connections>
+            <point key="canvasLocation" x="232.60869565217394" y="156.02678571428569"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="BoxEat" width="135" height="106"/>
+        <image name="BoxNotSelect" width="24" height="24"/>
+    </resources>
+</document>

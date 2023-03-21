@@ -1,0 +1,217 @@
+
+
+<div class="layui-form" lay-filter="layuiadmin-form-admin-file-file-setform" style="padding: 20px">
+
+      <script type="text/html" template lay-done="layui.data.done(d);">
+        <input type="hidden" name="id" id="id" value="{{ d.params.id || '' }}" >
+      </script>
+
+
+    <div class="layui-form-item">
+      <div class="layui-inline">
+        <label class="layui-form-label"><font color='red'>*</font>所在页</label>
+        <div class="layui-input-inline">
+          <div id="pagenum"></div>
+        </div>
+      </div>
+      <div class="layui-inline">
+        <label class="layui-form-label"><font color='red'>*</font>问答类型</label>
+        <div class="layui-input-inline">
+          <div id="type"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label"><font color="red">*</font>问答题目</label>
+      <div class="layui-input-block">
+        <script type="text/html" template>
+          <input type="text" name="title" value="{{ d.params.title || '' }}" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </script>
+      </div>
+    </div>
+
+
+    <div class="layui-card" style="margin-bottom:0px;margin-left: 100px">
+      <div class="layui-card-head">回答选项</div>
+      <div class="layui-card-body">
+
+        <table id="form-create" class="layui-table">
+          <thead>
+            <tr>
+              <th style="width:50%;">回答内容</th>
+              <th>标签</th>
+              <th style="width: 50px;"><button type="button" class="layui-btn layui-btn-sm addselect">增加</button></th>
+            </tr>
+          </thead>
+          <tbody id="tablecontent">
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+
+  <div class="layui-form-item" style="text-align: center;bottom: 10px;left: 0px;right: 0px;">
+    <script type="text/html" template>
+      <input type="submit" lay-submit lay-filter="layuiadmin-form-admin-file-file-setform-submit" value="确定" class="layui-btn">
+      <a class="layui-btn layui-btn-primary" onclick="layer.close({{d.params.layerindex}})">取消</a>
+    </script>
+  </div>
+
+</div>
+
+<script>
+layui.data.done = function (d) {
+  layui.use(['admin', 'form','table','xmSelect','upload'], function(){
+    var $ = layui.$
+    ,admin = layui.admin
+    ,table = layui.table
+    ,xmSelect = layui.xmSelect
+    ,upload = layui.upload
+    ,form = layui.form;
+
+
+    var pagenum = xmSelect.render({
+      el: '#pagenum', 
+      layVerify: 'required',
+      name: "pagenum",
+      radio: true,
+      clickClose: true,
+      data: [{value:1,name:"第1页"},{value:2,name:"第2页"},{value:3,name:"第3页"},{value:4,name:"第4页"},{value:5,name:"第5页"}],
+    })
+    if (d.params.pagenum)
+    {
+      pagenum.setValue([d.params.pagenum]);
+    }
+    var type = xmSelect.render({
+      el: '#type', 
+      layVerify: 'required',
+      name: "type",
+      radio: true,
+      clickClose: true,
+      data: [],
+      data: [{value:1,name:"填空"},{value:2,name:"单选"},{value:3,name:"多选"},{value:4,name:"范围选择"}],
+      on: function(data){
+        var arr = data.arr;
+        // firstcateid.update({
+        //   data: [],
+        // })        
+        // if (arr.length > 0)
+        // {
+        //   admin.req({
+        //     url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.getDictList   
+        //     ,type:"POST"
+        //     ,data:{"type":"firstcate",id:arr[0].id}
+        //     ,done: function(res){
+        //       if (res.errorcode === 0)
+        //       {
+        //         firstcateid.update({
+        //           data: res.data,
+        //         })
+        //         if (d.params.firstcateid)
+        //         {
+        //           firstcateid.setValue([d.params.firstcateid]);
+        //         }
+        //       }
+        //     }
+        //   }); 
+        // }
+      }
+    })
+
+    var nowindex=1;
+    var proplist = [];
+
+    admin.req({
+      url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.getDictList   
+      ,type:"POST"
+      ,data:{"type":"typechildctag"}
+      ,done: function(res){
+        if (res.errorcode === 0)
+        {
+          proplist = res.data
+          
+
+          
+        }
+      }
+    }); 
+
+
+
+
+
+
+    $('.addselect').on('click', function(){
+      createTables();
+    });
+
+
+    function createTables(p1,p2){
+      var s = "";
+      if (p1) s = p1;
+      var element = $([
+        '<tr>',
+          '<td ><input type="text" id="date_'+nowindex+'" name="valueInput_'+nowindex+'" lay-verify="required" class="layui-input" ></td>',
+          '<td class="proptd"></td>',
+          '<td class="handler">',
+            '<button type="button" class="layui-btn layui-btn-danger layui-btn-sm del">删除</button>',
+          '</td>',
+        '</tr>',
+      ].join(''))
+      
+      var proptd = element.find('.proptd')[0];
+      var propSelect = xmSelect.render({
+        el: proptd,
+        name: "propSelect_"+nowindex,
+        prop: {
+          value: 'id',
+        },
+        toolbar: {
+            show: true,
+        },
+        filterable: true,
+        autoRow: true,
+        data: function(){
+          return proplist;
+        }
+      })
+      if (p2) propSelect.setValue(p2);
+
+      element.find('.del').on('click', function(){
+        $(this).parents('tr').remove();
+      })
+      
+      nowindex++;
+      
+      $('#form-create tbody').append(element)    
+    }
+
+
+      //监听提交
+      form.on('submit(layuiadmin-form-admin-file-file-setform-submit)', function(data){
+
+        let postData = data.field;
+        let methstr = "POST";
+        if (postData.id)
+        {
+          methstr = "PUT";
+        }
+        // admin.req({
+        //   url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.TagClientDimen  
+        //   ,type: methstr
+        //   ,data: postData
+        //   ,done: function(res){
+        //     layer.msg(res.errormsg, {icon: 1});
+        //     table.reload('LAY-tag-tag-list-table'); //重载表格
+        //     layer.close(d.params.layerindex); //再执行关闭 
+        //   }
+        // });
+
+      });
+
+  });
+}
+</script>

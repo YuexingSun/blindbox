@@ -1,0 +1,173 @@
+
+<title>主页</title>
+
+<div class="layui-card layadmin-header">
+  <div class="layui-breadcrumb" lay-filter="breadcrumb">
+    <a lay-href="">主页</a>
+  </div>
+</div>
+
+<div class="layui-fluid">
+  <div class="layui-row layui-col-space15">
+    <div class="layui-col-md12" id="lookdiv" style="display: none;">    
+      <div class="layui-card">
+        <div class="layui-card-header">
+          查看统计
+        </div>
+        <div class="layui-card-body">
+          <div class="layui-row layui-col-space10">
+            <div class="layui-col-xs12 layui-col-sm4">
+              <div class="layui-card">
+                <div class="layui-card-header">
+                  销售金额
+                  <span class="layui-badge layui-bg-green layuiadmin-badge">今日</span>                  
+                </div>
+                <div class="layui-card-body layuiadmin-card-list">
+                  <p class="layuiadmin-big-font"><span style="font-size: 14px;">还可查看</span><span style="position: absolute;right: 15px;" id="look0"></span></p>
+                </div>
+              </div>
+            </div>
+            <div class="layui-col-xs12 layui-col-sm4">
+              <div class="layui-card">
+                <div class="layui-card-header">
+                  总投入/投放CPS费用/ROI
+                  <span class="layui-badge layui-bg-blue layuiadmin-badge">今日</span>                  
+                </div>
+                <div class="layui-card-body layuiadmin-card-list">
+                  <p class="layuiadmin-big-font"><span style="font-size: 14px;">还可查看</span><span style="position: absolute;right: 15px;" id="look1"></span></p>
+                </div>
+              </div>
+            </div>
+            <div class="layui-col-xs12 layui-col-sm4">
+              <div class="layui-card">
+                <div class="layui-card-header">
+                  联系方式
+                  <span class="layui-badge layui-bg-cyan layuiadmin-badge">今日</span>                  
+                </div>
+                <div class="layui-card-body layuiadmin-card-list">
+                  <p class="layuiadmin-big-font"><span style="font-size: 14px;">还可查看</span><span style="position: absolute;right: 15px;" id="look2"></span></p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="layui-col-md12" id="checkdiv" style="display: none;">    
+      <div class="layui-card">
+        <div class="layui-card-header">
+          审批统计
+        </div>
+        <div class="layui-card-body">
+          <div class="layui-row layui-col-space10">
+            <div class="layui-col-xs12 layui-col-sm4">
+              <div class="layui-card">
+                <div class="layui-card-header">
+                  销售金额
+                  <span class="layui-badge layui-bg-green layuiadmin-badge">今日</span>                  
+                </div>
+                <div class="layui-card-body layuiadmin-card-list">
+                  <p class="layuiadmin-big-font"><span style="font-size: 14px;">待审批</span><span style="position: absolute;right: 15px;" id="waitting0"></span></p>
+                  <p>
+                    可审批数量 
+                    <span class="layuiadmin-span-color" id="check0"></span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="layui-col-xs12 layui-col-sm4">
+              <div class="layui-card">
+                <div class="layui-card-header">
+                  总投入/投放CPS费用/ROI
+                  <span class="layui-badge layui-bg-blue layuiadmin-badge">今日</span>                  
+                </div>
+                <div class="layui-card-body layuiadmin-card-list">
+                  <p class="layuiadmin-big-font"><span style="font-size: 14px;">待审批</span><span style="position: absolute;right: 15px;" id="waitting1"></span></p>
+                  <p>
+                    可审批数量 
+                    <span class="layuiadmin-span-color" id="check1"></span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="layui-col-xs12 layui-col-sm4">
+              <div class="layui-card">
+                <div class="layui-card-header">
+                  联系方式
+                  <span class="layui-badge layui-bg-cyan layuiadmin-badge">今日</span>                  
+                </div>
+                <div class="layui-card-body layuiadmin-card-list">
+                  <p class="layuiadmin-big-font"><span style="font-size: 14px;">待审批</span><span style="position: absolute;right: 15px;" id="waitting2"></span></p>
+                  <p>
+                    可审批数量 
+                    <span class="layuiadmin-span-color" id="check2"></span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="layui-col-md12" id="notediv" style="display: none;">
+      <div class="layui-card">
+        <div class="layui-card-header">
+          系统公告
+        </div>
+        <div class="layui-card-body layui-text layadmin-text" id="notetxt">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  layui.use(['admin'], function(){
+    var $ = layui.$
+    ,admin = layui.admin;
+
+    // admin.req({
+    //   url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.getIndexDatas   
+    //   ,type:"post"
+    //   ,data: {}
+    //   ,done: function(res){
+    //     if (res.errorcode ===0)
+    //     {
+    //       if ((res.data.indexitem*1)&1)
+    //       {
+    //         for(var i=0;i<res.data.lookarray.length;i++)
+    //         {
+    //           $("#look"+i).html(res.data.lookarray[i]);
+    //         }
+    //         $("#lookdiv").show();
+    //       }
+    //       if ((res.data.indexitem*1)&2)
+    //       {
+    //         for(var i=0;i<res.data.checkarray.length;i++)
+    //         {
+    //           $("#check"+i).html(res.data.checkarray[i]);
+    //         }
+    //         for(var i=0;i<res.data.waittingarray.length;i++)
+    //         {
+    //           $("#waitting"+i).html(res.data.waittingarray[i]);
+    //         }
+    //         $("#checkdiv").show();
+    //       }
+    //       if ((res.data.indexitem*1)&4)
+    //       {
+    //         $("#notetxt").html(res.data.NoticeContent);
+    //         $("#notediv").show();
+    //       }
+    //     }
+
+    //   }
+    // });
+
+  });
+
+</script>

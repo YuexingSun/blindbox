@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.zhixing.zxhy.view_model.ArticleDetailsViewModel" />
+
+        <import type="com.zhixing.zxhy.util.databinding.Common" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ConstraintLayoutA"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/c_F">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ReportImg"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:background="@color/transparent"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_report_hint"
+            android:translationZ="4dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/GuideA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/GuideB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/Back"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="49dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_detail_back"
+            app:layout_constraintStart_toStartOf="@id/GuideA"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/Share"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="49dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_detail_share"
+            app:layout_constraintEnd_toEndOf="@id/GuideB"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/Compile"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="49dp"
+            android:layout_marginEnd="8dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_compile_article"
+            android:visibility="@{vm.detailsLiveData.ismine == 1 ? View.VISIBLE: View.GONE}"
+            app:layout_constraintEnd_toStartOf="@+id/Share"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/NestA"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="88dp"
+            android:layout_marginBottom="61dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/GuideC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="16dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/GuideD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="16dp" />
+
+                <com.zhpan.bannerview.BannerViewPager
+                    android:id="@+id/BannerVp"
+                    android:layout_width="match_parent"
+                    android:layout_height="498dp"
+                    android:visibility="gone"
+                    app:bvp_indicator_visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.zhpan.indicator.IndicatorView
+                    android:id="@+id/IndVA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/BannerVp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/BannerVp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/Title"
+                    style="@style/text_0_18"
+                    android:layout_width="0dp"
+                    android:layout_marginTop="14dp"
+                    android:ellipsize="end"
+                    android:gravity="start"
+                    android:maxLines="2"
+                    android:text="@{vm.detailsLiveData.title}"
+                    android:textColor="@color/c_3"
+                    android:textSize="@dimen/sp_22"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@id/GuideD"
+                    app:layout_constraintStart_toStartOf="@id/GuideC"
+                    app:layout_constraintTop_toBottomOf="@+id/IndVA" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/HeadImg"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="12dp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintStart_toStartOf="@+id/GuideC"
+                    app:layout_constraintTop_toBottomOf="@+id/Title"
+                    app:shapeAppearance="@style/roundedCornerImageStyle50" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/NickName"
+                    style="@style/text_3_14"
+                    android:layout_marginStart="8dp"
+                    android:text="@{vm.detailsLiveData.nickname}"
+                    android:textColor="@color/c_3"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/HeadImg"
+                    app:layout_constraintStart_toEndOf="@+id/HeadImg"
+                    app:layout_constraintTop_toTopOf="@+id/HeadImg" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/SendTime"
+                    style="@style/text_9_12"
+                    android:layout_marginTop="12dp"
+                    android:text="@{Common.detailsDate(vm.detailsLiveData.sendtime)}"
+                    app:layout_constraintStart_toStartOf="@+id/GuideC"
+                    app:layout_constraintTop_toBottomOf="@+id/HeadImg" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/Content"
+                    style="@style/text_0_16"
+                    android:layout_width="0dp"
+                    android:layout_marginTop="12dp"
+                    android:gravity="start"
+                    android:lineSpacingExtra="2dp"
+                    android:textColor="@color/c_3"
+                    android:textSize="@dimen/sp_18"
+                    app:layout_constraintEnd_toEndOf="@id/GuideD"
+                    app:layout_constraintStart_toStartOf="@id/GuideC"
+                    app:layout_constraintTop_toBottomOf="@+id/SendTime" />
+
+                <com.noober.background.view.BLConstraintLayout
+                    android:id="@+id/LocationConst"
+                    android:layout_width="0dp"
+                    android:layout_height="72dp"
+                    android:layout_marginTop="32dp"
+                    android:visibility="@{vm.detailsLiveData.location.lat != 0.0 ? View.VISIBLE: View.GONE}"
+                    app:bl_corners_radius="8dp"
+                    app:bl_solid_color="@color/c_E"
+                    app:layout_constraintEnd_toEndOf="@id/GuideD"
+                    app:layout_constraintStart_toStartOf="@id/GuideC"
+                    app:layout_constraintTop_toBottomOf="@+id/Content">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/LocationA"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginStart="8dp"
+                        android:scaleType="center"
+                        android:src="@mipmap/ic_detail_location"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/LocationStr"
+                        style="@style/text_0_14"
+                        android:layout_width="0dp"
+                        android:layout_marginEnd="20dp"
+                        android:gravity="start"
+                        android:text="@{vm.detailsLiveData.location.address}"
+                        android:textColor="@color/c_F86E97"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/LocationA"
+                        app:layout_constraintEnd_toStartOf="@+id/LocationC"
+                        app:layout_constraintStart_toEndOf="@+id/LocationA"
+                        app:layout_constraintTop_toTopOf="@+id/LocationA" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/LocationC"
+                        style="@style/text_0_14"
+                        android:layout_marginEnd="12dp"
+                        android:layout_marginBottom="2dp"
+                        android:text="TA们最近去过"
+                        android:textColor="@color/c_9"
+                        android:textSize="@dimen/sp_12"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@id/GoTavatarRecyc"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/GoTavatarRecyc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="22dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/LocationC"
+                        app:layout_constraintTop_toBottomOf="@+id/LocationC" />
+
+                </com.noober.background.view.BLConstraintLayout>
+
+                <View
+                    android:id="@+id/FenGeB"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="32dp"
+                    android:background="@color/c_E"
+                    app:layout_constraintEnd_toEndOf="@id/GuideD"
+                    app:layout_constraintStart_toStartOf="@id/GuideC"
+                    app:layout_constraintTop_toBottomOf="@id/LocationConst" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/CommentStr"
+                    style="@style/text_0_14"
+                    android:layout_marginTop="12dp"
+                    android:text="@{`最新回复（共 ` + vm.commentnumber.toString() + ` 条）`}"
+                    android:textColor="@color/c_9"
+                    android:textSize="@dimen/sp_12"
+                    app:layout_constraintStart_toStartOf="@+id/GuideC"
+                    app:layout_constraintTop_toBottomOf="@id/FenGeB" />
+
+                <com.scwang.smart.refresh.layout.SmartRefreshLayout
+                    android:id="@+id/CommentSmart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:visibility="@{vm.detailsLiveData.commentnumber != 0 ?View.VISIBLE: View.GONE}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/CommentStr"
+                    app:srlEnableLoadMore="false">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/CommentRecyc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp" />
+
+                    <com.scwang.smart.refresh.footer.ClassicsFooter
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:srlTextNothing="没有更多评论啦"
+                        app:srlTextPulling="上拉加载更多评论" />
+
+                </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/EmptyComment"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="19dp"
+                    android:layout_marginBottom="38dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/bg_empty_detail"
+                    android:visibility="@{vm.detailsLiveData.commentnumber == 0 ?View.VISIBLE: View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/CommentStr" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/BottomConst"
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
+            android:background="@color/c_F8"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <View
+                android:id="@+id/FenGeA"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/c_D"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.noober.background.view.BLTextView
+                android:id="@+id/Like"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="1dp"
+                app:bl_selected_drawable="@mipmap/ic_home_like"
+                app:bl_unSelected_drawable="@mipmap/ic_home_unlike"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/LikeNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:text="@{Common.intDispose(vm.detailsLiveData.likenumber)}"
+                android:textColor="@color/c_9"
+                android:textSize="@dimen/sp_14"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/Like"
+                app:layout_constraintStart_toEndOf="@+id/Like"
+                app:layout_constraintTop_toTopOf="@+id/Like" />
+
+            <com.noober.background.view.BLTextView
+                android:id="@+id/Collect"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="17dp"
+                app:bl_selected_drawable="@mipmap/ic_collect"
+                app:bl_unSelected_drawable="@mipmap/ic_uncollect"
+                app:layout_constraintBottom_toBottomOf="@+id/Like"
+                app:layout_constraintStart_toEndOf="@+id/LikeNumber"
+                app:layout_constraintTop_toTopOf="@+id/Like" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/CollectNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:text="@{Common.intDispose(vm.detailsLiveData.favnumber)}"
+                android:textColor="@color/c_9"
+                android:textSize="@dimen/sp_14"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/Collect"
+                app:layout_constraintStart_toEndOf="@+id/Collect"
+                app:layout_constraintTop_toTopOf="@+id/Collect" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/Comment"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginStart="17dp"
+                android:drawableStart="@mipmap/ic_home_comment"
+                android:drawablePadding="8dp"
+                android:gravity="center"
+                android:text="@{Common.intDispose(vm.commentnumber)}"
+                android:textColor="@color/c_9"
+                android:textSize="@dimen/sp_14"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/CollectNumber"
+                app:layout_constraintTop_toTopOf="@+id/Like" />
+
+            <com.noober.background.view.BLView
+                android:id="@+id/ViewA"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="16dp"
+                app:bl_corners_radius="18dp"
+                app:bl_solid_color="@color/c_F"
+                app:bl_stroke_color="@color/c_E"
+                app:bl_stroke_width="2dp"
+                app:layout_constraintBottom_toBottomOf="@id/Like"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/Comment"
+                app:layout_constraintTop_toTopOf="@id/Like" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/text_0_14"
+                android:layout_marginStart="16dp"
+                android:text="讲两句？"
+                android:textColor="@color/c_D"
+                android:textSize="@dimen/sp_12"
+                app:layout_constraintBottom_toBottomOf="@+id/ViewA"
+                app:layout_constraintStart_toStartOf="@+id/ViewA"
+                app:layout_constraintTop_toTopOf="@+id/ViewA" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,98 @@
+
+
+<title>隐私协议</title>
+  
+<div class="layui-card layadmin-header">
+  <div class="layui-breadcrumb" lay-filter="breadcrumb">
+    <a lay-href="">主页</a>
+    <a><cite>系统设置</cite></a>
+    <a><cite>隐私协议</cite></a>
+  </div>
+</div>
+
+<div class="layui-fluid">   
+  
+  <form class="layui-form" method="POST" lay-filter="LAY-news-detail-new-form" id="LAY-news-detail-new-form">
+
+    <div class="layui-card">
+      <div class="layui-card-body" style="padding: 15px;">
+
+        <div class="layui-form-item contentdiv">
+          <label class="layui-form-label">内容文字</label>
+          <div class="layui-input-block">
+            <textarea name="content" id="content"></textarea>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="layui-card">
+      <div class="layui-card-body" style="padding: 15px;">
+        <div class="layui-form-item">
+          <div class="layui-input-block">
+            <div class="layui-footer">
+              <button class="layui-btn" lay-submit="" lay-filter="LAY-news-detail-new-form-submit" id="submitbtn">保存</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+</div>
+
+<script>
+layui.use('useradmin', layui.factory('useradmin')).use(['admin', 'useradmin', 'table','laydate'], function(){
+  var $ = layui.$
+  ,admin = layui.admin
+  ,view = layui.view
+  ,table = layui.table
+  ,laydate = layui.laydate
+  ,form = layui.form;
+  
+  admin.req({
+    url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.ConfigSetData   
+    ,type:"GET"
+    ,data:{"key":"AppPivacyPolicy"}
+    ,done: function(res){
+      if (res.errorcode === 0)
+      {
+        CKEDITOR.replace( 'content',{ height: '450px', width: '100%' , allowedContent: true});
+        CKEDITOR.instances.content.setData(res.data.setvalue);
+      }
+    }
+  });    
+
+  /* 监听提交 */
+  form.on('submit(LAY-news-detail-new-form-submit)', function(data){
+
+    let postData = data.field;
+    postData.key = "AppPivacyPolicy";
+    postData.content = CKEDITOR.instances.content.getData();
+    if (postData.content == "")
+    {
+      layer.msg("请填写协议内容", {icon: 5});
+      return false;
+    }
+
+    layer.confirm("确认提交吗？",{icon: 3}, function(index){
+      admin.req({
+        url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.ConfigSetData  
+        ,type:"POST"
+        ,data: postData
+        ,done: function(res){
+          if (res.errorcode === 0)
+          {
+            layer.msg(res.errormsg, {icon: 1});
+          }
+        }
+      });
+    });
+    return false;
+  });
+
+  
+});
+</script>

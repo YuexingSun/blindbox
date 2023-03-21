@@ -1,0 +1,146 @@
+
+
+<title>分类颜色管理</title>
+  
+<div class="layui-card layadmin-header">
+  <div class="layui-breadcrumb" lay-filter="breadcrumb">
+    <a lay-href="">主页</a>
+    <a><cite>参数设置</cite></a>
+    <a><cite>分类颜色管理</cite></a>
+  </div>
+</div>
+
+<div class="layui-fluid">   
+  <div class="layui-card">
+
+    <div class="layui-card-body">
+
+      <div style="padding-bottom: 10px;text-align:right;">
+        <button class="layui-btn layuiadmin-btn-admin" data-type="add">增加颜色</button>
+      </div>
+      
+      <table id="LAY-tag-tag-list-table" lay-filter="LAY-tag-tag-list-table"></table>  
+      <script type="text/html" id="LAY-tag-tag-list-table-opt">
+        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
+      </script>
+    </div>
+  </div>
+</div>
+
+<script type="text/html" id="TagDimenTmplate">
+  <button class="layui-btn layui-btn-radius" style="border-color:{{d.txtcolor}};background:{{d.bgcolor}};color:{{d.linecolor}}">颜色效果</button>
+</script>
+
+<script>
+layui.use('useradmin', layui.factory('useradmin')).use(['admin', 'useradmin', 'table','laydate','xmSelect','element'], function(){
+  var $ = layui.$
+  ,admin = layui.admin
+  ,setter = layui.setter
+  ,view = layui.view
+  ,laydate = layui.laydate
+  ,table = layui.table
+  ,xmSelect = layui.xmSelect
+  ,element = layui.element
+  ,form = layui.form;
+
+
+  table.render({
+    elem: '#LAY-tag-tag-list-table'
+    ,url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.CateColor 
+    ,method : 'GET'
+    ,cols: [[
+      {field: 'id', title: '颜色效果',templet:'#TagDimenTmplate'}
+      ,{field: 'txtcolor', title: '文字颜色'}
+      ,{field: 'bgcolor', title: '背景颜色'}
+      ,{field: 'linecolor', title: '边框颜色'}
+      ,{title: '操作', width: "25%", align: 'center', toolbar: '#LAY-tag-tag-list-table-opt'}
+    ]]
+    ,page: true
+    ,text: {none:'暂无数据'}
+    ,done: function(res, curr, count){
+      if (res.errorcode != 0)
+      {
+        layer.msg(res.errormsg, {icon: 5});
+      }
+    }
+  });
+
+  //监听工具条
+  table.on('tool(LAY-tag-tag-list-table)', function(obj){
+    var data = obj.data;
+    if(obj.event === 'edit'){
+      layer.open({
+        type: 1
+        ,title: '修改颜色'
+        ,area: ['500px', '500px']
+        ,maxmin: true
+        ,id: 'LAY-popup-useradmin2-add'
+        ,success: function(layero, index){
+          data.layerindex = index;          
+          view(this.id).render('param/catecolor/form',data).done(function(){
+            form.render(null, 'layuiadmin-form-admin2');
+          });
+        }
+      });
+    }else if(obj.event === 'del'){
+      layer.confirm('确定要删除该颜色吗？', function(index){
+        admin.req({
+          url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.CateColor   
+          ,type:"DELETE"
+          ,data: {id:data.id}
+          ,done: function(res){
+            layer.msg(res.errormsg, {icon: 1});
+            table.reload('LAY-tag-tag-list-table'); //重载表格
+            layer.close(index);
+          }
+        });
+      });
+    }
+
+  });
+
+
+  //事件
+  var active = {
+    add: function(){
+      layer.open({
+        type: 1
+        ,title: '新建颜色'
+        ,area: ['500px', '500px']
+        ,maxmin: true
+        ,id: 'LAY-popup-useradmin2-add'
+        ,success: function(layero, index){
+          var data = new Object();
+          data.layerindex = index;          
+          view(this.id).render('param/catecolor/form',data).done(function(){
+            form.render(null, 'layuiadmin-form-admin2');
+          });
+        }
+      });
+    }
+  }  
+
+  $('.layui-btn.layuiadmin-btn-admin').on('click', function(){
+    var type = $(this).data('type');
+    active[type] ? active[type].call(this) : '';
+  });
+
+  $(".searchinput").keydown(function (e) {
+    if (e.keyCode === 13) {
+      $("#queryCondBtn").trigger("click");
+    }
+  });
+
+  //监听搜索
+  form.on('submit(LAY-tag-tag-list-search-form-submit)', function(data){
+    var field = data.field;    
+    //执行重载
+    table.reload('LAY-tag-tag-list-table', {
+      where: field
+    });
+  });
+
+
+});
+</script>

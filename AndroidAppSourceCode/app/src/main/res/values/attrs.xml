@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ClearableEditText">
+        <!--清除按钮图标-->
+        <attr name="clearIcon" format="reference" />
+        <!--清除按钮的宽高-->
+        <attr name="clearIconHeight" format="dimension" />
+        <attr name="clearIconWidth" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="ChartCircleView">
+        <attr name="cv_background" format="color" /> <!--背景色-->
+        <attr name="cv_startAngle" format="integer" /> <!--初始旋转角度-->
+        <attr name="cv_rate" format="float" /> <!--圆环比率，也可理解为圆环with比率-->
+        <attr name="cv_animDuration" format="integer" /> <!--动画时间-->
+        <attr name="cv_isArc" format="boolean" /> <!--形状是否为扇形-->
+        <attr name="cv_isAnim" format="boolean" /> <!--是否需要动画-->
+    </declare-styleable>
+
+    <!--自定义删除按钮的宽度-->
+    <declare-styleable name="LeftDeleteView">
+        <attr name="deleteBtnWidth" format="float" />
+    </declare-styleable>
+
+    <!--首页宫格图片展示-->
+    <declare-styleable name="ImageListShowView">
+        <attr name="imgShow_background" format="color" /> <!--背景色-->
+    </declare-styleable>
+</resources>

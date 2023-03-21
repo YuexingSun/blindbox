@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="getCodeClick"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="vm"
+            type="com.zhixing.zxhy.view_model.SetPhoneViewModel" />
+
+        <import type="com.zhixing.zxhy.util.databinding.SetPhone" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ConstraintLayoutA"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/c_EF">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/GuideA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/GuideB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/Back"
+            android:layout_width="40dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="49dp"
+            android:padding="10dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="编辑个人资料"
+            android:textColor="@color/c_3"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/Back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/Back" />
+
+        <com.noober.background.view.BLTextView
+            android:id="@+id/Save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:enabled="@{SetPhone.saveIsEnable(vm.phone, vm.code)}"
+            android:onClick="@{()->vm.setNewPhone()}"
+            android:padding="10dp"
+            android:text="保存"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+            app:bl_enabled_textColor="@color/c_F86E97"
+            app:bl_unEnabled_textColor="@color/c_80F86E97"
+            app:layout_constraintBottom_toBottomOf="@+id/Back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/Back" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/TextA"
+            style="@style/text_9_16"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:text="原手机号"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintStart_toStartOf="@id/GuideA"
+            app:layout_constraintTop_toBottomOf="@+id/Title" />
+
+        <com.noober.background.view.BLConstraintLayout
+            android:id="@+id/ConstA"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="8dp"
+            app:bl_corners_radius="12dp"
+            app:bl_solid_color="@color/c_F"
+            app:layout_constraintEnd_toEndOf="@id/GuideB"
+            app:layout_constraintStart_toStartOf="@id/GuideA"
+            app:layout_constraintTop_toBottomOf="@+id/TextA">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/text_9_16"
+                android:layout_marginStart="20dp"
+                android:text="@{vm.formerPhone}"
+                android:textColor="@color/c_9"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/PhoneBack"
+                android:layout_width="9dp"
+                android:layout_height="16dp"
+                android:layout_marginEnd="19dp"
+                android:background="@mipmap/ic_right_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </com.noober.background.view.BLConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/TextB"
+            style="@style/text_9_16"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:text="新手机号"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintStart_toStartOf="@id/GuideA"
+            app:layout_constraintTop_toBottomOf="@+id/ConstA" />
+
+        <com.noober.background.view.BLConstraintLayout
+            android:id="@+id/ConstB"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="8dp"
+            app:bl_corners_topLeftRadius="12dp"
+            app:bl_corners_topRightRadius="12dp"
+            app:bl_solid_color="@color/c_F"
+            app:layout_constraintEnd_toEndOf="@id/GuideB"
+            app:layout_constraintStart_toStartOf="@id/GuideA"
+            app:layout_constraintTop_toBottomOf="@+id/TextB">
+
+            <com.zhixing.zxhy.widget.ClearableEditText
+                android:id="@+id/PhoneEdit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="16dp"
+                android:background="@null"
+                android:hint="请输入新手机号码"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:paddingStart="3dp"
+                android:textColor="@color/c_3"
+                android:textColorHint="@color/c_CD"
+                android:textCursorDrawable="@drawable/ed_cursor_color"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold"
+                android:theme="@style/ed_down_line_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </com.noober.background.view.BLConstraintLayout>
+
+        <View
+            android:id="@+id/FenGe1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/c_E"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ConstB" />
+
+        <com.noober.background.view.BLConstraintLayout
+            android:id="@+id/ConstC"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            app:bl_corners_bottomLeftRadius="12dp"
+            app:bl_corners_bottomRightRadius="12dp"
+            app:bl_solid_color="@color/c_F"
+            app:layout_constraintEnd_toEndOf="@id/GuideB"
+            app:layout_constraintStart_toStartOf="@id/GuideA"
+            app:layout_constraintTop_toBottomOf="@+id/FenGe1">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/GetCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:onClick="@{getCodeClick}"
+                android:padding="6dp"
+                android:text="@{vm.getCode.toString()}"
+                android:textColor="@{vm.isGetCode == true ? @color/c_FF599F: @color/c_CD}"
+                android:visibility="@{vm.phone.toString().length() == 11 ? View.VISIBLE: View.INVISIBLE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/CodeEdit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:background="@null"
+                android:hint="输入验证码"
+                android:inputType="number"
+                android:maxLength="6"
+                android:paddingStart="3dp"
+                android:textColorHint="@color/c_CD"
+                android:textCursorDrawable="@drawable/ed_cursor_color"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold"
+                android:theme="@style/ed_down_line_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/GetCode"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </com.noober.background.view.BLConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

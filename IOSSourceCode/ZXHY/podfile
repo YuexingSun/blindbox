@@ -1,0 +1,55 @@
+#source 'https://github.com/CocoaPods/Specs.git'
+#source 'https://github.com/aliyun/aliyun-specs.git'
+
+platform :ios, ‘11.0’
+
+target “ZXHY” do
+          
+pod 'AFNetworking' ,'4.0.1'
+
+pod 'Reachability'
+        
+pod 'SDAutoLayout'
+             
+pod 'MJRefresh'  , '3.7.5'
+
+pod 'MBProgressHUD'  , '1.2.0'
+
+pod 'SDWebImage'   , '5.11.1'
+
+pod 'SDWebImageFLPlugin', '0.5.0'
+
+pod 'CocoaAsyncSocket'
+
+pod 'FMDB'
+
+pod 'YYModel', '1.0.4'
+
+pod 'Masonry' , '1.1.0'
+
+pod 'AlipaySDK-iOS'
+pod 'WechatOpenSDK' ,'1.8.7.1'
+
+pod 'CocoaLumberjack', '3.7.0'
+
+pod 'lottie-ios', '2.5.3'
+
+pod 'TZImagePickerController' , '3.6.2'
+
+pod 'YBImageBrowser/Video' , '3.0.9'
+
+#pod 'MLeaksFinder', '1.0.0'  #内存泄漏检测
+
+#高德
+pod 'AMapNavi'  , '8.1.0'    #导航
+pod 'AMapLocation', '2.8.0'  #定位
+pod 'AMapSearch' , '7.9.0'  #地图搜索
+
+#极光
+pod 'JCore'  , '3.1.2'
+pod 'JVerification' , '2.7.6'
+pod 'JShare'
+pod 'JAnalytics'
+
+end 
+

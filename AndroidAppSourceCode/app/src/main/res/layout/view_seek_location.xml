@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ConstA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/c_EF">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/GuideA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/GuideB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/Location"
+            style="@style/text_0_14"
+            android:layout_width="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="1dp"
+            android:gravity="start"
+            android:text="不显示地址"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/DetailLoca"
+            app:layout_constraintEnd_toEndOf="@id/GuideB"
+            app:layout_constraintStart_toStartOf="@id/GuideA"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/DetailLoca"
+            style="@style/text_9_12"
+            android:layout_width="0dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            android:text="广州市天河区详细地址"
+            app:layout_constraintBottom_toTopOf="@+id/FenGeA"
+            app:layout_constraintEnd_toStartOf="@+id/GuideB"
+            app:layout_constraintStart_toStartOf="@+id/GuideA"
+            app:layout_constraintTop_toBottomOf="@id/Location" />
+
+        <View
+            android:id="@+id/FenGeA"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/c_D"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/GuideA" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

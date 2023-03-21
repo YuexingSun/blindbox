@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.noober.background.view.BLConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ConstraintLayoutA"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent">
+
+    <com.noober.background.view.BLConstraintLayout
+        android:id="@+id/ConstraintLayoutB"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        app:bl_solid_color="@color/c_80000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/TextViewA"
+            style="@style/text_F_20"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="56dp"
+            android:text="请先前往"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/Location"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="28dp"
+            android:textColor="@color/c_F"
+            android:textSize="@dimen/sp_36"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/TextViewA"
+            app:layout_constraintTop_toBottomOf="@+id/TextViewA" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/text_F_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="270dp"
+            android:text="准备出发"
+            android:textSize="@dimen/sp_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/CountDown"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="countdown.json"
+            app:lottie_loop="false" />
+
+        <com.noober.background.view.BLTextView
+            android:id="@+id/OtherNaviA"
+            android:layout_width="287dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="48dp"
+            android:gravity="center"
+            android:text="使用其他地图导航"
+            android:textColor="@color/c_F"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold"
+            app:bl_corners_radius="32dp"
+            app:bl_solid_color="@color/c_C799BACE"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </com.noober.background.view.BLConstraintLayout>
+
+    <com.noober.background.view.BLConstraintLayout
+        android:id="@+id/ConstraintLayoutC"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/c_990"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/InfoIcon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="56dp"
+            android:src="@mipmap/ic_info"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/CTextA"
+            style="@style/text_F_20"
+            android:layout_marginStart="8dp"
+            android:text="请先前往"
+            android:textSize="@dimen/sp_15"
+            app:layout_constraintBottom_toBottomOf="@+id/InfoIcon"
+            app:layout_constraintStart_toEndOf="@+id/InfoIcon"
+            app:layout_constraintTop_toTopOf="@+id/InfoIcon" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/CLocation"
+            style="@style/text_F_20"
+            android:layout_width="0dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="28dp"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:textSize="@dimen/sp_15"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/CTextA"
+            app:layout_constraintTop_toTopOf="@+id/CTextA">
+
+            <requestFocus />
+
+        </androidx.appcompat.widget.AppCompatTextView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/DistanceA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/c_F"
+            android:textSize="@dimen/sp_36"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/InfoIcon"
+            app:layout_constraintTop_toBottomOf="@+id/CLocation" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/DistanceB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:textColor="@color/c_F"
+            android:textSize="@dimen/sp_36"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/DistanceA"
+            app:layout_constraintStart_toEndOf="@+id/DistanceA" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="2dp"
+            android:text="进入"
+            android:textColor="@color/c_F"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintBottom_toBottomOf="@+id/DistanceB"
+            app:layout_constraintStart_toEndOf="@+id/DistanceB" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/Address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="28dp"
+            android:maxLines="1"
+            android:textColor="@color/c_F"
+            android:textSize="@dimen/sp_36"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/DistanceA"
+            app:layout_constraintTop_toBottomOf="@+id/DistanceA" />
+
+        <com.amap.api.navi.view.NextTurnTipView
+            android:id="@+id/NextTurnA"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/Close"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginBottom="44dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_amap_close"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/Touch"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/Touch"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_amap_touch"
+            app:layout_constraintBottom_toBottomOf="@+id/Close"
+            app:layout_constraintEnd_toStartOf="@id/OtherNavi"
+            app:layout_constraintStart_toEndOf="@id/Close" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/OtherNavi"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_amap_other_navigation"
+            app:layout_constraintBottom_toBottomOf="@+id/Close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/Touch" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/ThreeBtnGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="Close, OtherNavi, Touch" />
+
+    </com.noober.background.view.BLConstraintLayout>
+
+    <include
+        android:id="@+id/JourneyDialog"
+        layout="@layout/dialog_journey_b"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</com.noober.background.view.BLConstraintLayout>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="251" id="KGk-i7-Jjw" customClass="ZXMineBoxDetailsTopViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="561" height="251"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="561" height="251"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已完成" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o7r-pn-QJs">
+                        <rect key="frame" x="40" y="142" width="481" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="Xrm-uu-KDZ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                        <color key="textColor" red="1" green="0.25490196078431371" blue="0.43529411764705883" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="恭喜！已走完整个行程" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOs-ny-7Wr">
+                        <rect key="frame" x="40" y="167" width="481" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="1" green="0.25490196079999999" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v91-8y-Lxr">
+                        <rect key="frame" x="15" y="204" width="220" height="37"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已到达目的地" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lX1-2c-94F">
+                                <rect key="frame" x="10" y="8.5" width="92" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="HKg-Qb-gHQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Luck" translatesAutoresizingMaskIntoConstraints="NO" id="6sy-VD-dgk">
+                                <rect key="frame" x="110" y="7.5" width="95" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="TQS-xJ-jOu"/>
+                                    <constraint firstAttribute="width" constant="95" id="xy1-0t-c3f"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="37" id="HVo-s4-miV"/>
+                            <constraint firstAttribute="width" constant="220" id="Nxi-Mm-ECm"/>
+                            <constraint firstItem="6sy-VD-dgk" firstAttribute="leading" secondItem="lX1-2c-94F" secondAttribute="trailing" constant="8" id="eBc-ao-nTx"/>
+                            <constraint firstItem="lX1-2c-94F" firstAttribute="centerY" secondItem="v91-8y-Lxr" secondAttribute="centerY" id="kYm-VX-LmS"/>
+                            <constraint firstItem="lX1-2c-94F" firstAttribute="leading" secondItem="v91-8y-Lxr" secondAttribute="leading" constant="10" id="lMF-Qh-OlE"/>
+                            <constraint firstItem="6sy-VD-dgk" firstAttribute="centerY" secondItem="lX1-2c-94F" secondAttribute="centerY" id="sXq-zX-dyx"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="nOs-ny-7Wr" firstAttribute="leading" secondItem="o7r-pn-QJs" secondAttribute="leading" id="1A8-Rt-4vG"/>
+                    <constraint firstItem="v91-8y-Lxr" firstAttribute="top" secondItem="nOs-ny-7Wr" secondAttribute="bottom" constant="20" id="D1w-Tj-q5b"/>
+                    <constraint firstItem="v91-8y-Lxr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="FWu-5E-z6g"/>
+                    <constraint firstAttribute="trailing" secondItem="o7r-pn-QJs" secondAttribute="trailing" constant="40" id="OtI-a8-qRN"/>
+                    <constraint firstItem="nOs-ny-7Wr" firstAttribute="top" secondItem="o7r-pn-QJs" secondAttribute="bottom" id="cYC-0m-5yN"/>
+                    <constraint firstItem="nOs-ny-7Wr" firstAttribute="trailing" secondItem="o7r-pn-QJs" secondAttribute="trailing" id="g2G-ec-rcM"/>
+                    <constraint firstItem="o7r-pn-QJs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="40" id="mPd-LP-GTn"/>
+                    <constraint firstAttribute="bottom" secondItem="v91-8y-Lxr" secondAttribute="bottom" constant="10" id="nhn-4e-oLz"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="bgView" destination="v91-8y-Lxr" id="WB8-Ke-d5O"/>
+                <outlet property="destinationLabel" destination="lX1-2c-94F" id="GoL-j3-hPi"/>
+                <outlet property="statusLabel" destination="o7r-pn-QJs" id="TeH-Uz-fU3"/>
+                <outlet property="statusTipLabel" destination="nOs-ny-7Wr" id="iSY-hh-qhD"/>
+            </connections>
+            <point key="canvasLocation" x="315.21739130434787" y="142.96875"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Luck" width="94" height="22"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

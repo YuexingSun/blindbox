@@ -1,0 +1,72 @@
+
+
+<div class="layui-form" lay-filter="layuiadmin-form-admin-file-file-setform" style="padding: 20px">
+
+      <script type="text/html" template lay-done="layui.data.done(d);">
+        <input type="hidden" name="id" id="id" value="{{ d.params.id || '' }}" >
+      </script>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label"><font color="red">*</font>维度名称</label>
+    <div class="layui-input-block">
+      <script type="text/html" template>
+        <input type="text" name="name" value="{{ d.params.name || '' }}" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+      </script>
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">权重值</label>
+    <div class="layui-input-inline">
+      <script type="text/html" template>
+        <input type="number" name="power" min="0" value="{{ d.params.power || '100' }}" placeholder="请输入" autocomplete="off" class="layui-input">
+      </script>
+    </div>
+    <div class="layui-form-mid layui-word-aux">%</div>
+    <div class="layui-form-mid layui-word-aux" style="margin-left: 110px;">100%表示标准权重，越大越优先</div>
+  </div>
+
+  <div class="layui-form-item" style="text-align: center;bottom: 10px;left: 0px;right: 0px;">
+    <script type="text/html" template>
+      <input type="submit" lay-submit lay-filter="layuiadmin-form-admin-file-file-setform-submit" value="确定" class="layui-btn">
+      <a class="layui-btn layui-btn-primary" onclick="layer.close({{d.params.layerindex}})">取消</a>
+    </script>
+  </div>
+
+</div>
+
+<script>
+layui.data.done = function (d) {
+  layui.use(['admin', 'form','table','xmSelect','upload'], function(){
+    var $ = layui.$
+    ,admin = layui.admin
+    ,table = layui.table
+    ,xmSelect = layui.xmSelect
+    ,upload = layui.upload
+    ,form = layui.form;
+
+      //监听提交
+      form.on('submit(layuiadmin-form-admin-file-file-setform-submit)', function(data){
+
+        let postData = data.field;
+        let methstr = "POST";
+        if (postData.id)
+        {
+          methstr = "PUT";
+        }
+        admin.req({
+          url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.TagClientDimen  
+          ,type: methstr
+          ,data: postData
+          ,done: function(res){
+            layer.msg(res.errormsg, {icon: 1});
+            table.reload('LAY-tag-tag-list-table'); //重载表格
+            layer.close(d.params.layerindex); //再执行关闭 
+          }
+        });
+
+      });
+
+  });
+}
+</script>

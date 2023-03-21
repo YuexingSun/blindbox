@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewM"
+            type="com.zhixing.zxhy.view_model.BoxDetailViewModel" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.noober.background.view.BLTextView
+            android:id="@+id/TextOne"
+            style="@style/NoManYi.Selected"
+            android:layout_marginEnd="14dp"
+            android:onClick="@{(view)->viewM.selectedBtns(view, 1)}"
+            android:text="以前来过"
+            app:layout_constraintEnd_toStartOf="@id/TextTwo"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.noober.background.view.BLTextView
+            android:id="@+id/TextTwo"
+            style="@style/NoManYi.Selected"
+            android:onClick="@{(view)->viewM.selectedBtns(view, 2)}"
+            android:text="不喜欢这个地方"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/TextOne"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.noober.background.view.BLTextView
+            android:id="@+id/TextThree"
+            style="@style/NoManYi.Selected"
+            android:onClick="@{(view)->viewM.selectedBtns(view, 3)}"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="14dp"
+            android:text="导航不清晰"
+            app:layout_constraintEnd_toStartOf="@id/TextTwo"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/TextOne" />
+
+        <com.noober.background.view.BLTextView
+            android:id="@+id/TextFour"
+            style="@style/NoManYi.Selected"
+            android:onClick="@{(view)->viewM.selectedBtns(view, 4)}"
+            android:text="太好猜"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/TextTwo"
+            app:layout_constraintTop_toTopOf="@id/TextThree" />
+
+        <com.noober.background.view.BLTextView
+            android:id="@+id/TextFive"
+            style="@style/NoManYi.Selected"
+            android:onClick="@{(view)->viewM.selectedBtns(view, 5)}"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="14dp"
+            android:text="时间不准确"
+            app:layout_constraintEnd_toStartOf="@id/TextTwo"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/TextThree" />
+
+        <com.noober.background.view.BLTextView
+            android:id="@+id/TextSix"
+            style="@style/NoManYi.Selected"
+            android:onClick="@{(view)->viewM.selectedBtns(view, 6)}"
+            android:text="找不到店"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/TextFour"
+            app:layout_constraintTop_toTopOf="@id/TextFive" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/CardViewA"
+    android:layout_width="297dp"
+    android:layout_height="128dp"
+    app:cardBackgroundColor="@color/c_F"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="0dp"
+    app:cardUseCompatPadding="false">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/Title"
+            style="@style/text_BF0_16"
+            android:layout_marginBottom="8dp"
+            android:text="确定要删除笔记吗？"
+            android:textColor="@color/c_3"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/Hint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/Hint"
+            style="@style/text_3_14"
+            android:text="删除了无法恢复哦"
+            android:textColor="@color/c_9"
+            app:layout_constraintBottom_toBottomOf="@id/FenGeA"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/Title" />
+
+        <View
+            android:id="@+id/FenGeA"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="46dp"
+            android:background="@color/c_D"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <View
+            android:id="@+id/FenGeB"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="2dp"
+            android:background="@color/c_D"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/FenGeA" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/Cancel"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/c_9"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/FenGeB"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/FenGeA" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/Confirm"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="删除"
+            android:textColor="@color/c_D00808"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/FenGeB"
+            app:layout_constraintTop_toBottomOf="@+id/FenGeA" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

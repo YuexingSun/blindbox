@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.zhixing.zxhy.view_model.OtherPhoneLoginViewModel" />
+
+        <import type="android.view.View" />
+
+        <import type="com.zhixing.zxhy.util.databinding.OtherPhoneLogin" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ConstraintLayoutA"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/bg_other_login">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/Back"
+            android:layout_width="29dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="49dp"
+            android:padding="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="129dp"
+            android:text="其他号码登录"
+            android:textColor="@color/c_442C60"
+            android:textSize="@dimen/sp_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/PhoneEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="46dp"
+            android:layout_marginTop="59dp"
+            android:layout_marginEnd="46dp"
+            android:background="@null"
+            android:hint="请输入手机号码"
+            android:inputType="phone"
+            android:maxLength="11"
+            android:paddingStart="3dp"
+            android:textColorHint="@color/c_CD"
+            android:textCursorDrawable="@drawable/ed_cursor_color"
+            android:textSize="@dimen/sp_20"
+            android:theme="@style/ed_down_line_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/Title" />
+
+        <View
+            android:id="@+id/FenGe1"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="43dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="43dp"
+            android:background="@color/c_E9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/PhoneEdit" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/CodeEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="46dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="46dp"
+            android:background="@null"
+            android:hint="输入验证码"
+            android:inputType="number"
+            android:maxLength="6"
+            android:paddingStart="3dp"
+            android:textColorHint="@color/c_CD"
+            android:textCursorDrawable="@drawable/ed_cursor_color"
+            android:textSize="@dimen/sp_20"
+            android:theme="@style/ed_down_line_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/FenGe1" />
+
+        <View
+            android:id="@+id/FenGe2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="43dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="43dp"
+            android:background="@color/c_E9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/CodeEdit" />
+
+        <com.noober.background.view.BLTextView
+            android:id="@+id/GetCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:text="@{vm.getCode.toString()}"
+            android:enabled="@{OtherPhoneLogin.getCodeEnable(vm.phone.toString().length(), vm.isGetCode)}"
+            app:bl_enabled_textColor="@color/c_FF599F"
+            app:bl_unEnabled_textColor="@color/c_CD"
+            app:layout_constraintBottom_toBottomOf="@+id/FenGe2"
+            app:layout_constraintEnd_toEndOf="@+id/CodeEdit"
+            app:layout_constraintTop_toBottomOf="@+id/FenGe1" />
+
+        <com.noober.background.view.BLButton
+            android:id="@+id/Login"
+            style="@style/big_text_button_style"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="55dp"
+            android:layout_marginEnd="32dp"
+            android:enabled="false"
+            android:text="登录"
+            android:onClick="@{()->vm.loginBySmsCode()}"
+            android:textColor="@color/c_F"
+            app:bl_unEnabled_gradient_startColor="@color/c_CF"
+            app:bl_unEnabled_gradient_endColor="@color/c_CF"
+            app:bl_enabled_gradient_startColor="@color/c_FF599F"
+            app:bl_enabled_gradient_endColor="@color/c_FF4545"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/CodeEdit" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/NoCodeRemind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:padding="10dp"
+            android:text="收不到验证码"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/Login" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

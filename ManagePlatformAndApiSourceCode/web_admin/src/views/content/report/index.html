@@ -1,0 +1,226 @@
+
+  <script src="./src/controller/lib/city-picker.data.js"></script>
+  <link href="./src/style/city-picker.css" rel="stylesheet" />
+
+<title>举报管理</title>
+  
+<div class="layui-card layadmin-header">
+  <div class="layui-breadcrumb" lay-filter="breadcrumb">
+    <a lay-href="">主页</a>
+    <a><cite>内容管理</cite></a>
+    <a><cite>举报管理</cite></a>
+  </div>
+</div>
+
+<div class="layui-fluid">   
+  <div class="layui-card">
+
+    <div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="LAY-tag-tag-list-search-form" method='post'>
+      <div class="layui-form-item">
+        <div class="layui-inline">
+          <label class="layui-form-label">举报类型</label>
+          <div class="layui-input-inline">
+            <div id="searchtype"></div>
+          </div>
+        </div>
+        <div class="layui-inline">
+          <label class="layui-form-label">是否处理</label>
+          <div class="layui-input-inline">
+            <div id="searchopt"></div>
+          </div>
+        </div>
+        
+
+        <div class="layui-inline">
+          <button class="layui-btn" lay-submit lay-filter="LAY-tag-tag-list-search-form-submit" id="queryCondBtn">
+            <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="layui-card-body">
+      
+      <table id="LAY-tag-tag-list-table" lay-filter="LAY-tag-tag-list-table"></table>  
+      <script type="text/html" id="LAY-tag-tag-list-table-opt">
+        <a class="layui-btn layui-btn layui-btn-xs" lay-href="content/article/index/id={{d.articleid}}"><i class="layui-icon layui-icon-edit"></i>去处理</a>
+        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>标记为已处理</a>
+      </script>
+    </div>
+  </div>
+</div>
+
+
+<script>
+layui.use('useradmin', layui.factory('useradmin')).use(['admin', 'useradmin', 'table','laydate','xmSelect','element','upload','citypicker'], function(){
+  var $ = layui.$
+  ,admin = layui.admin
+  ,setter = layui.setter
+  ,view = layui.view
+  ,laydate = layui.laydate
+  ,table = layui.table
+  ,xmSelect = layui.xmSelect
+  ,element = layui.element
+  ,upload = layui.upload
+  ,cityPicker = layui.citypicker
+  ,form = layui.form;
+
+  var searchtype = xmSelect.render({
+    el: '#searchtype', 
+    name: "searchtype",
+    radio: true,
+    clickClose: true,
+    data: [{name: '文章', value: 1},{name: '评论', value: 2}]
+  })
+
+  var searchopt = xmSelect.render({
+    el: '#searchopt', 
+    name: "searchopt",
+    radio: true,
+    clickClose: true,
+    data: [{name: '未处理', value: 0},{name: '已处理', value: 1}]
+  })
+
+  table.render({
+    elem: '#LAY-tag-tag-list-table'
+    ,url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.Report  
+    ,method : 'GET'
+    ,cols: [[
+      //{type:"checkbox"}
+      {field: 'commentid', title: '举报类型',templet:function(d){return d.commentid==0?'文章':'评论'}}
+      ,{field: 'title', title: '文章标题'}
+      ,{field: 'content', title: '文章内容'}
+      ,{field: 'comment', title: '评论内容'}
+      ,{field: 'isopted', title: '处理状态',templet:function(d){return d.isopted==0?'<span class="layui-badge" style="height: 100%;">未处理</span>':'<span class="layui-badge layui-bg-cyan" style="height: 100%;">已处理</span>'}}
+      ,{title: '操作', width: 150, align: 'center', toolbar: '#LAY-tag-tag-list-table-opt'}
+    ]]
+    ,autoSort: false
+    ,toolbar: true
+    ,defaultToolbar: [
+      'filter','exports' /*'print', 'exports'*/
+    ]
+    ,page: true
+    ,limit:50
+    ,limits:[20,50,100,200,400]
+    ,text: {none:'暂无数据'}
+    ,done: function(res, curr, count){
+      if (res.errorcode != 0)
+      {
+        layer.msg(res.errormsg, {icon: 5});
+      }
+    }
+  });
+  //监听排序事件 
+  table.on('sort(LAY-tag-tag-list-table)', function(obj){
+    table.reload('LAY-tag-tag-list-table', {
+      initSort: obj
+      ,where: {
+        field: obj.field
+        ,order: obj.type
+      }
+    });
+  });  
+
+
+  //监听工具条
+  table.on('tool(LAY-tag-tag-list-table)', function(obj){
+    var data = obj.data;
+    if(obj.event === 'edit'){
+      layer.confirm('确定已处理过该举报吗？', function(index){
+        admin.req({
+          url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.Report   
+          ,type:"DELETE"
+          ,data: {id:data.id}
+          ,done: function(res){
+            layer.msg(res.errormsg, {icon: 1});
+            table.reload('LAY-tag-tag-list-table'); //重载表格
+            layer.close(index);
+          }
+        });
+      });
+    }else if(obj.event === 'comment'){
+
+    }
+
+
+
+  });
+
+
+  //事件
+  var active = {
+    add: function(){
+      layer.open({
+        type: 1
+        ,title: '新增文章'
+        ,area: ['800px', '600px']
+        ,maxmin: true
+        ,id: 'LAY-popup-useradmin2-add'
+        ,success: function(layero, index){
+          data = new Object();
+          data.layerindex = index;
+          view(this.id).render('content/article/newform', data).done(function(){
+            form.render(null, 'layuiadmin-form-admin2');
+          });
+        }
+      });
+    },
+    
+    delall:function(){
+      var checkStatus = table.checkStatus("LAY-tag-tag-list-table");
+      if (checkStatus.data.length <=0)
+      {
+        layer.msg("请选择要删除的文章", {icon: 5});
+        return false;
+      }
+      var ids = "";
+      for(var i=0;i<checkStatus.data.length;i++)
+      {
+        ids += checkStatus.data[i].id+",";
+      }
+
+      var tip = "删除";
+      //if (obj.event === 'start') tip = "启用";
+      layer.confirm('确定要'+tip+'所选文章吗？', function(index){
+        admin.req({
+          url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.Article   
+          ,type:"DELETE"
+          ,data: {id:ids}
+          ,done: function(res){
+            layer.msg(res.errormsg, {icon: 1});
+            table.reload('LAY-tag-tag-list-table'); //重载表格
+            layer.close(index);
+          }
+        });
+      });
+
+
+    },
+
+  }  
+
+
+  $('.layui-btn.layuiadmin-btn-admin').on('click', function(){
+    var type = $(this).data('type');
+    active[type] ? active[type].call(this) : '';
+  });
+
+  $(".searchinput").keydown(function (e) {
+    if (e.keyCode === 13) {
+      $("#queryCondBtn").trigger("click");
+    }
+  });
+
+  //监听搜索
+  form.on('submit(LAY-tag-tag-list-search-form-submit)', function(data){
+    var field = data.field;    
+    //执行重载
+    table.reload('LAY-tag-tag-list-table', {
+      where: field
+    });
+  });
+
+
+});
+</script>

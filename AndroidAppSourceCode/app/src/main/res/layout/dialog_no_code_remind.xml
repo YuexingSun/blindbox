@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?><!--收不到验证码的提醒-->
+<com.noober.background.view.BLConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="208dp"
+    app:bl_corners_topLeftRadius="16dp"
+    app:bl_corners_topRightRadius="16dp"
+    app:bl_solid_color="@color/c_F">
+
+    <com.noober.background.view.BLTextView
+        android:id="@+id/Title"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:text="收不到验证码？"
+        android:textColor="@color/c_3"
+        android:textSize="@dimen/sp_16"
+        app:bl_corners_topLeftRadius="16dp"
+        app:bl_corners_topRightRadius="16dp"
+        app:bl_solid_color="@color/c_FFECEF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/Hint"
+        android:layout_width="match_parent"
+        android:layout_height="102dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Title">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/TextViewA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginBottom="8dp"
+            android:text="如果您无法收到短信验证码，建议您："
+            app:layout_constraintBottom_toTopOf="@id/ImageViewA"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ImageViewA"
+            android:layout_width="16dp"
+            android:layout_height="14dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginBottom="11dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_gantanhao"
+            app:layout_constraintBottom_toTopOf="@id/ImageViewB"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/TextViewA" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ImageViewB"
+            android:layout_width="16dp"
+            android:layout_height="14dp"
+            android:layout_marginStart="32dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_gantanhao"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ImageViewA" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/TextViewB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="检查您的手机号是否输入正确，是否空号；"
+            app:layout_constraintBottom_toBottomOf="@+id/ImageViewA"
+            app:layout_constraintStart_toEndOf="@+id/ImageViewA"
+            app:layout_constraintTop_toTopOf="@+id/ImageViewA" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/TextViewC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="检查您的手机号是否已经停机/关机/没有信号；"
+            app:layout_constraintBottom_toBottomOf="@+id/ImageViewB"
+            app:layout_constraintStart_toEndOf="@+id/ImageViewB"
+            app:layout_constraintTop_toTopOf="@+id/ImageViewB" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/FenGe1"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/c_F3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Hint" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/Cancel"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="取消"
+        android:textColor="@color/c_A6000000"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/FenGe1" />
+
+</com.noober.background.view.BLConstraintLayout>

@@ -1,0 +1,53 @@
+
+
+<div class="layui-fluid">   
+  <div class="layui-card">
+
+    <div class="layui-card-body">
+      <script type="text/html" template lay-done="layui.data.done(d);">
+        <table id="LAY-cleve-showlist-table" lay-filter="LAY-cleve-showlist-table"></table>  
+      </script>
+    </div>
+  </div>
+</div>
+
+<script>
+layui.data.done = function (d) {
+
+  var param = d.params;
+  layui.use(['admin', 'form','table','laydate'], function(){
+    var $ = layui.$
+    ,admin = layui.admin
+    ,table = layui.table
+    ,laydate = layui.laydate
+    ,form = layui.form;
+
+    table.render({
+      elem: '#LAY-cleve-showlist-table'
+      ,url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.WebUserBox   
+      ,method : 'GET'
+      ,where:{id:param.id}
+      ,cols: [[
+        {field: 'title', title: '标题'}
+        ,{field: 'createtime', title: '创建时间'}
+        ,{field: 'catename', title: '所属类型'}
+        ,{field: 'realname', title: '真实目的地'}
+        ,{field: 'readaddress', title: '地址'}
+        ,{field: 'isseled', title: '是否选择',templet:function(d){return (d.isseled==0)?"":"选中";}}
+      ]]
+      ,skin:'line'
+      // ,page: true
+      // ,limit: 30
+      ,text: {none:'暂无数据'}
+      ,done: function(res, curr, count){
+        if (res.errorcode != 0)
+        {
+          layer.msg(res.errormsg, {icon: 5});
+        }
+      }
+    });
+
+
+  });
+}
+</script>

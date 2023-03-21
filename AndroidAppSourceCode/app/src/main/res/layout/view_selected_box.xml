@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.noober.background.view.BLTextView
+        android:id="@+id/CircleText"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="11dp"
+        app:bl_corners_radius="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.noober.background.view.BLConstraintLayout
+        android:id="@+id/ConstraintLayoutB"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/TypePic"
+            android:layout_width="135dp"
+            android:layout_height="106dp"
+            android:layout_marginTop="26dp"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.noober.background.view.BLConstraintLayout
+            android:id="@+id/ConstraintLayoutC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="30dp"
+            android:padding="10dp"
+            android:elevation="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/TypePic">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/TypeDescribe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </com.noober.background.view.BLConstraintLayout>
+
+        <com.noober.background.view.BLConstraintLayout
+            android:id="@+id/ConstraintLayoutD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginEnd="16dp"
+            app:bl_corners_radius="8dp"
+            app:bl_solid_color="@color/c_F"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ConstraintLayoutC">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/DImageA"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_box_location"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/DTextA"
+                style="@style/text_4D_14"
+                android:layout_marginStart="8dp"
+                android:text="实时距离"
+                app:layout_constraintBottom_toBottomOf="@+id/DImageA"
+                app:layout_constraintStart_toEndOf="@+id/DImageA"
+                app:layout_constraintTop_toTopOf="@+id/DImageA" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/Distance"
+                style="@style/text_4D_14"
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/c_3"
+                app:layout_constraintBottom_toBottomOf="@+id/DImageA"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/DImageA" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/DImageB"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="18dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_box_cost"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/DImageA" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/DTextB"
+                style="@style/text_4D_14"
+                android:layout_marginStart="8dp"
+                android:text="人均消费"
+                app:layout_constraintBottom_toBottomOf="@+id/DImageB"
+                app:layout_constraintStart_toEndOf="@+id/DImageB"
+                app:layout_constraintTop_toTopOf="@+id/DImageB" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/Cost"
+                style="@style/text_4D_14"
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/c_3"
+                app:layout_constraintBottom_toBottomOf="@+id/DImageB"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/DImageB" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/DImageC"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="18dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_box_new"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/DImageB" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/DTextC"
+                style="@style/text_4D_14"
+                android:layout_marginStart="8dp"
+                android:text="新鲜度"
+                app:layout_constraintBottom_toBottomOf="@+id/DImageC"
+                app:layout_constraintStart_toEndOf="@+id/DImageC"
+                app:layout_constraintTop_toTopOf="@+id/DImageC" />
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/NewNum"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="@color/c_F"
+                android:isIndicator="true"
+                android:max="5"
+                android:numStars="5"
+                android:progressBackgroundTint="@color/c_14"
+                android:progressTint="@color/c_FF3998"
+                android:stepSize="0.5"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/DImageC"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/DImageC" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/DImageD"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="16dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_box_mystery"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/DImageC" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/DTextD"
+                style="@style/text_4D_14"
+                android:layout_marginStart="8dp"
+                android:text="神秘感"
+                app:layout_constraintBottom_toBottomOf="@+id/DImageD"
+                app:layout_constraintStart_toEndOf="@+id/DImageD"
+                app:layout_constraintTop_toTopOf="@+id/DImageD" />
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/MysteryNum"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="@color/c_F"
+                android:isIndicator="true"
+                android:max="5"
+                android:numStars="5"
+                android:progressBackgroundTint="@color/c_14"
+                android:progressTint="@color/c_FF3998"
+                android:stepSize="0.5"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/DImageD"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/DImageD" />
+
+        </com.noober.background.view.BLConstraintLayout>
+
+        <com.noober.background.view.BLButton
+            android:id="@+id/NowTrip"
+            style="@style/big_text_button_red_white"
+            android:layout_width="139dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="16dp"
+            android:text="马上启程"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ConstraintLayoutD" />
+
+    </com.noober.background.view.BLConstraintLayout>
+
+    <com.noober.background.view.BLTextView
+        android:id="@+id/TypeText"
+        android:layout_width="94dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="8dp"
+        android:gravity="center"
+        android:text="正餐"
+        android:textColor="@color/c_F"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintStart_toStartOf="@+id/CircleText"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

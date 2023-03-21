@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <com.noober.background.view.BLConstraintLayout
+        android:id="@+id/ConstA"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        app:bl_corners_radius="50dp"
+        app:bl_solid_color="@color/transparent"
+        app:bl_stroke_color="@color/c_F"
+        app:bl_stroke_width="2dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/Photo"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/roundedCornerImageStyle50" />
+
+    </com.noober.background.view.BLConstraintLayout>
+</layout>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.zhixing.zxhy">
+    <!-- 用于进行网络定位 需要申请 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 用于访问GPS定位 需要申请 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 用于获取运营商信息，用于支持提供运营商信息相关的接口 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- 用于访问网络，网络定位需要上网 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 相机 -->
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- 访问您设备上的照片、媒体内容和文件 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 用于写入缓存数据到扩展存储卡 需要权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 声音服务 -->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" /> <!-- Android 11 分区存储权限 需要申请 -->
+    <!-- <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" /> -->
+    <!-- 用于申请调用A-GPS模块 -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /> <!-- 如果设置了target >= 28 如果需要启动后台定位则必须声明这个权限 -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- 用与导航状态中保持屏幕常亮 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- 如果您的应用需要后台定位权限，且有可能运行在Android Q设备上,并且设置了target>28，必须增加这个权限声明 -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" /> <!-- 用于用户链接蓝牙时，在导航组件页面的蓝牙连接提醒，建立链接后开发者可选用蓝牙通道进行tts播报 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" /> <!-- 震动 -->
+    <uses-permission android:name="android.permission.VIBRATE" /> <!-- 监听网络状态的改变 -->
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" /> <!-- android 11获取这个读取手机号 需要权限 -->
+    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" /> <!-- 安装未知应用权限 -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" /> <!-- Android 11 新特性（软件包可见性）导致， targetVersion = 30 时会出现该问题 -->
+    <queries>
+        <!-- 高德地图 -->
+        <package android:name="com.autonavi.minimap" />
+        <!-- 百度地图 -->
+        <package android:name="com.baidu.BaiduMap" />
+        <!-- 微信 -->
+        <package android:name="com.tencent.mm" />
+    </queries>
+
+    <application
+        android:name=".App"
+        android:allowBackup="false"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_app"
+        android:label="@string/app_viewName"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_app"
+        android:supportsRtl="false"
+        android:theme="@style/Theme.ZhiXingBase"
+        tools:replace="android:theme,android:label">
+        <!-- singleTask栈内复用，其后面的栈会全部销毁 -->
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!-- 静态声明shortcut -->
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts_main" />
+        </activity>
+        <activity
+            android:name=".ui.activity.WebActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+        <!-- 极光推送配置 -->
+        <activity
+            android:name="com.cmic.sso.sdk.activity.LoginAuthActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTop"
+            android:screenOrientation="unspecified"
+            android:theme="@style/ActivityDialogStyle" />
+        <activity
+            android:name="cn.jiguang.verifysdk.CtLoginActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTop"
+            android:screenOrientation="unspecified"
+            android:theme="@style/ActivityDialogStyle" /> <!-- 表示当前项目已经适配了分区存储特性 -->
+
+        <meta-data
+            android:name="ScopedStorage"
+            android:value="true" />
+        <meta-data
+            android:name="JPUSH_APPKEY"
+            android:value="d097636bbxxxxxxxxx" />
+        <meta-data
+            android:name="JPUSH_CHANNEL"
+            android:value="${JPUSH_CHANNEL}" /> <!-- 极光推送配置 -->
+        <!-- 高德地图配置 -->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="${GAO_DE_KEY}" />
+
+        <service
+            android:name="com.amap.api.location.APSService"
+            android:foregroundServiceType="location" /> <!-- 高德地图配置 -->
+        <!-- AutoSize配置 -->
+        <meta-data
+            android:name="design_width_in_dp"
+            android:value="375" />
+        <meta-data
+            android:name="design_height_in_dp"
+            android:value="812" /> <!-- 全面屏和刘海设置 https://github.com/gyf-dev/ImmersionBar -->
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.4" /> <!-- StartUp配置 -->
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            tools:node="merge">
+
+            <!-- 初始化Timber -->
+            <meta-data
+                android:name="com.zhixing.zxhy.initializer.TimberInitializer"
+                android:value="androidx.startup" />
+            <!-- 初始化MMKV -->
+            <meta-data
+                android:name="com.zhixing.zxhy.initializer.MmkvInitializer"
+                android:value="androidx.startup" />
+            <!-- 初始化Lifecycle -->
+            <meta-data
+                android:name="com.zhixing.zxhy.initializer.AppLifecycleInitializer"
+                android:value="androidx.startup" />
+            <!-- 初始化网络 -->
+            <meta-data
+                android:name="com.zhixing.zxhy.initializer.NetworkInitializer"
+                android:value="androidx.startup" />
+            <!-- 初始化控件 -->
+            <meta-data
+                android:name="com.zhixing.zxhy.initializer.WidgetInitializer"
+                android:value="androidx.startup" />
+            <!-- 初始化微信sdk -->
+            <meta-data
+                android:name="com.zhixing.zxhy.initializer.WxInitializer"
+                android:value="androidx.startup" />
+            <!-- Bugly sdk -->
+            <meta-data
+                android:name="com.zhixing.zxhy.initializer.BuglyInitializer"
+                android:value="androidx.startup" />
+        </provider> <!-- 7.0之后安装app需要注册FileProvider 添加replace避免和其他第三方库的provider冲突 -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:replace="name,authorities,exported,grantUriPermissions">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/update_files" />
+        </provider>
+    </application>
+
+</manifest>

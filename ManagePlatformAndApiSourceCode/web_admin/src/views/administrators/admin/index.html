@@ -1,0 +1,201 @@
+
+
+<title>账号管理</title>
+  
+<div class="layui-card layadmin-header">
+  <div class="layui-breadcrumb" lay-filter="breadcrumb">
+    <a lay-href="">主页</a>
+    <a><cite>系统设置</cite></a>
+    <a><cite>账号管理</cite></a>
+  </div>
+</div>
+
+<div class="layui-fluid">   
+  <div class="layui-card">
+    <div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="layadmin-useradminadmin2-formlist">
+      <div class="layui-form-item">
+        <div class="layui-inline">
+          <label class="layui-form-label">账号</label>
+          <div class="layui-input-block">
+            <input type="text" name="searchname" placeholder="请输入" autocomplete="off" class="layui-input searchinput">
+          </div>
+        </div>
+        <div class="layui-inline">
+          <label class="layui-form-label">人员状态</label>
+          <div class="layui-input-inline">
+            <div id="searchstatus"></div>
+          </div>
+        </div>
+
+        <div class="layui-inline">
+          <button class="layui-btn layuiadmin-btn-admin" lay-submit lay-filter="LAY-useruseradmin2-back-search" id="queryCondBtn">
+            <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="layui-card-body">
+      <div style="padding-bottom: 10px;">
+        <button class="layui-btn layuiadmin-btn-admin" data-type="add">新建账号</button>
+      </div>
+      
+      <table id="LAY-useradminuser2-back-manage" lay-filter="LAY-useradminuser2-back-manage"></table>  
+
+      <script type="text/html" id="buttonTpl">
+        {{#  if(d.status == 1){ }}
+          <span class="layui-badge-rim">正常</span>
+        {{#  } else { }}
+          <span class="layui-badge layui-bg-cyan">已停用</span>
+        {{#  } }}
+      </script>
+
+
+      <script type="text/html" id="table-useradmin2-admin">
+        {{#  if(d.id != 1){ }}
+          <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
+          {{#  if(d.status == 1){ }}
+            <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="stop"><i class="layui-icon layui-icon-close"></i>停用</a>
+          {{#  }else{ }}
+            <a class="layui-btn layui-btn layui-btn-xs" lay-event="start"><i class="layui-icon layui-icon-ok"></i>启用</a>
+          {{#  } }}
+          <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
+
+        {{#  } }}
+      </script>
+    </div>
+  </div>
+</div>
+
+<script>
+layui.use('useradmin', layui.factory('useradmin')).use(['admin', 'useradmin', 'table','xmSelect'], function(){
+  var $ = layui.$
+  ,admin = layui.admin
+  ,view = layui.view
+  ,table = layui.table
+  ,xmSelect = layui.xmSelect  
+  ,form = layui.form;
+
+  var searchstatus = xmSelect.render({
+    el: '#searchstatus', 
+    name: "searchstatus",
+    autoRow: true,
+    radio: true,
+    clickClose: true,
+    data: [
+      {name: '正常', value: 1},
+      {name: '已停用', value: 2},
+    ]
+  })
+  
+
+  //
+  table.render({
+    elem: '#LAY-useradminuser2-back-manage'
+    ,url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.getAdminUser2List   
+    ,method : 'post'
+    ,cols: [[
+      {field: 'id', width: 80, title: 'ID'}
+      ,{field: 'username', title: '账号'}
+      ,{field: 'status', title:'状态', templet: '#buttonTpl', minWidth: 80, align: 'center'}
+      ,{title: '操作', width: 230, align: 'center', toolbar: '#table-useradmin2-admin'}
+    ]]
+    ,page: true
+    ,limit: 30
+    ,text: {none:'暂无数据'}
+    ,done: function(res, curr, count){
+      if (res.errorcode != 0)
+      {
+        layer.msg(res.errormsg, {icon: 5});
+      }
+    }
+  });
+  
+  //监听工具条
+  table.on('tool(LAY-useradminuser2-back-manage)', function(obj){
+    var data = obj.data;
+    if(obj.event === 'edit'){
+      layer.open({
+        type: 1
+        ,title: '编辑账号'
+        ,area: ['400px', '250px']
+        ,maxmin: true
+        ,id: 'LAY-popup-useradmin2-add'
+        ,success: function(layero, index){
+          data.layerindex = index;
+          view(this.id).render('administrators/admin/adminform', data).done(function(){
+            form.render(null, 'layuiadmin-form-admin2');
+
+          });
+        }
+      });
+    }
+    else
+    {
+      var tipstr = "";
+      if(obj.event === 'stop'){
+        tipstr = '确定要停用该账号吗？';
+      }else if(obj.event === 'start'){
+        tipstr = '确定要启用该账号吗？';
+      }else if(obj.event === 'del'){
+        tipstr = '确定要删除该账号吗？';
+      }
+      layer.confirm(tipstr,{icon: 3, title:'操作确认'}, function(index){
+        admin.req({
+          url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.removeUserGone   
+          ,type:"post"
+          ,data: {id:data.id,type:obj.event}
+          ,done: function(res){
+            layer.msg(res.errormsg, {icon: 1});
+            table.reload('LAY-useradminuser2-back-manage'); //重载表格
+            layer.close(index);
+          }
+        });
+      });
+    }
+  });
+
+
+  //监听搜索
+  form.on('submit(LAY-useruseradmin2-back-search)', function(data){
+    var field = data.field;
+    
+    //执行重载
+    table.reload('LAY-useradminuser2-back-manage', {
+      where: field
+    });
+  });
+
+  //事件
+  var active = {
+    add: function(){
+      layer.open({
+        type: 1
+        ,title: '新建账号'
+        ,area: ['400px', '250px']
+        ,maxmin: true
+        ,id: 'LAY-popup-useradmin2-add'
+        ,success: function(layero, index){
+          var data = new Object();
+          data.layerindex = index;          
+          view(this.id).render('administrators/admin/adminform',data).done(function(){
+            form.render(null, 'layuiadmin-form-admin2');
+            //console.log(layer.index);
+          });
+        }
+      });
+    }
+  }  
+  $('.layui-btn.layuiadmin-btn-admin').on('click', function(){
+    var type = $(this).data('type');
+    active[type] ? active[type].call(this) : '';
+  });
+  $(".searchinput").keydown(function (e) {
+    if (e.keyCode === 13) {
+      $("#queryCondBtn").trigger("click");
+    }
+  });
+
+  
+});
+</script>

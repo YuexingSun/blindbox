@@ -1,0 +1,65 @@
+//
+//  PrefixHeader.pch
+//  ZXHY
+//
+//  Created by Bern Mac on 7/28/21.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+
+
+
+//#import "ConstantTools.h"
+//#import "CommonToolsClass.h"
+
+#import "AppDelegate.h"
+#import "AppDelegate+WCaGVendor.h"
+#import "AppDelegate+ZXInitialization.h"
+
+#import <AFNetworking/AFNetworking.h>
+#import "UIImageView+WebCache.h"
+#import <Masonry/Masonry.h>
+#import <CocoaLumberjack/CocoaLumberjack.h>
+
+
+#import <AlipaySDK/AlipaySDK.h>
+#import "WXApi.h"
+
+//#import <UMCommon/UMCommon.h>
+//#import <UMShare/UMShare.h>
+//#import <UShareUI/UShareUI.h>
+
+#import "WGExtension.h"
+#import "ZXAPIKey.h"
+#import "ZXNetworkUrl.h"
+#import "ZXMainUrl.h"
+#import "ZXNotificationMacro.h"
+#import "ZXNetworkManager.h"
+#import "ZXPersonalDataManager.h"
+#import "ZXShareManager.h"
+#import "ZX_EmojiManager.h"
+
+#import "WGBaseNavigationController.h"
+#import "WGBaseViewController+WGNavigationView.h"
+#import "WGBaseViewController.h"
+#import "WGBaseTableView.h"
+#import "WGBaseView.h"
+
+#import "WGUIManager.h"
+#import "WGCommonRefreshUtil.h"
+#import "WGGeneralSheetController.h"
+#import "WGGeneralAlertController.h"
+
+
+
+
+#endif /* PrefixHeader_pch */
+
+
+#ifdef DEBUG
+static const int ddLogLevel = DDLogLevelVerbose;
+#else
+static const int ddLogLevel = DDLogLevelInfo;
+#endif

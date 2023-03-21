@@ -1,0 +1,417 @@
+
+<title>目的地统计</title>
+
+<div class="layui-card layadmin-header">
+  <div class="layui-breadcrumb" lay-filter="breadcrumb">
+    <a lay-href="">主页</a>
+    <a><cite>目的地统计</cite></a>
+  </div>
+</div>
+
+<div class="layui-fluid">
+  <div class="layui-row layui-col-space15">   
+    <div class="layui-col-sm6 layui-col-md3">
+      <div class="layui-card">
+        <div class="layui-card-header">
+          总计目的地数
+          
+        </div>
+        <div class="layui-card-body layuiadmin-card-list">
+          <p class="layuiadmin-big-font" id="totalall"></p>
+          <p>
+             &nbsp;
+            <span class="layuiadmin-span-color" ></span><span class="layui-badge layui-bg-blue layuiadmin-badge">总计</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="layui-col-sm6 layui-col-md3">
+      <div class="layui-card">
+        <div class="layui-card-header">
+          被开出目的地数
+        </div>
+        <div class="layui-card-body layuiadmin-card-list">
+          <p class="layuiadmin-big-font" id="miniall"></p>
+          <p>
+            本周
+            <span class="layuiadmin-span-color" id="miniweek"></span><span class="layui-badge layui-bg-blue layuiadmin-badge">总计</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="layui-col-sm6 layui-col-md3">
+      <div class="layui-card">
+        <div class="layui-card-header">
+          App
+        </div>
+        <div class="layui-card-body layuiadmin-card-list">
+          <p class="layuiadmin-big-font" id="appall"></p>
+          <p>
+            本周 
+            <span class="layuiadmin-span-color" id="appweek"></span><span class="layui-badge layui-bg-blue layuiadmin-badge">总计</span>
+          </p>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="layui-col-sm12">
+      <div class="layui-card">
+        <div class="layui-card-header">
+          开出目的地类型占比
+        </div>
+        <div class="layui-card-body">
+          <div class="layui-row">
+            <div class="layui-col-sm12">
+                <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade" lay-filter="LAY-index-pagetwo">
+                  <div carousel-item id="LAY-index-pagetwo">
+                    <div><i class="layui-icon layui-icon-loading1 layadmin-loading"></i></div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="layui-col-sm12">
+      <div class="layui-card">
+        <div class="layui-card-header">
+          开出目的地子类型占比
+        </div>
+        <div class="layui-card-body">
+          <div class="layui-row">
+            <div class="layui-col-sm12">
+                <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade" lay-filter="LAY-index-pagetwo1">
+                  <div carousel-item id="LAY-index-pagetwo1">
+                    <div><i class="layui-icon layui-icon-loading1 layadmin-loading"></i></div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="layui-col-sm12">
+      <div class="layui-card">
+        <div class="layui-card-header">
+          开出目的地子类型占比
+        </div>
+        <div class="layui-card-body">
+          <div class="layui-row">
+            <div class="layui-col-sm12">
+                <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade" lay-filter="LAY-index-pagetwo2">
+                  <div carousel-item id="LAY-index-pagetwo2">
+                    <div><i class="layui-icon layui-icon-loading1 layadmin-loading"></i></div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="layui-col-sm12">
+      <div class="layui-card">
+        <div class="layui-card-header">
+          开出目的地子类型占比
+        </div>
+        <div class="layui-card-body">
+          <div class="layui-row">
+            <div class="layui-col-sm12">
+                <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade" lay-filter="LAY-index-pagetwo3">
+                  <div carousel-item id="LAY-index-pagetwo3">
+                    <div><i class="layui-icon layui-icon-loading1 layadmin-loading"></i></div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+         <!-- <div class="layui-col-sm12">
+          <div class="layui-card">
+            <div class="layui-card-header">用户全国分布</div>
+            <div class="layui-card-body">
+              <div class="layui-row layui-col-space15">
+                <div class="layui-col-sm4">
+                  <table class="layui-table layuiadmin-page-table" lay-skin="line">
+                      <thead>
+                        <tr>
+                          <th>排名</th>
+                          <th>地区</th>
+                          <th>人数</th>
+                        </tr> 
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>浙江</td>
+                          <td>62310</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>上海</td>
+                          <td>59190</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>广东</td>
+                          <td>55891</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>北京</td>
+                          <td>51919</td>
+                        </tr>  
+                        <tr>
+                          <td>5</td>
+                          <td>山东</td>
+                          <td>39231</td>
+                        </tr>
+                        <tr>
+                          <td>6</td>
+                          <td>湖北</td>
+                          <td>37109</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+                <div class="layui-col-sm8">
+                  <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade" lay-filter="LAY-index-pagethree">
+                    <div carousel-item id="LAY-index-pagethree">
+                      <div><i class="layui-icon layui-icon-loading1 layadmin-loading"></i></div>
+                    </div>
+                  </div>    
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+    
+  </div>
+</div>
+
+<script>
+
+  //区块轮播切换
+  layui.use(['admin', 'carousel', 'echarts'], function(){
+    var $ = layui.$
+    ,admin = layui.admin
+    ,carousel = layui.carousel
+    ,element = layui.element
+    ,device = layui.device()
+    ,echarts = layui.echarts;
+
+    //轮播切换
+    $('.layadmin-carousel').each(function(){
+      var othis = $(this);
+      carousel.render({
+        elem: this
+        ,width: '100%'
+        ,arrow: 'none'
+        ,interval: othis.data('interval')
+        ,autoplay: othis.data('autoplay') === true
+        ,trigger: (device.ios || device.android) ? 'click' : 'hover'
+        ,anim: othis.data('anim')
+      });
+    });
+    
+    element.render('progress');
+
+    admin.req({
+      url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.StatisticData   
+      ,type:"GET"
+      ,data:{"type":"destination"}
+      ,done: function(res){
+        if (res.errorcode === 0)
+        {
+          $("#totalall").html(res.data.totalall);
+          $("#miniall").html(res.data.totalbox);
+          $("#miniweek").html(res.data.totalboxweek);
+
+            var elemDataView = [];
+            elemDataView[0] = $('#LAY-index-pagetwo').children('div');
+            elemDataView[1] = $('#LAY-index-pagetwo1').children('div');
+            elemDataView[2] = $('#LAY-index-pagetwo2').children('div');
+            elemDataView[3] = $('#LAY-index-pagetwo3').children('div');
+            var echartsApp = [], options = [
+              {
+                    title: {
+                        text: '',
+                        subtext: '',
+                        left: 'center'
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: '{a} <br/>{b} : {c} ({d}%)'
+                    },
+                    legend: {
+                        type: 'scroll',
+                        orient: 'vertical',
+                        right: 10,
+                        top: 20,
+                        bottom: 20,
+                        data: res.data.seriesData[0].legendData,
+
+                        selected: res.data.seriesData[0].selected
+                    },
+                    series: [
+                        {
+                            name: '',
+                            type: 'pie',
+                            radius: '55%',
+                            center: ['40%', '50%'],
+                            data: res.data.seriesData[0].seriesData,
+                            emphasis: {
+                                itemStyle: {
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
+                            }
+                        }
+                    ]
+                },
+              {
+                    title: {
+                        text: '',
+                        subtext: '',
+                        left: 'center'
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: '{a} <br/>{b} : {c} ({d}%)'
+                    },
+                    legend: {
+                        type: 'scroll',
+                        orient: 'vertical',
+                        right: 10,
+                        top: 20,
+                        bottom: 20,
+                        data: res.data.seriesData[1].legendData,
+
+                        selected: res.data.seriesData[1].selected
+                    },
+                    series: [
+                        {
+                            name: '',
+                            type: 'pie',
+                            radius: '55%',
+                            center: ['30%', '50%'],
+                            data: res.data.seriesData[1].seriesData,
+                            emphasis: {
+                                itemStyle: {
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
+                            }
+                        }
+                    ]
+                },
+              {
+                    title: {
+                        text: '',
+                        subtext: '',
+                        left: 'center'
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: '{a} <br/>{b} : {c} ({d}%)'
+                    },
+                    legend: {
+                        type: 'scroll',
+                        orient: 'vertical',
+                        right: 10,
+                        top: 20,
+                        bottom: 20,
+                        data: res.data.seriesData[2].legendData,
+
+                        selected: res.data.seriesData[2].selected
+                    },
+                    series: [
+                        {
+                            name: '',
+                            type: 'pie',
+                            radius: '55%',
+                            center: ['40%', '50%'],
+                            data: res.data.seriesData[2].seriesData,
+                            emphasis: {
+                                itemStyle: {
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
+                            }
+                        }
+                    ]
+                },
+              {
+                    title: {
+                        text: '',
+                        subtext: '',
+                        left: 'center'
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: '{a} <br/>{b} : {c} ({d}%)'
+                    },
+                    legend: {
+                        type: 'scroll',
+                        orient: 'vertical',
+                        right: 10,
+                        top: 20,
+                        bottom: 20,
+                        data: res.data.seriesData[3].legendData,
+
+                        selected: res.data.seriesData[3].selected
+                    },
+                    series: [
+                        {
+                            name: '',
+                            type: 'pie',
+                            radius: '55%',
+                            center: ['40%', '50%'],
+                            data: res.data.seriesData[3].seriesData,
+                            emphasis: {
+                                itemStyle: {
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+            ,renderDataView = function(index){
+              echartsApp[index] = echarts.init(elemDataView[index][0], layui.echartsTheme);
+              echartsApp[index].setOption(options[index]);
+              window.onresize = echartsApp[index].resize;
+            };
+            //没找到DOM，终止执行
+            if(!elemDataView[0][0]) return;
+            for(var i=0;i<4;i++)
+            {
+              renderDataView(i);
+            }
+
+
+        }
+      }
+    }); 
+
+
+
+
+
+
+    
+  });
+
+
+
+</script>

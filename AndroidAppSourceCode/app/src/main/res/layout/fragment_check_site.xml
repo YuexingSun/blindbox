@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.zhixing.zxhy.view_model.CheckSiteViewModel" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ConstraintLayoutA"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/Back"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="49dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_detail_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.amap.api.maps.TextureMapView
+            android:id="@+id/MapViewA"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Back" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/AddressCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="106dp"
+            android:layout_marginEnd="12dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/c_F">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/GuideA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="16dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/GuideB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="16dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/Address"
+                    style="@style/edit_3_16"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@{vm.checkSiteData.address}"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@id/GuideB"
+                    app:layout_constraintStart_toStartOf="@id/GuideA"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/DetailAddress"
+                    style="@style/text_9_12"
+                    android:layout_width="0dp"
+                    android:layout_marginTop="2dp"
+                    android:gravity="start"
+                    android:text="@{vm.checkSiteData.detailAddress}"
+                    android:textColor="@color/c_6"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/GuideA"
+                    app:layout_constraintTop_toBottomOf="@+id/Address" />
+
+                <androidx.appcompat.widget.AppCompatRatingBar
+                    android:id="@+id/Point"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="14dp"
+                    android:isIndicator="true"
+                    android:max="5"
+                    android:numStars="5"
+                    android:progressBackgroundTint="@color/c_14"
+                    android:rating="@{vm.checkSiteData.point}"
+                    android:stepSize="0.1"
+                    android:theme="@style/RatingBar_CustomColor"
+                    android:visibility="@{vm.checkSiteData.point == 0.0f ? View.GONE: View.VISIBLE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/GuideA"
+                    app:layout_constraintTop_toBottomOf="@+id/DetailAddress" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/Distance"
+                    style="@style/text_9_12"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="14dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/Point"
+                    app:layout_constraintTop_toBottomOf="@+id/DetailAddress"
+                    app:layout_goneMarginStart="0dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

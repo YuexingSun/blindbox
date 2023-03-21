@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/c_F8">
+
+    <com.noober.background.view.BLEditText
+        android:id="@+id/Bg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="false"
+        android:minHeight="36dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:bl_corners_radius="18dp"
+        app:bl_solid_color="@color/c_F"
+        app:bl_stroke_color="@color/c_E"
+        app:bl_stroke_width="2dp"
+        app:layout_constraintBottom_toBottomOf="@id/Comment"
+        app:layout_constraintEnd_toStartOf="@+id/SendBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/Comment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="48dp"
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:minHeight="52dp"
+        android:paddingStart="14dp"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintBottom_toTopOf="@id/EmojiConst"
+        app:layout_constraintEnd_toStartOf="@+id/SendBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/KeyBoardEmoji"
+        android:layout_width="24dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="9dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_emoji"
+        app:layout_constraintBottom_toBottomOf="@id/Bg"
+        app:layout_constraintEnd_toEndOf="@+id/Bg"
+        app:layout_constraintTop_toTopOf="@id/Bg" />
+
+    <com.noober.background.view.BLButton
+        android:id="@+id/SendBtn"
+        android:layout_width="64dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="12dp"
+        android:background="@null"
+        android:enabled="false"
+        android:text="发送"
+        android:textColor="@color/c_F"
+        android:textSize="@dimen/sp_14"
+        android:textStyle="bold"
+        app:bl_corners_radius="18dp"
+        app:bl_enabled_solid_color="@color/c_F86E97"
+        app:bl_unEnabled_solid_color="@color/c_80F86E97"
+        app:layout_constraintBottom_toBottomOf="@+id/Bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/Bg" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/EmojiConst"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Comment">
+
+        <com.noober.background.view.BLImageButton
+            android:id="@+id/Emoji001"
+            style="@style/EmojiClickBackG"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="7dp"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/emoji_001"
+            app:layout_constraintEnd_toStartOf="@id/Emoji002"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.noober.background.view.BLImageButton
+            android:id="@+id/Emoji002"
+            style="@style/EmojiClickBackG"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/emoji_002"
+            app:layout_constraintEnd_toStartOf="@id/Emoji003"
+            app:layout_constraintStart_toEndOf="@id/Emoji001"
+            app:layout_constraintTop_toTopOf="@+id/Emoji001" />
+
+        <com.noober.background.view.BLImageButton
+            android:id="@+id/Emoji003"
+            style="@style/EmojiClickBackG"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/emoji_003"
+            app:layout_constraintEnd_toStartOf="@id/Emoji004"
+            app:layout_constraintStart_toEndOf="@id/Emoji002"
+            app:layout_constraintTop_toTopOf="@+id/Emoji001" />
+
+        <com.noober.background.view.BLImageButton
+            android:id="@+id/Emoji004"
+            style="@style/EmojiClickBackG"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/emoji_004"
+            app:layout_constraintEnd_toStartOf="@id/Emoji005"
+            app:layout_constraintStart_toEndOf="@id/Emoji003"
+            app:layout_constraintTop_toTopOf="@+id/Emoji001" />
+
+        <com.noober.background.view.BLImageButton
+            android:id="@+id/Emoji005"
+            style="@style/EmojiClickBackG"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/emoji_005"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/Emoji004"
+            app:layout_constraintTop_toTopOf="@+id/Emoji001" />
+
+        <com.noober.background.view.BLImageButton
+            android:id="@+id/Emoji006"
+            style="@style/EmojiClickBackG"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="7dp"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/emoji_006"
+            app:layout_constraintEnd_toStartOf="@id/Emoji007"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Emoji001" />
+
+        <com.noober.background.view.BLImageButton
+            android:id="@+id/Emoji007"
+            style="@style/EmojiClickBackG"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/emoji_007"
+            app:layout_constraintEnd_toStartOf="@id/Emoji008"
+            app:layout_constraintStart_toEndOf="@id/Emoji006"
+            app:layout_constraintTop_toTopOf="@+id/Emoji006" />
+
+        <com.noober.background.view.BLImageButton
+            android:id="@+id/Emoji008"
+            style="@style/EmojiClickBackG"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/emoji_008"
+            app:layout_constraintEnd_toStartOf="@id/Emoji009"
+            app:layout_constraintStart_toEndOf="@id/Emoji007"
+            app:layout_constraintTop_toTopOf="@+id/Emoji006" />
+
+        <com.noober.background.view.BLImageButton
+            android:id="@+id/Emoji009"
+            style="@style/EmojiClickBackG"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/emoji_009"
+            app:layout_constraintEnd_toStartOf="@id/Emoji010"
+            app:layout_constraintStart_toEndOf="@id/Emoji008"
+            app:layout_constraintTop_toTopOf="@+id/Emoji006" />
+
+        <com.noober.background.view.BLImageButton
+            android:id="@+id/Emoji010"
+            style="@style/EmojiClickBackG"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/emoji_010"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/Emoji009"
+            app:layout_constraintTop_toTopOf="@+id/Emoji006" />
+
+        <com.noober.background.view.BLImageButton
+            android:id="@+id/Emoji011"
+            style="@style/EmojiClickBackG"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="7dp"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/emoji_011"
+            app:layout_constraintEnd_toStartOf="@id/Emoji012"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Emoji006" />
+
+        <com.noober.background.view.BLImageButton
+            android:id="@+id/Emoji012"
+            style="@style/EmojiClickBackG"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/emoji_012"
+            app:layout_constraintEnd_toStartOf="@id/Emoji013"
+            app:layout_constraintStart_toEndOf="@id/Emoji011"
+            app:layout_constraintTop_toTopOf="@+id/Emoji011" />
+
+        <com.noober.background.view.BLImageButton
+            android:id="@+id/Emoji013"
+            style="@style/EmojiClickBackG"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/emoji_013"
+            app:layout_constraintEnd_toStartOf="@id/Emoji014"
+            app:layout_constraintStart_toEndOf="@id/Emoji012"
+            app:layout_constraintTop_toTopOf="@+id/Emoji011" />
+
+        <com.noober.background.view.BLImageButton
+            android:id="@+id/Emoji014"
+            style="@style/EmojiClickBackG"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/emoji_014"
+            app:layout_constraintEnd_toStartOf="@id/Emoji015"
+            app:layout_constraintStart_toEndOf="@id/Emoji013"
+            app:layout_constraintTop_toTopOf="@+id/Emoji011" />
+
+        <com.noober.background.view.BLImageButton
+            android:id="@+id/Emoji015"
+            style="@style/EmojiClickBackG"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/emoji_015"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/Emoji014"
+            app:layout_constraintTop_toTopOf="@+id/Emoji011" />
+
+        <com.noober.background.view.BLImageButton
+            android:id="@+id/Emoji016"
+            style="@style/EmojiClickBackG"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="17dp"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/emoji_016"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/Emoji017"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Emoji011" />
+
+        <com.noober.background.view.BLImageButton
+            android:id="@+id/Emoji017"
+            style="@style/EmojiClickBackG"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/emoji_017"
+            app:layout_constraintEnd_toStartOf="@id/Emoji018"
+            app:layout_constraintStart_toEndOf="@id/Emoji016"
+            app:layout_constraintTop_toTopOf="@+id/Emoji016" />
+
+        <com.noober.background.view.BLImageButton
+            android:id="@+id/Emoji018"
+            style="@style/EmojiClickBackG"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/emoji_018"
+            app:layout_constraintEnd_toStartOf="@id/Emoji019"
+            app:layout_constraintStart_toEndOf="@id/Emoji017"
+            app:layout_constraintTop_toTopOf="@+id/Emoji016" />
+
+        <com.noober.background.view.BLImageButton
+            android:id="@+id/Emoji019"
+            style="@style/EmojiClickBackG"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/emoji_019"
+            app:layout_constraintEnd_toStartOf="@id/Emoji020"
+            app:layout_constraintStart_toEndOf="@id/Emoji018"
+            app:layout_constraintTop_toTopOf="@+id/Emoji016" />
+
+        <com.noober.background.view.BLImageButton
+            android:id="@+id/Emoji020"
+            style="@style/EmojiClickBackG"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/emoji_020"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/Emoji019"
+            app:layout_constraintTop_toTopOf="@+id/Emoji016" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent">
+
+    <com.noober.background.view.BLConstraintLayout
+        android:id="@+id/ConstraintLayoutA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:paddingBottom="31dp"
+        app:bl_corners_radius="16dp"
+        app:bl_gradient_endColor="@color/c_FFF2F8"
+        app:bl_gradient_startColor="@color/c_F"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/GuidelineA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="22dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/GuidelineB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="22dp" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/TypePic"
+            android:layout_width="match_parent"
+            android:layout_height="198dp"
+            android:elevation="16dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/roundedCornerImageStyle16" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/StoreName"
+            style="@style/text_0_14"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/c_A605032A"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintStart_toStartOf="@id/GuidelineA"
+            app:layout_constraintTop_toBottomOf="@+id/TypePic" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/TypeDescribe"
+            style="@style/text_0_14"
+            android:layout_width="0dp"
+            android:layout_marginTop="8dp"
+            android:gravity="start"
+            android:maxLines="3"
+            android:textColor="@color/c_05032A"
+            android:textSize="@dimen/sp_24"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/GuidelineB"
+            app:layout_constraintStart_toStartOf="@id/GuidelineA"
+            app:layout_constraintTop_toBottomOf="@+id/StoreName" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/Distance"
+            style="@style/text_4D_14"
+            android:layout_marginTop="18dp"
+            android:textColor="@color/c_FF4692"
+            android:textSize="@dimen/sp_40"
+            app:layout_constraintStart_toStartOf="@id/GuidelineA"
+            app:layout_constraintTop_toBottomOf="@+id/TypeDescribe" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/TextA"
+            style="@style/text_4D_14"
+            android:textColor="@color/c_8004022A"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintStart_toStartOf="@+id/GuidelineA"
+            app:layout_constraintTop_toBottomOf="@+id/Distance" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/TextC"
+            style="@style/text_4D_14"
+            android:layout_marginTop="22dp"
+            android:textColor="@color/c_8004022A"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintStart_toStartOf="@+id/GuidelineA"
+            app:layout_constraintTop_toBottomOf="@+id/TextA" />
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/NewNum"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/transparent"
+            android:isIndicator="true"
+            android:max="5"
+            android:numStars="5"
+            android:progressBackgroundTint="@color/c_B4"
+            android:progressTint="@color/c_FFC700"
+            android:secondaryProgressTint="@color/c_FFC700"
+            android:stepSize="0.5"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/TextC"
+            app:layout_constraintStart_toEndOf="@+id/TextC"
+            app:layout_constraintTop_toTopOf="@+id/TextC" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/TextD"
+            style="@style/text_4D_14"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/c_8004022A"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintStart_toStartOf="@+id/GuidelineA"
+            app:layout_constraintTop_toBottomOf="@+id/TextC" />
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/MysteryNum"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/transparent"
+            android:isIndicator="true"
+            android:max="5"
+            android:numStars="5"
+            android:progressBackgroundTint="@color/c_B4"
+            android:progressTint="@color/c_FFC700"
+            android:secondaryProgressTint="@color/c_FFC700"
+            android:stepSize="0.5"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/TextD"
+            app:layout_constraintStart_toEndOf="@+id/TextD"
+            app:layout_constraintTop_toTopOf="@+id/TextD" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/TextB"
+            style="@style/text_4D_14"
+            android:textColor="@color/c_8004022A"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintBottom_toBottomOf="@+id/TextD"
+            app:layout_constraintEnd_toStartOf="@+id/GuidelineB" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/Cost"
+            style="@style/text_0_14"
+            android:textColor="@color/c_FF4692"
+            android:textSize="@dimen/sp_30"
+            app:layout_constraintBottom_toTopOf="@+id/TextB"
+            app:layout_constraintEnd_toEndOf="@id/GuidelineB" />
+
+    </com.noober.background.view.BLConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/Type"
+        android:layout_width="64dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="13dp"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ConstraintLayoutA" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

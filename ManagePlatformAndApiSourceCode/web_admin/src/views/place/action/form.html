@@ -1,0 +1,333 @@
+
+
+<div class="layui-form" lay-filter="layuiadmin-form-admin2" style="padding: 20px 30px 0 0;">
+
+      <script type="text/html" template lay-done="layui.data.done(d);">
+        <input type="hidden" name="id" id="id" value="{{ d.params.id || '' }}" >
+      </script>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label"><font color='red'>*</font>所属目的地</label>
+    <div class="layui-input-block">
+      <div id="destinationid"></div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label"><font color='red'>*</font>方案名称</label>
+    <div class="layui-input-block">
+      <script type="text/html" template>
+        <input type="text" name="name" value="{{ d.params.name || '' }}" lay-verify="required" placeholder="请输入方案名称" autocomplete="off" class="layui-input">
+      </script>
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">标签</label>
+    <div class="layui-input-block">
+      <div id="taglist"></div>
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">显示文案</label>
+    <div class="layui-input-block">
+      <script type="text/html" template>
+        <input type="text" name="content" value="{{ d.params.content || '' }}" placeholder="请输入文案文字" autocomplete="off" class="layui-input">
+      </script>
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">耗时(分钟)</label>
+    <div class="layui-input-block">
+      <script type="text/html" template>
+        <input type="number" name="times" value="{{ d.params.times || '' }}" placeholder="单位(分钟)" autocomplete="off" class="layui-input">
+      </script>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">门市价格</label>
+    <div class="layui-input-block">
+      <script type="text/html" template>
+        <input type="text" name="saleprice" value="{{ d.params.saleprice || '' }}" placeholder="门市价格" autocomplete="off" class="layui-input">
+      </script>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">价格</label>
+    <div class="layui-input-block">
+      <script type="text/html" template>
+        <input type="text" name="price" value="{{ d.params.price || '' }}" placeholder="价格" autocomplete="off" class="layui-input">
+      </script>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">适用人数</label>
+    <div class="layui-input-block">
+      <script type="text/html" template>
+        <input type="number" name="number" value="{{ d.params.number || '' }}" placeholder="适用人数" autocomplete="off" class="layui-input">
+      </script>
+    </div>
+  </div>
+  
+    <div class="layui-card" style="margin-bottom:0px;margin-left: 100px">
+      <div class="layui-card-head">营业时间</div>
+      <div class="layui-card-body">
+
+        <table id="form-create" class="layui-table">
+          <thead>
+            <tr>
+              <th style="width:50%;">时间</th>
+              <th>星期</th>
+              <th style="width: 50px;"><button type="button" class="layui-btn layui-btn-sm addselect">增加</button></th>
+            </tr>
+          </thead>
+          <tbody id="tablecontent">
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">图片</label>
+      <div class="layui-input-block">
+        <button type="button" class="layui-btn" id="uploadfilebtn">
+          <i class="layui-icon">&#xe67c;</i><span>上传图片</span>
+        </button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <script type="text/html" template>
+          <img src="{{ d.params.pic || '' }}" id="coverpic">
+        </script>
+      </div>
+    </div>
+
+
+
+
+  <div class="layui-form-item">
+    <label class="layui-form-label"></label>
+    <div class="layui-input-block">
+      <input type="submit" lay-submit lay-filter="LAY-user-back-submit" value="确认" class="layui-btn">
+    </div>
+  </div>
+</div>
+
+<script>
+layui.data.done = function (d) {
+
+  layui.use(['admin', 'form','table','xmSelect','upload','laydate'], function(){
+    var $ = layui.$
+    ,admin = layui.admin
+    ,table = layui.table
+    ,xmSelect = layui.xmSelect
+    ,upload = layui.upload
+    ,laydate = layui.laydate 
+    ,form = layui.form;
+
+    var destinationid = xmSelect.render({
+      el: '#destinationid', 
+      layVerify: 'required',
+      name: "destinationid",
+      prop: {
+        value: 'id',
+      },
+      filterable: true,
+      filterMethod: function(val, item, index, prop){
+        if(item.name.toLowerCase().indexOf(val.toLowerCase()) !=-1){
+          return true;
+        }
+        return false;
+      },
+      paging: true,
+      pageSize: 20,
+      radio: true,
+      clickClose: true,
+      data: []
+    })
+    admin.req({
+      url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.getDictList   
+      ,type:"POST"
+      ,data:{"type":"destination"}
+      ,done: function(res){
+        if (res.errorcode === 0)
+        {
+          destinationid.update({
+            data: res.data,
+          })
+        }
+        if (d.params.destinationid)
+        {
+          destinationid.setValue([d.params.destinationid]);
+        }
+      }
+    }); 
+
+    var taglist = xmSelect.render({
+      el: '#taglist', 
+      name: "taglist",
+      prop: {
+        value: 'id',
+      },
+      filterable: true,
+      filterMethod: function(val, item, index, prop){
+        if(item.name.toLowerCase().indexOf(val.toLowerCase()) !=-1){
+          return true;
+        }
+        return false;
+      },
+      data: []
+    })
+    admin.req({
+      url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.getDictList   
+      ,type:"POST"
+      ,data:{"type":"typechildtag"}
+      ,done: function(res){
+        if (res.errorcode === 0)
+        {
+          taglist.update({
+            data: res.data,
+          })
+          if (d.params.taglist)
+          {
+            var tmp = [];
+            for(var i=0;i<d.params.taglist.length;i++)
+            {
+              tmp.push(d.params.taglist[i].id);
+            }
+            taglist.setValue(tmp);
+          }
+        }
+      }
+    }); 
+
+
+    //上传
+    var loadindex = null;
+    
+    upload.render({
+      elem: '#uploadfilebtn'
+      ,url: layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.uploadFile
+      ,before: function(obj){
+        loadindex = layer.load(2);
+      }
+      ,done: function(res){
+        layer.close(loadindex);
+        if (res.location)
+        {
+          $("#coverpic").attr("src",res.location);
+          layer.msg('上传成功', {icon: 1});
+        }
+        else
+        { 
+          layer.msg(res.errormsg, {icon: 5});
+        }
+      }
+    });
+
+
+    var nowindex = 1;
+    var proplist = [{value:1,name:"周一"},{value:2,name:"周二"},{value:3,name:"周三"},{value:4,name:"周四"},{value:5,name:"周五"},{value:6,name:"周六"},{value:7,name:"周日"}];
+    function createTables(p1,p2){
+      var s = "";
+      if (p1) s = p1;
+      var element = $([
+        '<tr>',
+          '<td ><input type="text" id="date_'+nowindex+'" name="valueInput_'+nowindex+'" lay-verify="required" class="layui-input" ></td>',
+          '<td class="proptd"></td>',
+          '<td class="handler">',
+            '<button type="button" class="layui-btn layui-btn-danger layui-btn-sm del">删除</button>',
+          '</td>',
+        '</tr>',
+      ].join(''))
+      
+      var datetd = element.find('#date_'+nowindex)[0];
+
+      laydate.render({ 
+        elem: datetd
+        ,range: true
+        ,type: 'time'
+        ,value: s //必须遵循format参数设定的格式
+      });
+
+      var proptd = element.find('.proptd')[0];
+      var propSelect = xmSelect.render({
+        el: proptd,
+        name: "propSelect_"+nowindex,
+        layVerify: 'required',
+        // prop: {
+        //   value: 'id',
+        // },
+        toolbar: {
+            show: true,
+        },
+        filterable: true,
+        autoRow: true,
+        data: function(){
+          return proplist;
+        }
+      })
+      if (p2) propSelect.setValue(p2);
+
+      element.find('.del').on('click', function(){
+        $(this).parents('tr').remove();
+      })
+      
+      nowindex++;
+      
+      $('#form-create tbody').append(element)    
+    }
+    $('.addselect').on('click', function(){
+      createTables();
+    });
+    if (d.params.opentime)
+    {
+      for(var i=0;i<d.params.opentime.length;i++)
+      {
+        var tmp = [];
+        for(var j=0;j<d.params.opentime[i].weeklist.length;j++)
+        {
+          tmp.push(d.params.opentime[i].weeklist[j].weekid);
+        }
+        createTables(d.params.opentime[i].time,tmp);
+      }
+    }
+
+
+
+
+    form.render();
+
+      //监听提交
+      form.on('submit(LAY-user-back-submit)', function(data){
+
+        let postData = data.field;
+        postData.nowindex = nowindex;
+        postData.pic = $("#coverpic").attr("src");
+
+        //console.log(postData);
+        let methstr = "POST";
+        if (postData.id)
+        {
+          methstr = "PUT";
+        }
+
+        admin.req({
+          url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.DestinationProduct   
+          ,type: methstr
+          ,data: postData
+          ,done: function(res){
+            layer.msg(res.errormsg, {icon: 1});
+            table.reload('LAY-tag-tag-list-table'); //重载表格
+            layer.close(d.params.layerindex); //再执行关闭 
+          }
+        });
+
+      });
+
+
+
+  });
+}
+</script>

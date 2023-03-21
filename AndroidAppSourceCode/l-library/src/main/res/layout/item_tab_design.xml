@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:paddingHorizontal="10dp">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_tab_design_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="12dp"
+        android:textSize="15sp"
+        android:textColor="@color/black25" />
+
+    <View
+        android:id="@+id/v_tab_design_line"
+        android:layout_width="wrap_content"
+        android:layout_height="2dp"
+        android:layout_alignStart="@id/tv_tab_design_title"
+        android:layout_alignEnd="@id/tv_tab_design_title"
+        android:layout_alignBottom="@id/tv_tab_design_title"
+        android:background="@color/common_accent_color" />
+
+</RelativeLayout>

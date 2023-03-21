@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.noober.background.view.BLConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="257dp"
+    android:layout_height="357dp"
+    app:bl_corners_radius="16dp"
+    app:bl_solid_color="@color/c_F">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ImageViewA"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="26dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_setout_hint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/TextViewA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="请先前往目的地附近"
+        android:textColor="@color/c_FF599F"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ImageViewA" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/TextViewB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="接近目的地时可揭晓盲盒结果"
+        android:textColor="@color/c_BF442C60"
+        android:textSize="@dimen/sp_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/TextViewA" />
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/CheckBoxA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:paddingStart="2dp"
+        android:paddingTop="14dp"
+        android:paddingEnd="2dp"
+        android:paddingBottom="14dp"
+        android:text="下次不再提示"
+        android:textColor="@color/c_8C000000"
+        android:textSize="@dimen/sp_14"
+        android:theme="@style/MyCheckBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/TextViewB" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/ConfirmA"
+        android:layout_width="173dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="6dp"
+        android:background="@mipmap/bg_setout_hint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/CheckBoxA" />
+
+</com.noober.background.view.BLConstraintLayout>

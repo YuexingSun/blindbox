@@ -1,0 +1,169 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+		    "path" : "pages/bindbox/bindbox",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "选择盲盒",
+		        "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+		    }
+		    
+		},
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "首页"
+				
+			}
+		}
+	    ,{
+            "path" : "pages/my/my",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        },
+		{
+		    "path" : "pages/index/question",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		}
+        
+        
+        ,{
+            "path" : "pages/auther/phone",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/bindbox/boxContant",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "盲盒内容",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+				// "navigationBarBackgroundColor":"#ffedeb"
+				// "backgroundColor":"#ffedeb"
+            }
+            
+        }
+        ,{
+            "path" : "pages/bindbox/map",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle":"custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/bindbox/tengxunmap",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/bindbox/openBox",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/bindbox/boxDetails",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+				"navigationStyle":"custom",
+				"backgroundColor":"#f5f1f4"
+            }
+            
+        }
+        ,{
+            "path" : "pages/my/boxList",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+				"navigationStyle":"custom",
+				"enablePullDownRefresh": true
+            }
+            
+        }
+        ,{
+            "path" : "pages/my/setting",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "个人资料",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/my/settingDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/my/props",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "我的道具",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#ffffff",
+		"backgroundColor": "#f4f4f4"
+	},
+	"tabBar":{
+		"color": "#a59cb6",
+		"selectedColor": "#442C60",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list":[
+			// {
+			// 	"pagePath":"pages/index/index",
+			// 	"iconPath":"static/icons/Community.png",
+			// 	"selectedIconPath":"static/icons/ACommunity.png",
+			// 	"text":"community"
+			// },
+			{
+				"pagePath":"pages/bindbox/bindbox",
+				"iconPath":"static/icons/BlindBox.png",
+				"selectedIconPath":"static/icons/ABlindBox.png",
+				"text":"Bind box"
+			},
+			{
+				"pagePath":"pages/my/my",
+				"iconPath":"static/icons/Me.png",
+				"selectedIconPath":"static/icons/AMe.png",
+				"text":"Me"
+			}
+		]
+	}
+}

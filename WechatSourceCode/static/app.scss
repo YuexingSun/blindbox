@@ -1,0 +1,24 @@
+.warp{
+	padding: 40rpx;
+	box-sizing: border-box;
+}
+button::after{
+	border: none;
+	
+}
+.column{
+	flex-direction: column;
+}
+.flex{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+page{
+	background-color: #f4f4f4;
+}
+.text-cut{
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}

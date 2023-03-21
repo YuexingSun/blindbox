@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="questListData"
+            type="com.zhixing.zxhy.view_model.QuestionData.Queslist" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@{questListData.title}"
+            android:textColor="@color/c_B4ACBC"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/ItemName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/c_442C60"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="@+id/Title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/Title" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/SliderA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stepSize="1"
+            android:theme="@style/MaterialSnackbarTheme"
+            android:valueFrom="0"
+            app:haloColor="@color/c_F86D97"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/Title"
+            app:trackColorActive="@color/c_F86D97"
+            app:trackColorInactive="@color/c_FFEDEA" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/ChipGroupA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="10dp"
+            android:visibility="@{questListData.type == 2 ? View.VISIBLE: View.GONE}"
+            app:chipSpacingHorizontal="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/Title"
+            app:singleSelection="true" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/Type4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{questListData.type == 4 ? View.VISIBLE: View.GONE}"
+            app:constraint_referenced_ids="ItemName, SliderA" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

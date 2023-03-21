@@ -1,0 +1,212 @@
+
+
+<div class="layui-form" lay-filter="ayuiadmin-form-socialform" style="padding: 20px 30px 0 0;">
+
+      <script type="text/html" template lay-done="layui.data.done(d);">
+        <input type="hidden" name="id" id="id" value="{{ d.params.id || '' }}" >
+      </script>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label"><font color='red'>*</font>标题</label>
+      <div class="layui-input-block">
+        <script type="text/html" template>
+          <input type="text" name="title" value="{{ d.params.title || '' }}" lay-verify="required" autocomplete="off" class="layui-input" placeholder='标题'>
+        </script>
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">副标题</label>
+      <div class="layui-input-block">
+        <script type="text/html" template>
+          <textarea name="subtitle" placeholder="副标题" class="layui-textarea">{{ d.params.subtitle || '' }}</textarea>
+        </script>
+      </div>
+    </div>
+
+
+    <div class="layui-form-item">
+      <label class="layui-form-label">正文</label>
+      <div class="layui-input-block">
+        <script type="text/html" template>
+          <textarea name="content" placeholder="正文" class="layui-textarea">{{ d.params.content || '' }}</textarea>
+        </script>
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label"><font color='red'>*</font>发布时间</label>
+      <div class="layui-input-block">
+        <script type="text/html" template>
+          <input type="text" name="sendtime" value="{{ d.params.sendtime || '' }}" lay-verify="required" autocomplete="off" class="layui-input" placeholder='发布时间' id="sendtime">
+        </script>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">关联菜品门店</label>
+      <div class="layui-input-block">
+        <div id="detilist"></div>
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+      <label class="layui-form-label"><font color='red'>*</font>配图</label>
+      <div class="layui-input-block">
+        <button type="button" class="layui-btn" id="uploadcoverbtn">
+          <i class="layui-icon">&#xe67c;</i><span>上传图片</span>
+        </button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <script type="text/html" template>
+          <img src="{{ d.params.pic || '' }}" id="coverpic">
+        </script>
+      </div>
+    </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label"></label>
+    <div class="layui-input-block">
+      <input type="submit" lay-submit lay-filter="LAY-user-back-submit" class="layui-btn" id="LAY-user-back-submit">
+    </div>
+  </div>
+</div>
+
+<script>
+layui.data.done = function (d) {
+
+  layui.use(['admin', 'form','table','xmSelect','upload','laydate','citypicker'], function(){
+    var $ = layui.$
+    ,admin = layui.admin
+    ,table = layui.table
+    ,xmSelect = layui.xmSelect
+    ,upload = layui.upload
+    ,laydate = layui.laydate 
+    ,cityPicker = layui.citypicker
+    ,form = layui.form;
+
+    laydate.render({ 
+      elem: '#sendtime'
+      ,type: 'datetime'
+    });
+
+    //上传
+    var loadindex = null;
+    
+    upload.render({
+      elem: '#uploadcoverbtn'
+      ,url: layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.uploadFile
+      ,before: function(obj){
+        loadindex = layer.load(2);
+      }
+      ,done: function(res){
+        layer.close(loadindex);
+        if (res.location)
+        {
+          $("#coverpic").attr("src",res.location);
+          layer.msg('上传成功', {icon: 1});
+        }
+        else
+        { 
+          layer.msg(res.errormsg, {icon: 5});
+        }
+      }
+    });
+
+
+
+    var detilist = xmSelect.render({
+      el: '#detilist', 
+      name: "detilist",
+      prop: {
+        value: 'id',
+        name: 'detiname',
+      },
+      toolbar: {
+        show: true,
+      },
+      filterable: true,
+      filterMethod: function(val, item, index, prop){
+        if(item.name.toLowerCase().indexOf(val.toLowerCase()) !=-1){
+          return true;
+        }
+        return false;
+      },
+      template({ item, sels, name, value }){
+        return item.detiname  + '<span style="position: absolute; right: 10px; color: #8799a3">'+item.name+'</span>' 
+      },
+      model: {
+        label: {
+          block: {
+            template: function(item, sels){
+              return item.detiname + '-' + item.name;
+            },
+          },
+        }
+      },
+      paging: true,
+      pageSize: 50,
+      autoRow: true,
+      data: []
+    })
+    admin.req({
+      url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.getDictList   
+      ,type:"POST"
+      ,data:{"type":"productlist"}
+      ,done: function(res){
+        if (res.errorcode === 0)
+        {
+          detilist.update({
+            data: res.data,
+          })
+          if (d.params.detilist)
+          {
+            var tmp = [];
+            for(var i=0;i<d.params.detilist.length;i++)
+            {
+              tmp.push(d.params.detilist[i].productid);
+            }
+            detilist.setValue(tmp);
+          }
+        }
+      }
+    }); 
+
+
+    form.render();
+
+
+    //监听提交
+    form.on('submit(LAY-user-back-submit)', function(data){
+        let postData = data.field;
+
+        postData.coverpic = $("#coverpic").attr("src");
+        if (!postData.coverpic)
+        {
+          layer.msg("请上传封面图", {icon: 5});
+          return false;
+        }
+
+        let methstr = "POST";
+        if (postData.id)
+        {
+          methstr = "PUT";
+          postData.type = "edit";
+        }
+
+        admin.req({
+          url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.Words   
+          ,type: methstr
+          ,data: postData
+          ,done: function(res){
+            layer.msg(res.errormsg, {icon: 1});
+            table.reload('LAY-tag-tag-list-table'); //重载表格
+            layer.close(d.params.layerindex); //再执行关闭 
+          }
+        });
+
+    });
+
+
+
+  });
+}
+</script>

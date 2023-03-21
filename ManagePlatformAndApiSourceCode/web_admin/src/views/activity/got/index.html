@@ -1,0 +1,120 @@
+
+
+<title>中奖管理</title>
+  
+<div class="layui-card layadmin-header">
+  <div class="layui-breadcrumb" lay-filter="breadcrumb">
+    <a lay-href="">主页</a>
+    <a><cite>抽奖活动管理</cite></a>
+    <a><cite>中奖管理</cite></a>
+  </div>
+</div>
+
+<div class="layui-fluid">   
+  <div class="layui-card">
+
+    <div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="LAY-tag-tag-list-search-form" method='post'>
+      
+    </div>
+
+
+    <div class="layui-card-body">
+
+      <div style="padding-bottom: 10px;text-align:right;">
+      </div>
+      
+      <table id="LAY-tag-tag-list-table" lay-filter="LAY-tag-tag-list-table"></table>  
+      <script type="text/html" id="LAY-tag-tag-list-table-opt">
+        <!-- <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i></a> -->
+        {{# if (d.status == 1){ }}
+          <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>领取</a>
+        {{# } }}
+        
+      </script>
+    </div>
+  </div>
+</div>
+
+<script>
+layui.use('useradmin', layui.factory('useradmin')).use(['admin', 'useradmin', 'table','laydate','xmSelect','element','upload'], function(){
+  var $ = layui.$
+  ,admin = layui.admin
+  ,setter = layui.setter
+  ,view = layui.view
+  ,laydate = layui.laydate
+  ,table = layui.table
+  ,xmSelect = layui.xmSelect
+  ,element = layui.element
+  ,upload = layui.upload
+  ,form = layui.form;
+
+
+  table.render({
+    elem: '#LAY-tag-tag-list-table'
+    ,url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.ActivityGot  
+    ,method : 'GET'
+    ,cols: [[
+      {field: 'giftname', title: '奖品名称'}
+      ,{field: 'gifticon', title: '奖品图标',templet:function(d){return (d.gifticon!='')?'<img src='+d.gifticon+' width="50px">':''}}
+      ,{field: 'gifttime', title: '中奖时间'}
+      ,{field: 'nickname', title: '中奖人昵称'}
+      ,{field: 'mob', title: '中奖人手机'}
+      ,{field: 'account', title: '支付宝账号'}
+      ,{field: 'status', title: '状态',templet:function(d){if(d.status==0)return "未领取";else if(d.status==1)return "待发放";else return "已领取";}}
+      ,{title: '操作', width: 150, align: 'center', toolbar: '#LAY-tag-tag-list-table-opt'}
+    ]]
+    ,autoSort: false
+    ,page: true
+    ,text: {none:'暂无数据'}
+    ,done: function(res, curr, count){
+      if (res.errorcode != 0)
+      {
+        layer.msg(res.errormsg, {icon: 5});
+      }
+    }
+  });
+
+  //监听工具条
+  table.on('tool(LAY-tag-tag-list-table)', function(obj){
+    var data = obj.data;
+    if(obj.event === 'del'){
+      layer.confirm('确定已发放该奖品了吗？', function(index){
+        admin.req({
+          url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.ActivityGot   
+          ,type:"DELETE"
+          ,data: {id:data.id}
+          ,done: function(res){
+            layer.msg(res.errormsg, {icon: 1});
+            table.reload('LAY-tag-tag-list-table'); //重载表格
+            layer.close(index);
+          }
+        });
+      });
+    }
+
+  });
+
+
+  $('.layui-btn.layuiadmin-btn-admin').on('click', function(){
+    var type = $(this).data('type');
+    active[type] ? active[type].call(this) : '';
+  });
+
+  $(".searchinput").keydown(function (e) {
+    if (e.keyCode === 13) {
+      $("#queryCondBtn").trigger("click");
+    }
+  });
+
+  //监听搜索
+  form.on('submit(LAY-tag-tag-list-search-form-submit)', function(data){
+    var field = data.field;    
+    //执行重载
+    table.reload('LAY-tag-tag-list-table', {
+      where: field
+    });
+  });
+
+
+});
+</script>

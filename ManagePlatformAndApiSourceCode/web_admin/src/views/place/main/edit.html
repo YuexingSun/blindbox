@@ -1,0 +1,109 @@
+
+
+<div class="layui-form" lay-filter="layuiadmin-form-admin2" style="padding: 20px 30px 0 0;">
+
+      <script type="text/html" template lay-done="layui.data.done(d);">
+        <input type="hidden" name="id" id="id" value="{{ d.params.id || '' }}" >
+      </script>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label"><font color='red'>*</font>类别名称</label>
+    <div class="layui-input-block">
+      <script type="text/html" template>
+        <input type="text" name="name" value="{{ d.params.name || '' }}" lay-verify="required" placeholder="请输入类别名称" autocomplete="off" class="layui-input">
+      </script>
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">类别图标</label>
+    <div class="layui-input-block">
+      <button type="button" class="layui-btn" id="uploadfilebtn">
+        <i class="layui-icon">&#xe67c;</i><span>上传图标</span>
+      </button>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <script type="text/html" template>
+        <img src="{{ d.params.logo || '' }}" id="logo" name="logo" width="100px">
+      </script>
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label"></label>
+    <div class="layui-input-block">
+      <input type="submit" lay-submit lay-filter="LAY-user-back-submit" value="确认" class="layui-btn">
+    </div>
+  </div>
+</div>
+
+<script>
+layui.data.done = function (d) {
+
+  layui.use(['admin', 'form','table','xmSelect','upload'], function(){
+    var $ = layui.$
+    ,admin = layui.admin
+    ,table = layui.table
+    ,xmSelect = layui.xmSelect
+    ,upload = layui.upload
+    ,form = layui.form;
+
+    //上传
+    var loadindex = null;
+    upload.render({
+      elem: '#uploadfilebtn'
+      ,url: layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.uploadFile
+      ,before: function(obj){
+        loadindex = layer.load(2);
+      }
+      ,done: function(res){
+        layer.close(loadindex);
+        if (res.location)
+        {
+          $("#logo").attr("src",res.location);
+          layer.msg('上传成功', {icon: 1});
+        }
+        else
+        { 
+          layer.msg(res.errormsg, {icon: 5});
+        }
+      }
+    });
+
+    form.render();
+
+      //监听提交
+      form.on('submit(LAY-user-back-submit)', function(data){
+
+        let postData = data.field;
+        postData.logo = $("#logo").attr("src");
+        if (!postData.logo)
+        {
+          layer.msg("请上传分类图标", {icon: 5});
+          return false;
+        }
+
+        //console.log(postData);
+        let methstr = "POST";
+        if (postData.id)
+        {
+          methstr = "PUT";
+        }
+
+        admin.req({
+          url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.DestinationMain   
+          ,type: methstr
+          ,data: postData
+          ,done: function(res){
+            layer.msg(res.errormsg, {icon: 1});
+            table.reload('LAY-tag-tag-list-table'); //重载表格
+            layer.close(d.params.layerindex); //再执行关闭 
+          }
+        });
+
+      });
+
+
+
+  });
+}
+</script>

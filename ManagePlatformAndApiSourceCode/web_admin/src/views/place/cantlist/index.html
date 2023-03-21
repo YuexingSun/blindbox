@@ -1,0 +1,165 @@
+
+
+  <style>
+        html,body,#container{
+            height:100%;
+            width:100%;
+        }
+        .btn{
+            width:10rem;
+            margin-left:6.8rem;   
+        }
+      .amap-marker:first-child .amap-icon img {
+          width: 25px;
+          height: 34px;
+      }
+  </style>
+
+<title>目的地管理</title>
+  
+<div class="layui-card layadmin-header">
+  <div class="layui-breadcrumb" lay-filter="breadcrumb">
+    <a lay-href="">主页</a>
+    <a><cite>目的地管理</cite></a>
+    <a><cite>无目的地可用</cite></a>
+  </div>
+</div>
+
+<div class="layui-fluid">   
+  <div class="layui-card">
+
+    <!-- <div class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="LAY-tag-tag-list-search-form" method='post'>
+      <div class="layui-form-item">
+        <div class="layui-inline">
+          <label class="layui-form-label">目的地名称</label>
+          <div class="layui-input-inline">
+            <input type="text" name="searchname" placeholder="请输入" autocomplete="off" class="layui-input searchinput">
+          </div>
+        </div>
+        <div class="layui-inline">
+          <label class="layui-form-label">主类别</label>
+          <div class="layui-input-inline">
+            <div id="searchmaintype"></div>
+          </div>
+        </div>
+        <div class="layui-inline">
+          <label class="layui-form-label">所属分类</label>
+          <div class="layui-input-inline">
+            <div id="searchfirst"></div>
+          </div>
+        </div>
+        <div class="layui-inline">
+          <label class="layui-form-label">所在省市</label>
+          <div class="layui-input-inline">
+            <input type="text" autocomplete="on" class="layui-input" id="city-pickersearch" name="city-pickersearch" readonly="readonly" data-toggle="city-pickersearch" placeholder="请选择">
+          </div>
+        </div>
+
+
+        <div class="layui-inline">
+          <button class="layui-btn" lay-submit lay-filter="LAY-tag-tag-list-search-form-submit" id="queryCondBtn">
+            <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+          </button>
+        </div>
+      </div>
+    </div> -->
+
+
+    <div class="layui-card-body" style="height: 550px;">
+        <div id="container"></div>
+
+      <!-- <div style="padding-bottom: 10px;text-align:right;">
+        <button class="layui-btn layui-btn-primary" id="uploadfile">批量导入</button>&nbsp;&nbsp;
+        <button class="layui-btn layui-btn-danger layuiadmin-btn-admin" data-type="delall">批量删除</button>
+        <button class="layui-btn layui-btn-danger layuiadmin-btn-admin" data-type="pithstop">批量停用</button>
+        <button class="layui-btn ayuiadmin-btn-admin" data-type="pithstart">批量启用</button>
+        <button class="layui-btn layui-btn-warm layuiadmin-btn-admin" data-type="map">地图查看</button>
+        <button class="layui-btn layuiadmin-btn-admin" data-type="add">增加目的地</button>
+        <button class="layui-btn layui-btn-primary" id="uploadfile2">导入新文件</button>&nbsp;&nbsp;
+      </div>
+      
+      <table id="LAY-tag-tag-list-table" lay-filter="LAY-tag-tag-list-table"></table>  
+      <script type="text/html" id="LAY-tag-tag-list-table-opt">
+        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
+        {{# if (d.status == 0){ }}
+          <a class="layui-btn layui-btn layui-btn-xs" lay-event="stop"><i class="layui-icon layui-icon-pause"></i>停用</a>
+        {{#  }else{ }}  
+          <a class="layui-btn layui-btn layui-btn-xs" lay-event="start"><i class="layui-icon layui-icon-play"></i>启用</a>
+        {{#  } }}
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
+      </script>
+    </div> -->
+  </div>
+</div>
+
+<script>
+layui.use('useradmin', layui.factory('useradmin')).use(['admin', 'useradmin', 'table','laydate','xmSelect','element','upload'], function(){
+  var $ = layui.$
+  ,admin = layui.admin
+  ,setter = layui.setter
+  ,view = layui.view
+  ,laydate = layui.laydate
+  ,table = layui.table
+  ,xmSelect = layui.xmSelect
+  ,element = layui.element
+  ,upload = layui.upload
+  ,form = layui.form;
+
+
+    var map = new AMap.Map("container", {
+        resizeEnable: true,
+        zoom :13,
+    });
+    AMap.plugin([
+        'AMap.ToolBar',
+    ], function(){
+        // 在图面添加工具条控件，工具条控件集成了缩放、平移、定位等功能按钮在内的组合控件
+        map.addControl(new AMap.ToolBar());
+    });
+    map.setFeatures(['bg','road','point','building']);
+    
+    var geocoder = new AMap.Geocoder({
+        city: "020", //城市设为北京，默认：“全国”
+    });
+
+    admin.req({
+      url : layui.setter.ApiUrl.HostAddress + layui.setter.ApiUrl.Destination   
+      ,type:"GET"
+      ,data:{"id":"CantForMap"}
+      ,done: function(res){
+        if (res.errorcode === 0)
+        {
+          for(var i=0;i<res.data.length;i++)
+          {
+            var marker = new AMap.Marker({
+              position : [res.data[i].lng,res.data[i].lat],
+              title : res.data[i].intabletime
+            });
+            marker.setLabel({
+                offset: new AMap.Pixel(0, 20),  //设置文本标注偏移量
+                content: "<div class='info'>"+res.data[i].intabletime+"</div>", //设置文本标注内容
+                direction: 'right' //设置文本标注方位
+            });
+            map.add(marker);
+
+            // var circle = new AMap.Circle({
+            //     center: new AMap.LngLat(res.data[i].lng,res.data[i].lat),  // 圆心位置
+            //     radius: 300, // 圆半径
+            //     fillColor: '#a3e1f8',   // 圆形填充颜色
+            //     strokeColor: '#fff', // 描边颜色
+            // });
+
+            // map.add(circle);
+
+            //map.setFitView(marker);
+          }
+          map.setFitView();
+        }
+      }
+    }); 
+
+
+
+
+});
+</script>

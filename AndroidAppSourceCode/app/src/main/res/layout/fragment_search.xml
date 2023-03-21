@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ConstraintLayoutA"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/c_EF">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/GuideA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/GuideB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp" />
+
+        <View
+            android:id="@+id/TopBg"
+            android:layout_width="match_parent"
+            android:layout_height="88dp"
+            android:background="@color/c_F"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/Cancel"
+            style="@style/text_0_16"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="24dp"
+            android:padding="10dp"
+            android:text="取消"
+            android:textColor="@color/c_6"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/TopBg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.noober.background.view.BLConstraintLayout
+            android:id="@+id/SearchConst"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="15dp"
+            android:transitionName="search_const"
+            app:bl_corners_radius="16dp"
+            app:bl_solid_color="@color/c_EF"
+            app:layout_constraintEnd_toStartOf="@+id/Cancel"
+            app:layout_constraintStart_toStartOf="@id/GuideA"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/SearchImg"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="7dp"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/ic_search"
+                android:transitionName="search_img"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.zhixing.zxhy.widget.ClearableEditText
+                android:id="@+id/Search"
+                style="@style/text_0_14"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="6dp"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="搜索文章"
+                android:textColor="@color/c_3"
+                android:textStyle="bold"
+                android:transitionName="search_text"
+                app:clearIcon="@mipmap/ic_edit_close"
+                app:clearIconHeight="20dp"
+                app:clearIconWidth="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/SearchImg"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </com.noober.background.view.BLConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/Empty"
+            android:layout_width="169dp"
+            android:layout_height="169dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_search_empty"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
+            android:id="@+id/SmartA"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/c_EF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TopBg"
+            app:srlEnableLoadMore="false">
+
+            <com.scwang.smart.refresh.header.MaterialHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RecycA"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/FenGeA" />
+
+            <com.scwang.smart.refresh.footer.ClassicsFooter
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srlTextNothing="没有更多文章啦"
+                app:srlTextPulling="上拉加载更多文章" />
+
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

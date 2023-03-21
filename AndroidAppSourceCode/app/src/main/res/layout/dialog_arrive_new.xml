@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/c_BF00A473">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/NestedScrollViewA"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/transparent"
+        android:paddingBottom="31dp"
+        app:layout_constraintBottom_toTopOf="@id/IAmArrive"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ConstraintLayoutA"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/TextViewA"
+                style="@style/text_F_20"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="56dp"
+                android:text="将要到达目的地"
+                android:textSize="@dimen/sp_15"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/StoreName"
+                style="@style/text_F_20"
+                android:layout_width="0dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:gravity="start"
+                android:lineSpacingExtra="-2dp"
+                android:textSize="@dimen/sp_22"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/TextViewA"
+                app:layout_constraintTop_toBottomOf="@+id/TextViewA" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/MapIc"
+                android:layout_width="20dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="5dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_arrive_map"
+                app:layout_constraintStart_toStartOf="@+id/StoreName"
+                app:layout_constraintTop_toBottomOf="@+id/StoreName" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/StoreLocation"
+                style="@style/text_F_20"
+                android:layout_width="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="32dp"
+                android:maxLines="2"
+                android:textColor="@color/c_CCF"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/MapIc"
+                app:layout_constraintTop_toTopOf="@+id/MapIc" />
+
+            <View
+                android:id="@+id/FenGeA"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="34dp"
+                android:layout_marginTop="27dp"
+                android:background="@color/c_33F"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/MapIc" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/ArriveLottie"
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+                android:layout_marginTop="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/FenGeA"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="arrive.json"
+                app:lottie_loop="false" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/ArriveText"
+                style="@style/text_F_20"
+                android:layout_width="0dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="48dp"
+                android:layout_marginEnd="32dp"
+                android:gravity="start"
+                android:textSize="@dimen/sp_18"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ArriveLottie" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/Help"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="44dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_location_help"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NestedScrollViewA" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/IAmArrive"
+        android:layout_width="200dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="48dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_arrive"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/LotteryImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="38dp"
+        android:layout_marginBottom="48dp"
+        android:src="@mipmap/ic_lottery_lable"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/IAmArrive"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
